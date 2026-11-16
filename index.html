@@ -205,6 +205,7 @@ canvas.tall{height:340px}
 .answer li.hit{background:var(--accent-soft);box-shadow:0 0 0 6px var(--accent-soft)}
 .why.hit{background:var(--accent-soft);box-shadow:0 0 0 12px var(--accent-soft)}
 .qa.linked .answer li:not(.hit){opacity:.6}
+.qa.linked .answer:not(.open):not(:has(li.core.hit)) li{opacity:1}
 .qa.linked .why:not(.hit){opacity:.6}
 .swarm .scene{cursor:pointer}
 .why em{font-style:normal;font-weight:700;color:var(--accent)}
@@ -324,6 +325,11 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 
 .answer .short::before{content:"Svar: ";color:var(--accent)}
 
+.answer li:not(.core){display:none}
+.answer.open li:not(.core){display:list-item}
+.xbtn{align-self:flex-start;font:inherit;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--accent);cursor:pointer}
+.xbtn:hover{border-color:var(--accent)}
+
 /* Bildplats */
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
@@ -347,7 +353,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   <header>
     <p class="eyebrow">Biologi åk 9 · Kapitel 10</p>
     <h1>Genetik inför provet</h1>
-    <p class="lead">Varje svar börjar med det korta svaret på frågan i fet stil. Sedan kommer förklaringen i numrerade punkter som följer bilderna. Punkter med <strong class="k">färgad siffra</strong> är det du ska kunna skriva på provet. De andra punkterna ger sammanhanget.</p>
+    <p class="lead">Varje fråga har ett svar: först det korta svaret i fet stil, sedan punkterna du ska kunna skriva på provet. Knappen Förklaring visar sammanhanget, alltså varför det är så och var det märks i verkligheten.</p>
     <nav aria-label="Områden">
       <a href="#fabriken">Cellen som en fabrik</a>
       <a href="#omrade-1">1. DNA-molekylen</a>
@@ -439,7 +445,6 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
         <li>Du, en hund, en banan och en bakterie använder exakt samma fyra kvävebaser. Ändå är ni helt olika.</li>
         <li class="core">Jämför med bokstäverna R, O och T. De kan bli ROT, ORT eller TRO: samma bokstäver, men olika betydelse.</li>
         <li class="core">På samma sätt kan kvävebaserna komma i vilken följd som helst längs DNA-molekylen.</li>
-        <li class="core">En bit DNA med en viss följd av kvävebaser kallas en <strong>DNA-sekvens</strong>.</li>
       </ol>
     </div>
     <div class="card">
@@ -461,7 +466,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <ol>
         <li>Din kropp bygger nya saker hela tiden: färgämne i huden när du solar, protein i musklerna när du tränar och insulin när du har ätit.</li>
         <li class="core">Instruktionerna för allt detta finns i ditt DNA.</li>
-        <li class="core">Varje recept beskriver hur en viss sak ska byggas. Det kan vara flera tusen bokstäver långt, och därför räcker fyra bokstäver till allt som behövs för att bygga en människa.</li>
+        <li class="core">Varje recept beskriver hur en viss sak ska byggas. Det kan vara flera tusen bokstäver långt.</li>
         <li class="core">Olika recept ger olika saker, och varje recept används där det behövs: i huden, i musklerna eller i bukspottkörteln.</li>
       </ol>
     </div>
@@ -485,7 +490,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
         <li>Du består av tiotusentals miljarder celler, och i nästan var och en finns hela receptsamlingen.</li>
         <li>I varje cell ligger DNA samlat i cellkärnan.</li>
         <li class="core">Det DNA som fyller cellkärnan är din <strong>arvsmassa</strong>.</li>
-        <li class="core">Den är ungefär tre meter lång, fast kärnan bara är en hundradels millimeter bred. Därför måste tråden vara virad runt små proteiner.</li>
+        <li class="core">Den är ungefär tre meter lång, fast kärnan bara är en hundradels millimeter bred. Därför är tråden virad runt små proteiner, som sytråd på trådrullar, och sedan packad ännu tätare.</li>
         <li class="core">Längst in är tråden en dubbelspiral. Hela arvsmassan består av drygt tre miljarder baspar.</li>
       </ol>
     </div>
@@ -588,7 +593,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
         <li>Byggmaterialet kommer från maten. I magsäcken och tunntarmen bryts matens protein ner till små bitar som kallas <strong>aminosyror</strong>.</li>
         <li class="core">Blodet för aminosyrorna ut till muskelcellerna. Där ska de sättas ihop på nytt, i den ordning som ditt DNA bestämmer. Det arbetet kallas <strong>proteinsyntes</strong>.</li>
         <li class="core">DNA finns i <strong>cellkärnan</strong> och lämnar den aldrig. Därför börjar det med att genen för proteinet kopieras.</li>
-        <li class="core">Kopian tar sig ut ur kärnan till en <strong>ribosom</strong>.</li>
+        <li class="core">Kopian tar sig ut genom öppningar i cellkärnans vägg och når en <strong>ribosom</strong>.</li>
         <li class="core">Ribosomen läser kopian tre bokstäver i taget. Varje sådan grupp, en <strong>triplett</strong>, står för en aminosyra, och ribosomen kopplar ihop aminosyrorna i den ordningen. Kedjan av aminosyror är det färdiga proteinet.</li>
         <li>Det nya proteinet byggs in i muskeln. Därför blir du starkare av att träna och äta ordentligt.</li>
       </ol>
@@ -614,8 +619,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <ol>
         <li>Du har vuxit flera centimeter på ett år. Allt det nya måste komma någonstans ifrån.</li>
         <li>Cellerna har inte blivit större. De har blivit fler, genom att celler delar sig.</li>
-        <li class="core">Före delningen kopieras alla 46 kromosomerna. Varje kromosom består då av två likadana halvor som sitter ihop.</li>
-        <li class="core">Sedan dras halvorna isär och cellen delas på mitten. Båda cellerna får exakt samma DNA. Det kallas <strong>vanlig celldelning</strong>, eller mitos.</li>
+        <li class="core">Före delningen kopieras alla 46 kromosomerna: DNA-stegen öppnas på mitten, och varje halva byggs på med nya kvävebaser. Varje kromosom består då av två likadana halvor som sitter ihop.</li>
+        <li class="core">Tunna trådar fäster i varje kromosom och drar de två halvorna åt var sitt håll. Sedan snörs cellen av på mitten. Båda cellerna får exakt samma DNA. Det kallas <strong>vanlig celldelning</strong>, eller mitos.</li>
         <li>Så har en enda befruktad äggcell blivit till hela du, och alla dina kroppsceller har samma DNA.</li>
       </ol>
     </div>
@@ -639,7 +644,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
         <li>Syskon har samma föräldrar men blir ändå olika. Förklaringen finns i hur könscellerna bildas.</li>
         <li class="core">Ett barn får kromosomer från både spermien och äggcellen. Därför får en könscell bara ha 23, annars skulle barnet få 92.</li>
         <li class="core">Könsceller bildas ur celler som har alla 46 kromosomerna, ordnade i par. I varje par kommer en från mamma och en från pappa.</li>
-        <li class="core">Först blandas arvsmassan: kromosomerna i ett par byter bitar med varandra.</li>
+        <li class="core">Först blandas arvsmassan: kromosomerna i ett par lägger sig tätt intill varandra och byter motsvarande bitar.</li>
         <li class="core">Sedan delas cellen så att varje könscell bara får en kromosom ur varje par. Slumpen avgör vilken. Det kallas <strong>reduktionsdelning</strong>, eller meios.</li>
         <li>Därför är ingen könscell den andra lik, och därför blir syskon olika.</li>
       </ol>
@@ -688,7 +693,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <ol>
         <li>Tjejen med fräknar har fått dem från sin mamma. Pappan har inga. Varför var det mammans anlag som vann?</li>
         <li class="core">Alla gener finns i dubbel uppsättning, en från mamma och en från pappa. De två varianterna i ett genpar kallas <strong>alleler</strong> eller anlag.</li>
-        <li class="core">Ett <strong>dominant</strong> anlag slår alltid igenom. Anlaget för fräknar är dominant och skrivs med stor bokstav, F.</li>
+        <li class="core">Ett <strong>dominant</strong> anlag slår alltid igenom, det vill säga egenskapen syns. Anlaget för fräknar är dominant och skrivs med stor bokstav, F.</li>
         <li class="core">Ett <strong>vikande</strong> anlag märks bara om det inte finns något dominant anlag i genparet. Anlaget för inga fräknar är vikande och skrivs med liten bokstav, f.</li>
         <li class="core">Den som har FF eller Ff får alltså fräknar. Bara den som har ff blir utan.</li>
       </ol>
@@ -1999,6 +2004,17 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     var n=k+(e.key==='ArrowRight'?1:-1); if(n>=0&&n<b.length){b[n].click(); e.preventDefault();}
   });
   route();
+})();
+</script>
+<script>
+/* Förklaringen visas först när man ber om den */
+(function(){
+  [].forEach.call(document.querySelectorAll('.answer'),function(a){
+    var n=a.querySelectorAll('li:not(.core)').length; if(!n) return;
+    var b=document.createElement('button'); b.type='button'; b.className='xbtn'; b.setAttribute('aria-expanded','false'); b.textContent='Förklaring';
+    b.addEventListener('click',function(){var o=a.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); b.textContent=o?'Dölj förklaringen':'Förklaring';});
+    a.appendChild(b);
+  });
 })();
 </script>
 </body>
