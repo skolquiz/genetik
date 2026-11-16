@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genetik inför provet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Layout: en smal läskolumn. Varje fråga är ett block: fråga, kort svar, bild som visar just det svaret. */
+:root{
+  --bg:#f2f5f2; --surface:#ffffff; --ink:#15272b; --muted:#566a6d; --line:#d3dcd8; --accent:#0d6b68;
+  --accent-soft:#dcefec;
+  --a:#2a76cf; --t:#d9761c; --c:#23915a; --g:#9a52c4;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e191b; --surface:#16262a; --ink:#e7f0ed; --muted:#9fb3b0; --line:#2b3d41; --accent:#62d2c5;
+    --accent-soft:#17383a;
+    --a:#6aaef5; --t:#f3a253; --c:#5fcf93; --g:#c995ec;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e191b; --surface:#16262a; --ink:#e7f0ed; --muted:#9fb3b0; --line:#2b3d41; --accent:#62d2c5;
+  --accent-soft:#17383a;
+  --a:#6aaef5; --t:#f3a253; --c:#5fcf93; --g:#c995ec;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6}
+main{max-width:1280px;margin:0 auto;padding:32px 20px 64px;display:flex;flex-direction:column;gap:44px}
+.eyebrow{font-size:14px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin:0 0 8px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,7vw,52px);line-height:1.05;margin:0;text-wrap:balance}
+.qa h3{font-family:var(--display);font-weight:600;font-size:26px;line-height:1.2;margin:0;text-wrap:balance}
+h2.area{font-family:var(--display);font-weight:800;font-size:clamp(28px,5.5vw,38px);line-height:1.1;margin:20px 0 0;padding-top:28px;border-top:3px solid var(--ink);text-wrap:balance}
+h2.area span{display:block;font-family:var(--body);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav a{font-weight:700;font-size:16px;color:var(--ink);text-decoration:none;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:7px 14px}
+nav a:hover{border-color:var(--accent)}
+nav a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+p{margin:0}
+.qa{display:flex;flex-direction:column;gap:14px}
+.num{font-family:var(--display);font-weight:800;font-size:14px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin:0}
+.answer{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:14px;margin:0;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.answer ol{margin:0;padding-left:28px;display:flex;flex-direction:column;gap:8px}
+.answer .short{font-weight:700;font-size:1.08em;line-height:1.45}
+.answer li::marker{color:var(--muted)}
+.answer li.core::marker{font-weight:700;color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.how{font-size:16px;color:var(--muted)}
+.base{font-weight:700}
+.bA{color:var(--a)} .bT{color:var(--t)} .bC{color:var(--c)} .bG{color:var(--g)}
+
+/* Stegen */
+.stage{padding:0;gap:0;overflow:hidden}
+canvas{display:block;width:100%;height:300px}
+.twist{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 16px;border-top:1px solid var(--line);font-weight:700;font-size:16px}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+input[type=range]:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.caption{font-size:16px;color:var(--muted);padding:0 16px 16px;min-height:6.4em}
+@media (max-width:480px){.twist{grid-template-columns:1fr 1fr;font-size:14px}.twist input{grid-column:1/-1;grid-row:1}.twist span:last-child{text-align:right}}
+
+/* Brickor */
+.names{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.name{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:16px}
+.chip{aspect-ratio:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:24px;border:2px solid currentColor;background:var(--bg)}
+.name .chip{width:56px}
+.name span{color:var(--ink)}
+@media (max-width:440px){.names{grid-template-columns:repeat(2,1fr)}}
+
+/* Para ihop */
+.strand{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-width:420px}
+.chip.empty{color:var(--muted);border-style:dashed}
+.chip.now{outline:3px solid var(--accent);outline-offset:2px}
+.rungs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-width:420px;height:16px}
+.rungs span{width:3px;background:var(--line);justify-self:center}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;font-weight:700;font-size:16px;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.picks button[data-b]{min-width:54px;font-family:var(--display);font-size:22px;border-color:currentColor;border-width:2px}
+#feedback{min-height:1.6em;font-weight:700}
+
+/* Sekvens */
+.seq{display:flex;flex-wrap:wrap;gap:6px;min-height:40px}
+.seq .chip{width:36px;font-size:18px;border-radius:8px}
+.len{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.count{font-size:17px}
+.count strong{font-family:var(--display);font-weight:800;font-size:28px;color:var(--accent);font-variant-numeric:tabular-nums;display:block;line-height:1.2}
+
+/* Kroppsbild */
+.bodyfig{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:22px;align-items:center}
+.frame{position:relative;overflow:hidden;border-radius:12px;background:#fff;aspect-ratio:600/890;border:1px solid var(--line);width:100%}
+.canvas{position:absolute;left:0;top:0;width:200%;height:100%}
+.canvas img{width:100%;height:100%;display:block}
+.mk{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:#15272b;color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff}
+.legendwrap{display:flex;flex-direction:column;gap:16px}
+.legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;counter-reset:mk}
+.legend li{display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:12px;row-gap:3px;counter-increment:mk}
+.legend li::before{content:counter(mk);grid-row:1/4;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--surface);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.legend li>*{grid-column:2}
+.seq.mini{gap:3px;min-height:0;margin-top:4px}
+.seq.mini .chip{width:22px;font-size:13px;border-radius:5px;border-width:1.5px}
+@media (max-width:600px){.bodyfig{grid-template-columns:1fr}.frame{max-width:320px;justify-self:center}}
+
+.zoom{position:relative;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.zoom img{display:block;width:100%;height:auto}
+.legend.two{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px}
+@media (max-width:600px){.legend.two{grid-template-columns:1fr}.zoom .mk{width:22px;height:22px;font-size:13px;box-shadow:0 0 0 2px #fff}}
+
+/* Område 2 och 3 */
+.band,.bandlabels{display:flex;gap:0}
+.band{height:18px;border-radius:9px;overflow:hidden}
+.band i{background:var(--line)} .band b{background:var(--accent)}
+.bandlabels b{font-size:14px;font-weight:700;color:var(--accent);text-align:center;white-space:nowrap}
+.chromos{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:14px 6px}
+.pair{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:3px;align-items:flex-end;height:48px}
+.bars i{width:9px;border-radius:5px}
+.mom{background:var(--accent)} .dad{background:var(--t)}
+.key{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:15px}
+.key.pad{padding:0 16px 12px}
+.key span{display:flex;align-items:center;gap:8px}
+.sw{width:10px;height:22px;border-radius:5px;display:inline-block}
+.ln{width:28px;height:5px;border-radius:3px;display:inline-block}
+.ln.old{background:var(--muted)} .ln.new{background:var(--accent)}
+.drag{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-top:1px solid var(--line);font-weight:700;font-size:16px}
+canvas.tall{height:340px}
+
+/* Berättelser med prickar */
+.story{padding:0;gap:0;overflow:hidden}
+.scene{position:relative;background:#fff}
+.scene img{display:block;width:100%;height:auto}
+.scene canvas{position:absolute;left:0;top:0;width:100%;height:100%}
+.cap{padding:14px 16px 8px;min-height:4.4em;font-size:17px}
+.pips{display:flex;gap:6px;padding:0 16px 16px}
+.pips i{width:24px;height:5px;border-radius:3px;background:var(--line)}
+.pips i.on{background:var(--accent)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;padding:0}
+
+/* Bred skärm: svaret till vänster, bilden stor till höger */
+@media (min-width:900px){
+  body{font-size:19px}
+  main{padding:44px 40px 88px;gap:56px}
+  .qa{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,9fr);column-gap:36px;row-gap:16px;align-items:start}
+  .qa>.num,.qa>h3{grid-column:1/-1}
+  .qa>.answer{grid-column:1}
+  .qa>:not(.num):not(h3):not(.answer):not(.think):not(.why){grid-column:2}
+  .qa h3{font-size:30px}
+  .cap{font-size:19px}
+}
+
+/* Liknelsen */
+.think{background:var(--accent-soft);border-radius:14px;padding:14px 18px}
+.think strong{color:var(--accent)}
+.factory{display:flex;flex-direction:column;gap:16px}
+.lead{max-width:70ch}
+.fgrid{display:grid;grid-template-columns:1fr;gap:24px;align-items:start}
+.map{margin:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.map div{display:grid;grid-template-columns:minmax(110px,9em) 1fr;gap:14px;padding:9px 16px;border-top:1px solid var(--line)}
+.map div:first-child{border-top:0}
+.map dt{font-weight:700} .map dd{margin:0}
+@media (min-width:900px){
+  .fgrid{grid-template-columns:minmax(0,5fr) minmax(0,9fr);gap:36px}
+  .qa>.answer{grid-row:3}
+  .qa>.think{grid-column:1;grid-row:4}
+  .qa>:not(.num):not(h3):not(.answer):not(.think):not(.why){grid-row:3}
+}
+
+/* Symboler */
+.ic{width:26px;height:26px;flex:none}
+.ic-fabrik,.ic-maskin{color:var(--ink)} .ic-kontor{color:var(--accent)} .ic-samling{color:var(--muted)}
+.ic-parm,.ic-bokstav{color:var(--a)} .ic-recept{color:var(--t)} .ic-kopia{color:#c49a1a} .ic-bit{color:var(--c)} .ic-produkt{color:var(--g)}
+.think{display:flex;flex-direction:column;gap:8px}
+.ics{display:flex;gap:8px}
+.ics .ic{width:32px;height:32px}
+.map div{grid-template-columns:28px minmax(110px,9em) 1fr;align-items:center}
+
+/* Varför först, och svärmscen */
+.why{display:flex;flex-direction:column;gap:10px}
+.why h4{font-family:var(--display);font-weight:800;font-size:20px;margin:0;color:var(--accent)}
+.swarm .scene{background:#fff}
+.layers img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 1.1s,transform .7s}
+.layers img.on{opacity:1} .layers img.dim{opacity:.3}
+@media (min-width:900px){
+  .qa>.why{grid-column:1;grid-row:3}
+  .qa>.think{grid-row:5}
+  .qa>:not(.num):not(h3):not(.answer):not(.think):not(.why){grid-row:3}
+}
+
+.pips{align-items:center;flex-wrap:wrap}
+.pips button{min-width:36px;padding:4px 0;border-radius:8px;font-size:15px}
+.pips button.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pips .play{margin-left:auto;padding:4px 14px}
+
+/* Koppling mellan scen och text */
+.answer li,.why{transition:background .3s,box-shadow .3s,opacity .3s;border-radius:8px}
+.answer li.go{cursor:pointer}
+.answer li.go:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.answer li.hit{background:var(--accent-soft);box-shadow:0 0 0 6px var(--accent-soft)}
+.why.hit{background:var(--accent-soft);box-shadow:0 0 0 12px var(--accent-soft)}
+.qa.linked .answer li:not(.hit){opacity:.6}
+.qa.linked .why:not(.hit){opacity:.6}
+.swarm .scene{cursor:pointer}
+.why em{font-style:normal;font-weight:700;color:var(--accent)}
+
+@media (min-width:900px){.qa>.card{position:sticky;top:16px}}
+
+.lead .k{color:var(--accent)}
+header .lead{margin-top:14px}
+
+.pips .hint{margin-left:auto;font-size:14px;color:var(--muted)}
+
+/* Mindre text i svaret, så att det inte blir längre än bilden */
+.answer{font-size:16px;line-height:1.5;gap:10px;padding:16px 18px}
+.answer ol{gap:6px;padding-left:24px}
+.answer .short{font-size:17px;line-height:1.4}
+@media (min-width:900px){.qa{grid-template-columns:minmax(0,6fr) minmax(0,9fr)}}
+
+.calc{display:block;font-size:15px;color:var(--muted);margin-top:4px}
+
+/* Korsningsschema */
+.pn-pick{display:flex;flex-direction:column;gap:8px}
+.pn-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pn-who{font-weight:700;min-width:4.6em}
+.pn-row button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pn{border-collapse:separate;border-spacing:6px;margin:4px 0}
+.pn th{font-family:var(--display);font-weight:800;font-size:24px;width:92px;height:52px;background:var(--bg);border-radius:10px}
+.pn .pn-cap{font-family:var(--body);font-size:15px;font-weight:700;background:none;height:auto;color:var(--muted)}
+.pn .pn-side{width:auto;text-align:right;padding-right:4px}
+.pn tbody td{width:150px;height:92px;text-align:center;border:2px dashed var(--line);border-radius:12px;font-size:24px;color:var(--muted)}
+.pn tbody td.now{outline:3px solid var(--accent);outline-offset:2px}
+.pn tbody td.ok{border-style:solid;border-color:var(--c);color:var(--ink);background:var(--accent-soft)}
+.pn tbody td b{display:block;font-family:var(--display);font-weight:800;font-size:24px}
+.pn tbody td span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.pn-opts button{min-width:64px;font-family:var(--display);font-size:20px}
+.pn-opts button:disabled{opacity:.4;cursor:default}
+.pn-fb{font-weight:700;min-height:3em}
+sup{font-size:.65em}
+
+.layers img{transform-origin:0 0}
+.layers img.thumb{transform:scale(.4);opacity:1}
+
+/* Område 6: sortera och bygg kedja */
+.gs-prog{font-size:14px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.gs-text{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.3;min-height:4.2em}
+.gs-fb,.gc-fb{font-weight:700;min-height:3em}
+.gs-btn:disabled{opacity:.45;cursor:default}
+.gs-next{align-self:flex-start;background:var(--accent);color:var(--bg);border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer}
+.gc-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:22px;margin:4px 0}
+.gc-list li{position:relative;border:2px solid var(--c);border-radius:12px;padding:10px 14px;background:var(--accent-soft)}
+.gc-list li+li::before{content:"";position:absolute;left:28px;top:-22px;height:20px;border-left:3px solid var(--ink)}
+.gc-list li.but{border-color:var(--warn,#c2410c);background:transparent}
+.gc-list li.next{border-style:dashed;background:transparent;color:var(--muted)}
+.gc-opts{display:flex;flex-direction:column;gap:8px}
+.gc-opts button{text-align:left;font:inherit;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);cursor:pointer}
+.gc-opts button:hover{border-color:var(--accent)}
+
+.fabrik{width:100%;height:auto;border-radius:14px;display:block}
+
+/* Område 7: begreppen */
+#begrepp{max-width:860px}
+.bg-tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.bg-kind{font-size:15px;color:var(--muted);font-weight:700}
+.bg-q{font-family:var(--display);font-size:24px;font-weight:700;line-height:1.3;min-height:2.6em}
+.bg-opts button.ok{border-color:var(--c);background:var(--accent-soft);font-weight:700}
+.bg-opts button:disabled{opacity:.55;cursor:default}
+.bg-opts button.ok:disabled{opacity:1}
+.bg-search{font:inherit;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);max-width:420px}
+.bg-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;margin:6px 0 0}
+.bg-item dt{font-weight:700;font-family:var(--display);font-size:18px}
+.bg-item dt span{font:400 13px var(--body);color:var(--muted);margin-left:6px}
+.bg-item dd{margin:0;font-size:16px}
+.bg-item.extra dd{color:var(--muted)}
+@media (max-width:700px){.bg-list{grid-template-columns:1fr}}
+
+#sw-fab{max-width:980px}
+
+/* En fråga per sida */
+main>[hidden]{display:none!important}
+header nav[hidden]{display:none!important}
+main.paged{gap:22px;padding-top:20px}
+.pbar{display:flex;gap:16px;align-items:baseline;font-size:15px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px}
+.pbar .phome{font-weight:700;color:var(--accent);text-decoration:none}
+.pbar .phome::before{content:"\2190\00a0"}
+.pnav{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:18px}
+.pnav button{font:inherit;font-weight:700;padding:12px 20px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;max-width:48%;text-align:left}
+.pnav .pnext{background:var(--accent);border-color:var(--accent);color:var(--bg);margin-left:auto;text-align:right}
+.pnav button:disabled{visibility:hidden}
+main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px 36px;margin-top:22px}
+.toc .tcont{grid-column:1/-1;margin:0}
+.toc .tcont a{display:inline-block;background:var(--accent);color:var(--bg);font-weight:700;padding:12px 20px;border-radius:12px;text-decoration:none}
+.tgroup h2{font-family:var(--display);font-size:21px;margin:0 0 6px;line-height:1.25}
+.tgroup h2 span{display:block;font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.tgroup h2 small{display:block;font:400 14px var(--body);color:var(--muted)}
+.tgroup ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.tgroup li a{display:block;padding:7px 12px 7px 34px;border-radius:9px;color:var(--ink);text-decoration:none;position:relative;background:var(--surface);border:1px solid var(--line)}
+.tgroup li a:hover{border-color:var(--accent)}
+.tgroup li a::before{content:"";position:absolute;left:11px;top:50%;width:13px;height:13px;margin-top:-8px;border:1.5px solid var(--muted);border-radius:50%}
+.tgroup li.done a::before{content:"\2713";border:0;color:var(--accent);font-weight:700;width:auto;height:auto;margin-top:-13px;left:12px}
+
+/* Bildplats */
+.slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
+.slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
+footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-fabrik" viewBox="0 0 24 24"><path d="M2 21V11l6 4v-4l6 4V4h6v17z" fill="currentColor"/></symbol>
+<symbol id="i-kontor" viewBox="0 0 24 24"><path d="M3 21V9l9-6 9 6v12h-6v-6H9v6z" fill="currentColor"/></symbol>
+<symbol id="i-samling" viewBox="0 0 24 24"><path d="M3 5h6a3 3 0 0 1 3 3v12a3 3 0 0 0-3-2H3z" fill="currentColor"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a3 3 0 0 1 3-2h6z" fill="currentColor" opacity=".7"/></symbol>
+<symbol id="i-parm" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="currentColor"/><rect x="8" y="3" width="2" height="18" fill="#fff" opacity=".55"/><circle cx="14.5" cy="15" r="2" fill="#fff" opacity=".85"/></symbol>
+<symbol id="i-recept" viewBox="0 0 24 24"><path d="M6 2h9l4 4v16H6z" fill="currentColor"/><path d="M9 10h7M9 14h7M9 18h4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="i-bokstav" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor"/><path d="M8 17l4-10 4 10M9.6 13.5h4.8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-kopia" viewBox="0 0 24 24"><path d="M3 7h9v15H3z" fill="currentColor" opacity=".45"/><path d="M9 2h8l4 4v13H9z" fill="currentColor"/><path d="M12 10h6M12 14h6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="i-maskin" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="12" cy="12" r="7"/><rect x="10.3" y="1.5" width="3.4" height="21" rx="1"/><rect x="10.3" y="1.5" width="3.4" height="21" rx="1" transform="rotate(45 12 12)"/><rect x="10.3" y="1.5" width="3.4" height="21" rx="1" transform="rotate(90 12 12)"/><rect x="10.3" y="1.5" width="3.4" height="21" rx="1" transform="rotate(135 12 12)"/></g><circle cx="12" cy="12" r="2.8" fill="#fff"/></symbol>
+<symbol id="i-bit" viewBox="0 0 24 24"><g fill="currentColor"><rect x="3" y="9" width="18" height="11" rx="2"/><rect x="6" y="5" width="4.5" height="5" rx="1"/><rect x="13.5" y="5" width="4.5" height="5" rx="1"/></g></symbol>
+<symbol id="i-produkt" viewBox="0 0 24 24"><path d="M5 16l7-8 7 8" stroke="currentColor" stroke-width="2.6" fill="none"/><g fill="currentColor"><circle cx="5" cy="16" r="3.6"/><circle cx="12" cy="8" r="3.6"/><circle cx="19" cy="16" r="3.6"/></g></symbol>
+</defs></svg>
+<main>
+  <header>
+    <p class="eyebrow">Biologi åk 9 · Kapitel 10</p>
+    <h1>Genetik inför provet</h1>
+    <p class="lead">Varje svar börjar med det korta svaret på frågan i fet stil. Sedan kommer förklaringen i numrerade punkter som följer bilderna. Punkter med <strong class="k">färgad siffra</strong> är det du ska kunna skriva på provet. De andra punkterna ger sammanhanget.</p>
+    <nav aria-label="Områden">
+      <a href="#fabriken">Cellen som en fabrik</a>
+      <a href="#omrade-1">1. DNA-molekylen</a>
+      <a href="#omrade-2">2. Gener och kromosomer</a>
+      <a href="#omrade-3">3. DNA:s två uppgifter</a>
+      <a href="#omrade-4">4. Celldelning</a>
+      <a href="#omrade-5">5. Arv</a>
+      <a href="#omrade-6">6. Genmodifiering</a>
+      <a href="#omrade-7">7. Begreppen</a>
+    </nav>
+  </header>
+
+  <section class="factory" aria-labelledby="fab">
+    <h2 class="area" id="fabriken"><span>Minnesbild</span>Tänk på cellen som en fabrik</h2>
+    <p class="lead" id="fab">En cell fungerar som en fabrik som bygger produkter efter recept. Klicka dig igenom cellens delar och se vad var och en motsvarar. På provet skriver du cellens ord, inte fabrikens.</p>
+    <div class="card story swarm" id="sw-fab">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/cell.jpg" alt=""></div>
+        <canvas role="img" aria-label="En cell i genomskärning. Varje steg ringar in en del av cellen och säger vad den motsvarar i en fabrik."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj del av cellen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-1"><span>Område 1</span>DNA-molekylen</h2>
+
+  <section class="qa" aria-labelledby="q1">
+    <p class="num">Fråga 1</p>
+    <h3 id="q1">Hur ser DNA-molekylen ut?</h3>
+    <div class="answer">
+      <p class="short">DNA är en mycket lång molekyl som ser ut som en repstege vriden till en spiral. Formen kallas dubbelspiral.</p>
+      <ol>
+        <li>DNA finns i nästan varje cell i din kropp och styr mycket av hur du ser ut och fungerar.</li>
+        <li class="core">Stegens två långa sidor kallas <strong>strängar</strong>, och pinnarna mellan dem är baspar.</li>
+        <li class="core">Namnet <strong>dubbelspiral</strong> kommer av att de två strängarna vrider sig runt varandra.</li>
+        <li>Formen gör att molekylen kan delas på mitten och kopieras. Det är så en enda befruktad äggcell kunde bli en hel människa med samma DNA i alla celler.</li>
+      </ol>
+    </div>
+    <div class="card stage">
+      <canvas id="ladder" role="img" aria-label="En repstege med två strängar och pinnar av baspar. Med reglaget vrids stegen till en dubbelspiral."></canvas>
+      <label class="twist" for="twist"><span>Uträtad för att visa</span><input type="range" id="twist" min="0" max="100" value="0" step="1"><span>Så ser DNA ut</span></label>
+      <p class="caption" id="caption" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="q3">
+    <p class="num">Fråga 2</p>
+    <h3 id="q3">Vad består stegens pinnar av, och vilka kvävebaser sitter ihop?</h3>
+    <div class="answer">
+      <p class="short">Pinnarna består av kvävebaser som sitter ihop två och två i baspar: A med T, och C med G.</p>
+      <ol>
+        <li class="core">Varje pinne är två <strong>kvävebaser</strong> som hakar i varandra. Ett sådant par kallas ett <strong>baspar</strong>.</li>
+        <li class="core">De fyra kvävebaserna heter adenin (<span class="base bA">A</span>), tymin (<span class="base bT">T</span>), cytosin (<span class="base bC">C</span>) och guanin (<span class="base bG">G</span>).</li>
+        <li class="core">Parningen är alltid densamma. Därför bestämmer den ena strängen hur den andra ser ut.</li>
+        <li>Det är det som gör att drygt tre miljarder baspar kan kopieras nästan utan fel varje gång en cell delar sig.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <div class="names">
+        <div class="name"><div class="chip bA">A</div><span>adenin</span></div>
+        <div class="name"><div class="chip bT">T</div><span>tymin</span></div>
+        <div class="name"><div class="chip bC">C</div><span>cytosin</span></div>
+        <div class="name"><div class="chip bG">G</div><span>guanin</span></div>
+      </div>
+      <p class="how">Den övre strängen är klar. Välj rätt kvävebas till varje tom plats i den undre.</p>
+      <div>
+        <div class="strand" id="top"></div>
+        <div class="rungs" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="strand" id="bottom"></div>
+      </div>
+      <div class="picks" role="group" aria-label="Välj kvävebas">
+        <button type="button" class="bA" data-b="A">A</button>
+        <button type="button" class="bT" data-b="T">T</button>
+        <button type="button" class="bC" data-b="C">C</button>
+        <button type="button" class="bG" data-b="G">G</button>
+        <button type="button" id="again" hidden>Ny sträng</button>
+      </div>
+      <p id="feedback" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="q4">
+    <p class="num">Fråga 3</p>
+    <h3 id="q4">Hur kan fyra bokstäver räcka till så mycket information?</h3>
+    <div class="answer">
+      <p class="short">Det är ordningen på kvävebaserna som bär informationen, och ordningen kan varieras nästan hur mycket som helst.</p>
+      <ol>
+        <li>Du, en hund, en banan och en bakterie använder exakt samma fyra kvävebaser. Ändå är ni helt olika.</li>
+        <li class="core">Jämför med bokstäverna R, O och T. De kan bli ROT, ORT eller TRO: samma bokstäver, men olika betydelse.</li>
+        <li class="core">På samma sätt kan kvävebaserna komma i vilken följd som helst längs DNA-molekylen.</li>
+        <li class="core">En bit DNA med en viss följd av kvävebaser kallas en <strong>DNA-sekvens</strong>.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <p class="how">På varje plats i en sekvens kan det stå A, T, C eller G, alltså fyra möjligheter. Dra i reglaget för att göra sekvensen längre, och se hur många olika sekvenser som då går att bilda.</p>
+      <div class="seq" id="seq" aria-hidden="true"></div>
+      <div class="len">
+        <input type="range" id="len" min="1" max="15" value="4" step="1" aria-label="Antal baser i sekvensen">
+        <button type="button" id="shuffle">Byt ordning</button>
+      </div>
+      <p class="count" aria-live="polite"><span id="lenText"></span><strong id="combos"></strong><span id="calc" class="calc"></span></p>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="q5">
+    <p class="num">Fråga 4</p>
+    <h3 id="q5">Vad står det i DNA-sekvenserna?</h3>
+    <div class="answer">
+      <p class="short">I DNA-sekvenserna står recept på allt som kroppen ska bygga, till exempel proteiner.</p>
+      <ol>
+        <li>Din kropp bygger nya saker hela tiden: färgämne i huden när du solar, protein i musklerna när du tränar och insulin när du har ätit.</li>
+        <li class="core">Instruktionerna för allt detta finns i ditt DNA.</li>
+        <li class="core">Varje recept beskriver hur en viss sak ska byggas. Det kan vara flera tusen bokstäver långt, och därför räcker fyra bokstäver till allt som behövs för att bygga en människa.</li>
+        <li class="core">Olika recept ger olika saker, och varje recept används där det behövs: i huden, i musklerna eller i bukspottkörteln.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-recept">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/kropp.jpg" alt=""><img src="img/r2.jpg" alt=""><img src="img/r4.jpg" alt=""></div>
+        <canvas role="img" aria-label="En svärm av prickar går mellan tre ställen i kroppen och tre recept på en DNA-tråd."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="q6">
+    <p class="num">Fråga 5</p>
+    <h3 id="q6">Vad är arvsmassa, och hur får den plats i cellen?</h3>
+    <div class="answer">
+      <p class="short">Arvsmassa är allt DNA som finns hos en organism. Den får plats i cellkärnan eftersom DNA är hårt lindat och packat runt proteiner.</p>
+      <ol>
+        <li>Du består av tiotusentals miljarder celler, och i nästan var och en finns hela receptsamlingen.</li>
+        <li>I varje cell ligger DNA samlat i cellkärnan.</li>
+        <li class="core">Det DNA som fyller cellkärnan är din <strong>arvsmassa</strong>.</li>
+        <li class="core">Den är ungefär tre meter lång, fast kärnan bara är en hundradels millimeter bred. Därför måste tråden vara virad runt små proteiner.</li>
+        <li class="core">Längst in är tråden en dubbelspiral. Hela arvsmassan består av drygt tre miljarder baspar.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-arv">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/z1.jpg" alt=""><img src="img/z2.jpg" alt=""><img src="img/zoom.jpg" alt=""></div>
+        <canvas role="img" aria-label="Prickar ringar in ett steg i taget i en inzoomning från cell till cellkärna, packat DNA och dubbelspiral."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-2"><span>Område 2</span>Gener och kromosomer</h2>
+
+  <section class="qa" aria-labelledby="b1">
+    <p class="num">Fråga 1</p>
+    <h3 id="b1">Vad är en gen?</h3>
+    <div class="answer">
+      <p class="short">En gen är en bit av DNA som är ett recept på något som kroppen ska bygga.</p>
+      <ol>
+        <li>En del har fräknar, andra har det inte. Skillnaden syns i huden, men den börjar någon annanstans.</li>
+        <li>Fräknar är små fläckar där huden har extra mycket färgämne. Färgämnet bildas i särskilda celler i huden.</li>
+        <li class="core">Cellerna gör det eftersom det står i deras DNA. DNA är indelat i delar som kallas <strong>gener</strong>, eller arvsanlag.</li>
+        <li class="core">En av generna är just receptet som ger fräknar.</li>
+        <li class="core">Generna avgör därför mycket av hur du ser ut och fungerar. Med en annan variant av genen hade hon inte haft fräknar.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-gen">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/fraknar.jpg" alt=""><img src="img/g2.jpg" alt=""><img src="img/g3.jpg" alt=""><img src="img/g4.jpg" alt=""></div>
+        <canvas role="img" aria-label="En svärm av prickar går från fräknarna i ett ansikte till en bit DNA, där en gen färgas, och tillbaka till huden."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="b2">
+    <p class="num">Fråga 2</p>
+    <h3 id="b2">Hur många kromosomer har en människa?</h3>
+    <div class="answer">
+      <p class="short">En människa har 46 kromosomer i varje kroppscell. De hör ihop två och två i 23 kromosompar.</p>
+      <ol>
+        <li>Du liknar både din mamma och din pappa, men är inte en kopia av någon av dem. Förklaringen finns i hur ditt DNA är uppdelat.</li>
+        <li class="core">DNA är packat i buntar som kallas <strong>kromosomer</strong>. En spermie har 23 stycken och en äggcell har 23.</li>
+        <li>Vid befruktningen hamnar de i samma cell.</li>
+        <li class="core">Där bildar de <strong>kromosompar</strong>. I varje par kommer en kromosom från mamma och en från pappa.</li>
+        <li class="core">När den första cellen delar sig kopieras kromosomerna, så att varje ny kroppscell får alla 46.</li>
+        <li>Därför har du drag från båda dina föräldrar.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-krom">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/k1.jpg" alt=""><img src="img/befruktning.jpg" alt=""><img src="img/k3.jpg" alt=""><img src="img/k5.jpg" alt=""><img src="img/k4.jpg" alt=""></div>
+        <canvas role="img" aria-label="Blå streck vid en spermie och rosa streck i en äggcell möts och ordnar sig i 23 par."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-3"><span>Område 3</span>DNA:s två uppgifter</h2>
+
+  <section class="qa" aria-labelledby="c1">
+    <p class="num">Fråga 1</p>
+    <h3 id="c1">Vilka två uppgifter har DNA?</h3>
+    <div class="answer">
+      <p class="short">DNA har två uppgifter: att lagra och kopiera informationen, och att tillverka protein.</p>
+      <ol>
+        <li>När du skrapar knät läker såret av sig självt. Kroppen bygger ny hud.</li>
+        <li>Ny hud blir till genom att hudceller delar sig. Men en ny cell klarar sig inte utan DNA, för där står alla recept.</li>
+        <li class="core">Uppgift 1: innan en cell delar sig kopieras allt DNA.</li>
+        <li class="core">När cellen sedan delar sig får båda cellerna samma gener.</li>
+        <li class="core">Uppgift 2: generna används som recept när cellen bygger de proteiner den behöver, till exempel till ny hud.</li>
+        <li>Så fylls såret med nya hudceller tills huden är hel igen.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-kopia">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/d0.jpg" alt=""><img src="img/kna.jpg" alt=""><img src="img/d2.jpg" alt=""><img src="img/d3.jpg" alt=""><img src="img/d4.jpg" alt=""><img src="img/cell.jpg" alt=""><img src="img/d5.jpg" alt=""></div>
+        <canvas role="img" aria-label="Prickar går från ett sår på ett knä till en hudcell i förstoring, där de fördubblas och delas upp på två celler."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="c3">
+    <p class="num">Fråga 2</p>
+    <h3 id="c3">Var bildas proteinerna, och hur går proteinsyntesen till?</h3>
+    <div class="answer">
+      <p class="short">Proteinerna bildas i ribosomerna, utanför cellkärnan. Vid proteinsyntesen görs en kopia av en gen i cellkärnan, och ribosomen bygger proteinet efter kopian.</p>
+      <ol>
+        <li>Dina muskler är byggda av protein. När du tränar slits de lite och behöver nytt protein för att lagas och bli starkare.</li>
+        <li>Byggmaterialet kommer från maten. I magsäcken och tunntarmen bryts matens protein ner till små bitar som kallas <strong>aminosyror</strong>.</li>
+        <li class="core">Blodet för aminosyrorna ut till muskelcellerna. Där ska de sättas ihop på nytt, i den ordning som ditt DNA bestämmer. Det arbetet kallas <strong>proteinsyntes</strong>.</li>
+        <li class="core">DNA finns i <strong>cellkärnan</strong> och lämnar den aldrig. Därför börjar det med att genen för proteinet kopieras.</li>
+        <li class="core">Kopian tar sig ut ur kärnan till en <strong>ribosom</strong>.</li>
+        <li class="core">Ribosomen läser kopian tre bokstäver i taget. Varje sådan grupp, en <strong>triplett</strong>, står för en aminosyra, och ribosomen kopplar ihop aminosyrorna i den ordningen. Kedjan av aminosyror är det färdiga proteinet.</li>
+        <li>Det nya proteinet byggs in i muskeln. Därför blir du starkare av att träna och äta ordentligt.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-synt">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/p0.jpg" alt=""><img src="img/arm.jpg" alt=""><img src="img/mat.jpg" alt=""><img src="img/p3.jpg" alt=""><img src="img/p4.jpg" alt=""><img src="img/p5.jpg" alt=""><img src="img/p6.jpg" alt=""></div>
+        <canvas role="img" aria-label="En svärm av prickar på bilder av en arm, en tallrik mat och en cell visar hur protein från maten bryts ner till aminosyror och byggs ihop till muskelprotein."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-4"><span>Område 4</span>Celldelning</h2>
+
+  <section class="qa" aria-labelledby="d1">
+    <p class="num">Fråga 1</p>
+    <h3 id="d1">Vad händer vid vanlig celldelning?</h3>
+    <div class="answer">
+      <p class="short">En cell blir två likadana celler. Först kopieras allt DNA, så att båda cellerna får 46 kromosomer.</p>
+      <ol>
+        <li>Du har vuxit flera centimeter på ett år. Allt det nya måste komma någonstans ifrån.</li>
+        <li>Cellerna har inte blivit större. De har blivit fler, genom att celler delar sig.</li>
+        <li class="core">Före delningen kopieras alla 46 kromosomerna. Varje kromosom består då av två likadana halvor som sitter ihop.</li>
+        <li class="core">Sedan dras halvorna isär och cellen delas på mitten. Båda cellerna får exakt samma DNA. Det kallas <strong>vanlig celldelning</strong>, eller mitos.</li>
+        <li>Så har en enda befruktad äggcell blivit till hela du, och alla dina kroppsceller har samma DNA.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-mitos">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/v1.jpg" alt=""><img src="img/v2.jpg" alt=""><img src="img/v3.jpg" alt=""><img src="img/v4.jpg" alt=""><img src="img/v5.jpg" alt=""></div>
+        <canvas role="img" aria-label="Prickar visar hur en person växer genom att celler kopierar sina kromosomer och delar sig i två likadana celler."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="d2">
+    <p class="num">Fråga 2</p>
+    <h3 id="d2">Vad händer vid reduktionsdelning?</h3>
+    <div class="answer">
+      <p class="short">Vid reduktionsdelning bildas könsceller. Antalet kromosomer halveras från 46 till 23, och arvsmassan blandas så att varje könscell blir unik.</p>
+      <ol>
+        <li>Syskon har samma föräldrar men blir ändå olika. Förklaringen finns i hur könscellerna bildas.</li>
+        <li class="core">Ett barn får kromosomer från både spermien och äggcellen. Därför får en könscell bara ha 23, annars skulle barnet få 92.</li>
+        <li class="core">Könsceller bildas ur celler som har alla 46 kromosomerna, ordnade i par. I varje par kommer en från mamma och en från pappa.</li>
+        <li class="core">Först blandas arvsmassan: kromosomerna i ett par byter bitar med varandra.</li>
+        <li class="core">Sedan delas cellen så att varje könscell bara får en kromosom ur varje par. Slumpen avgör vilken. Det kallas <strong>reduktionsdelning</strong>, eller meios.</li>
+        <li>Därför är ingen könscell den andra lik, och därför blir syskon olika.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-meios">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/m1.jpg" alt=""><img src="img/m3.jpg" alt=""><img src="img/m4.jpg" alt=""><img src="img/m5.jpg" alt=""><img src="img/m2.jpg" alt=""></div>
+        <canvas role="img" aria-label="Prickar visar hur könsceller bildas: kromosomparen blandas och delas upp så att varje könscell får hälften och blir unik."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="d3">
+    <p class="num">Fråga 3</p>
+    <h3 id="d3">Vad är skillnaden mellan vanlig celldelning och reduktionsdelning?</h3>
+    <div class="answer">
+      <p class="short">Vanlig celldelning ger två likadana kroppsceller med 46 kromosomer. Reduktionsdelning ger könsceller med 23 kromosomer, och alla är olika.</p>
+      <ol>
+        <li class="core">Båda börjar med en cell som har 46 kromosomer.</li>
+        <li class="core">Vanlig celldelning sker i hela kroppen, när du växer och när skador ska lagas. Cellerna som bildas är kopior av den gamla.</li>
+        <li class="core">Reduktionsdelning sker bara i äggstockarna och testiklarna, när äggceller och spermier bildas. Cellerna som bildas har hälften så många kromosomer och är alla olika.</li>
+        <li class="core">Skillnaden har ett syfte. Kroppsceller ska vara kopior. Könsceller ska ha hälften, så att det blir 46 igen vid befruktningen, och vara olika, så att varje barn blir unikt.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-jmf">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/j1.jpg" alt=""></div>
+        <canvas role="img" aria-label="Två rader: överst en cell som blir två likadana celler, nederst en cell som blir fyra olika celler med hälften så många kromosomer."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-5"><span>Område 5</span>Arv och korsningsschema</h2>
+
+  <section class="qa" aria-labelledby="e1">
+    <p class="num">Fråga 1</p>
+    <h3 id="e1">Vad är dominanta och vikande anlag?</h3>
+    <div class="answer">
+      <p class="short">Ett dominant anlag slår alltid igenom. Ett vikande anlag, som också kallas recessivt, syns bara om man har fått det från båda föräldrarna.</p>
+      <ol>
+        <li>Tjejen med fräknar har fått dem från sin mamma. Pappan har inga. Varför var det mammans anlag som vann?</li>
+        <li class="core">Alla gener finns i dubbel uppsättning, en från mamma och en från pappa. De två varianterna i ett genpar kallas <strong>alleler</strong> eller anlag.</li>
+        <li class="core">Ett <strong>dominant</strong> anlag slår alltid igenom. Anlaget för fräknar är dominant och skrivs med stor bokstav, F.</li>
+        <li class="core">Ett <strong>vikande</strong> anlag märks bara om det inte finns något dominant anlag i genparet. Anlaget för inga fräknar är vikande och skrivs med liten bokstav, f.</li>
+        <li class="core">Den som har FF eller Ff får alltså fräknar. Bara den som har ff blir utan.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-dom">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/a1.jpg" alt=""><img src="img/a3.jpg" alt=""></div>
+        <canvas role="img" aria-label="En familj där förstoringar i lager visar dotterns hudcell och genparet för fräknar."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="e2">
+    <p class="num">Fråga 2</p>
+    <h3 id="e2">Hur ritar man ett korsningsschema?</h3>
+    <div class="answer">
+      <p class="short">Man skriver den ena förälderns två anlag överst och den andras till vänster, och fyller i de fyra fälten. Fälten visar vilka kombinationer barnen kan få.</p>
+      <ol>
+        <li>Mamman har fräknar och pappan har inga. Hur stor var chansen att deras barn skulle få fräknar? Det kan man räkna ut med ett korsningsschema.</li>
+        <li class="core">Skriv först upp föräldrarnas anlag. Varje förälder har två, till exempel Ff och ff.</li>
+        <li class="core">Rita en ruta med fyra fält. Skriv pappans två anlag ovanför, ett över varje kolumn, och mammans till vänster, ett vid varje rad.</li>
+        <li class="core">Fyll i varje fält med anlaget till vänster och anlaget ovanför. Varje fält är en kombination som ett barn kan få.</li>
+        <li class="core">Läs av resultatet. Fält med minst ett stort F ger fräknar. Varje fält motsvarar 25 %, så två fält av fyra betyder 50 % sannolikhet.</li>
+      </ol>
+    </div>
+    <div class="card punnett" id="pn-auto">
+      <p class="how">Välj föräldrarnas anlag och fyll i fälten ett i taget. Börja gärna med exemplet som redan är valt: en mamma med fräknar (Ff) och en pappa utan (ff).</p>
+      <div class="pn-pick"></div>
+      <table class="pn"></table>
+      <div class="pn-opts picks" role="group" aria-label="Välj vad som ska stå i fältet"></div>
+      <p class="pn-fb" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="e3">
+    <p class="num">Fråga 3</p>
+    <h3 id="e3">Vad är könsbundet arv?</h3>
+    <div class="answer">
+      <p class="short">Könsbundet arv är arv av anlag som sitter på X-kromosomen. De slår oftast igenom hos pojkar, eftersom pojkar bara har en X-kromosom.</p>
+      <ol>
+        <li>Röd-grön färgblindhet är mycket vanligare hos pojkar än hos flickor. Det beror på var anlaget sitter.</li>
+        <li class="core">Det 23:e kromosomparet är <strong>könskromosomerna</strong>. Flickor har två X-kromosomer, och pojkar har en X och en Y.</li>
+        <li class="core">En del anlag sitter på X-kromosomen. När de ärvs kallas det <strong>könsbundet arv</strong>.</li>
+        <li class="core">En pojke har bara en X-kromosom. Får han ett vikande sjukdomsanlag där finns inget friskt anlag som kan väga upp, och anlaget slår igenom.</li>
+        <li class="core">En flicka har två X-kromosomer. Har hon anlaget på den ena blir hon inte sjuk, eftersom den andra har ett friskt anlag. Hon är då <strong>anlagsbärare</strong>.</li>
+        <li>Färgblindhet och blödarsjuka ärvs på det här sättet.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-kon">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/a4.jpg" alt=""><img src="img/a5.jpg" alt=""></div>
+        <canvas role="img" aria-label="Ett färgseendetest och en flicka och en pojke, med förstoringar som visar deras könskromosomer."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="e4">
+    <p class="num">Fråga 4</p>
+    <h3 id="e4">Hur visar man könsbundet arv i ett korsningsschema?</h3>
+    <div class="answer">
+      <p class="short">Man skriver X och Y, med anlaget som en liten bokstav uppe till höger om X. Schemat visar då varför söner kan drabbas när döttrar inte gör det.</p>
+      <ol>
+        <li class="core">Anlaget sitter på X-kromosomen. Skriv X<sup>F</sup> för normalt färgseende, som är dominant, och X<sup>f</sup> för färgblindhet, som är vikande. Y-kromosomen har inget sådant anlag.</li>
+        <li class="core">Mamman har två X-kromosomer och pappan har en X och en Y. Skriv pappans X och Y ovanför fälten och mammans två X till vänster.</li>
+        <li class="core">Fyll i fälten som vanligt. Fält med Y är söner, och fält med två X är döttrar.</li>
+        <li class="core">En son med X<sup>f</sup> blir färgblind. En dotter med X<sup>F</sup> X<sup>f</sup> ser färger normalt men är anlagsbärare.</li>
+        <li class="core">Så används schemat som bevis: om mamman är anlagsbärare och pappan ser färger normalt blir hälften av sönerna färgblinda, men ingen av döttrarna.</li>
+      </ol>
+    </div>
+    <div class="card punnett" id="pn-x">
+      <p class="how">Välj föräldrarna och fyll i fälten ett i taget. Exemplet som redan är valt är det vanligaste på prov: mamman är anlagsbärare och pappan ser färger normalt.</p>
+      <div class="pn-pick"></div>
+      <table class="pn"></table>
+      <div class="pn-opts picks" role="group" aria-label="Välj vad som ska stå i fältet"></div>
+      <p class="pn-fb" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-6"><span>Område 6</span>Genmodifiering</h2>
+
+  <section class="qa" aria-labelledby="f1">
+    <p class="num">Fråga 1</p>
+    <h3 id="f1">Vad är genmodifiering?</h3>
+    <div class="answer">
+      <p class="short">Vid genmodifiering flyttar man en gen från en organism till en annan, så att den får en ny egenskap. Resultatet kallas en genmodifierad organism, GMO.</p>
+      <ol>
+        <li>På ett bomullsfält växer ogräs som tar ljus och näring från bomullen. Odlaren vill kunna spruta bort ogräset utan att bomullen tar skada.</li>
+        <li class="core">Lösningen är att ge bomullen en gen som gör att den tål bekämpningsmedlet. En sådan gen kan finnas hos en helt annan art, till exempel en bakterie.</li>
+        <li class="core">Genen klipps ut ur bakteriens DNA. Verktyget kallas gensaxen.</li>
+        <li class="core">Genen sätts in i DNA i en cell från växten. Cellen odlas, och ur den växer en planta där alla celler har den nya genen.</li>
+        <li class="core">Plantan är en <strong>genmodifierad organism</strong>, förkortat GMO.</li>
+        <li class="core">Skillnaden mot avel och förädling: där korsar man individer och hoppas att avkomman får rätt egenskaper. Genmodifiering går mycket snabbare, ger exakt den egenskap man vill ha, och kan flytta gener mellan olika arter.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-gmo">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/gm1.jpg" alt=""><img src="img/gm2.jpg" alt=""><img src="img/gm3.jpg" alt=""><img src="img/gm4.jpg" alt=""></div>
+        <canvas role="img" aria-label="Ett bomullsfält med förstoringar som visar hur en gen flyttas från en bakterie till en växtcell."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="f2">
+    <p class="num">Fråga 2</p>
+    <h3 id="f2">Vilka exempel finns det på genmodifiering?</h3>
+    <div class="answer">
+      <p class="short">Grödor som tål bekämpningsmedel, potatis som tål kyla, lax som växer snabbt och ris med extra näring.</p>
+      <ol>
+        <li class="core"><strong>Skräddarsydda grödor</strong> tål ett visst bekämpningsmedel. Det är den vanligaste genmodifieringen och finns hos soja, majs, bomull och raps. Du har troligen redan burit sådan bomull, eller ätit kött från djur som fått sådan soja.</li>
+        <li class="core"><strong>Potatis</strong> kan få en anti-frysgen som gör att den tål kyla bättre.</li>
+        <li class="core"><strong>Lax</strong> kan fås att växa snabbare och att äta växter i stället för annan fisk.</li>
+        <li class="core"><strong>Det gyllene riset</strong> har fått extra näring och skulle kunna minska undernäringen i fattiga länder.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-ex">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/gm5.jpg" alt=""><img src="img/gm6.jpg" alt=""><img src="img/gm7.jpg" alt=""><img src="img/gm8.jpg" alt=""></div>
+        <canvas role="img" aria-label="Fyra exempel på genmodifiering: soja, potatis, lax och ris."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="f3">
+    <p class="num">Fråga 3</p>
+    <h3 id="f3">Vilka fördelar och nackdelar finns det med genmodifiering?</h3>
+    <div class="answer">
+      <p class="short">Fördelarna är större skördar, mindre bekämpningsmedel och snabbare resultat. Nackdelarna är att generna kan spridas i naturen, att odlaren blir beroende av ett företag och att följderna är svåra att förutse.</p>
+      <ol>
+        <li class="core"><strong>Fördel:</strong> skördarna kan bli större, så att vi får mer mat.</li>
+        <li class="core"><strong>Fördel:</strong> det kan gå åt mindre bekämpningsmedel, vilket är bra för miljön och för dem som arbetar på fälten.</li>
+        <li class="core"><strong>Fördel:</strong> det går snabbare och blir mer exakt än avel och förädling.</li>
+        <li class="core"><strong>Nackdel:</strong> de nya generna kan spridas till vilda växter genom korsning, och en genmodifierad art kan tränga undan andra arter. Ekosystem är svåra att förutse.</li>
+        <li class="core"><strong>Nackdel:</strong> ogräs kan bli motståndskraftiga, så att det krävs ännu starkare medel.</li>
+        <li class="core"><strong>Nackdel:</strong> odlaren måste köpa frö och bekämpningsmedel från samma företag. Tekniken är dyr och kanske bara kommer rika länder till godo.</li>
+        <li class="core"><strong>Etik:</strong> en del menar att vi inte har rätt att ändra på andra organismer. Andra svarar att vi har gjort det genom avel i tusentals år.</li>
+      </ol>
+    </div>
+    <div class="card story swarm" id="sw-cmp">
+      <div class="scene" style="aspect-ratio:1376/768">
+        <div class="layers" aria-hidden="true"><img src="img/cmp1.jpg" alt=""><img src="img/cmp2.jpg" alt=""><img src="img/cmp3.jpg" alt=""><img src="img/cmp4.jpg" alt=""></div>
+        <canvas role="img" aria-label="Fyra bildpar som ställer en fördel med genmodifiering mot en nackdel."></canvas>
+      </div>
+      <p class="cap"></p>
+      <div class="pips" role="group" aria-label="Välj steg i jämförelsen"></div>
+      <ol class="sr"></ol>
+    </div>
+  </section>
+
+  <section class="qa" aria-labelledby="f4">
+    <p class="num">Fråga 4</p>
+    <h3 id="f4">Hur resonerar man i flera led?</h3>
+    <div class="answer">
+      <p class="short">Man börjar med vad som har ändrats och följer sedan konsekvenserna steg för steg, först nyttan och sedan risken.</p>
+      <ol>
+        <li class="core">Börja med själva förändringen: vilken egenskap har organismen fått?</li>
+        <li class="core">Skriv vad det leder till, och vad det i sin tur leder till. Ord som "det leder till att" och "vilket gör att" binder ihop leden.</li>
+        <li class="core">Vänd sedan på det med "å andra sidan" och följ risken på samma sätt, i minst två led.</li>
+        <li class="core">Avsluta med en egen slutsats: vad väger tyngst, och varför?</li>
+        <li>Ett led är ett steg i en kedja av orsak och verkan. Ju fler led som hänger ihop, desto högre nivå visar svaret.</li>
+      </ol>
+    </div>
+    <div class="card" id="gm-chain">
+      <p class="how">Bygg ett resonemang led för led. Välj ett exempel och sedan den fortsättning som följer av ledet innan.</p>
+      <div class="gc-pick pn-row"></div>
+      <ol class="gc-list"></ol>
+      <div class="gc-opts"></div>
+      <p class="gc-fb" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <h2 class="area" id="omrade-7"><span>Område 7</span>Begreppen</h2>
+
+  <section class="card" id="begrepp" aria-label="Begreppsträning">
+    <div class="pn-row"><button type="button" class="bg-tab" aria-pressed="true">Öva</button><button type="button" class="bg-tab" aria-pressed="false">Slå upp</button></div>
+    <div class="bg-pane">
+      <p class="how">Ibland får du en förklaring och ska välja begreppet, ibland tvärtom. Ett begrepp som blir fel kommer tillbaka tills det sitter.</p>
+      <p class="bg-prog gs-prog"></p>
+      <p class="bg-kind"></p>
+      <p class="bg-q"></p>
+      <div class="bg-opts gc-opts"></div>
+      <p class="bg-fb gs-fb" aria-live="polite"></p>
+      <button type="button" class="bg-next gs-next" hidden>Nästa</button>
+    </div>
+    <div class="bg-pane" hidden>
+      <label class="how" for="bg-search">Sök bland begreppen i bokens begreppslista</label>
+      <input type="search" id="bg-search" class="bg-search" placeholder="Skriv ett ord, till exempel allel">
+      <dl class="bg-list"></dl>
+    </div>
+  </section>
+
+  <footer>Bygger på Spektrum Biologi, kapitel 10, s. 300–339, och bokens begreppslista. På några ställen går förklaringarna längre än boken, till exempel om hur arvsmassan blandas vid reduktionsdelningen.</footer>
+</main>
+
+<script>
+(function(){
+  var BASES=['A','T','C','G'], PAIR={A:'T',T:'A',C:'G',G:'C'};
+  function tok(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  function rnd(){return BASES[Math.floor(Math.random()*4)];}
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Fråga 1: stegen som vrids ---------- */
+  var cv=document.getElementById('ladder'), ctx=cv.getContext('2d');
+  var slider=document.getElementById('twist'), cap=document.getElementById('caption');
+  var W=0,H=0,dpr=1,parts=[],seq=[],nR=10,twist=0,want=0,rot=0,col={},fontFam='sans-serif';
+  function readColors(){
+    col={A:tok('--a'),T:tok('--t'),C:tok('--c'),G:tok('--g'),rail:tok('--muted'),surface:tok('--surface'),ink:tok('--ink')};
+    fontFam=getComputedStyle(document.body).fontFamily;
+  }
+  function radius(){return Math.min(H*0.26,80);}
+  function build(){
+    var r=cv.getBoundingClientRect();
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=r.width; H=r.height;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    nR=Math.max(6,Math.min(13,Math.floor(W/50)));
+    seq=[]; for(var i=0;i<nR;i++) seq.push(rnd());
+    parts=[];
+    var nRail=nR*11,k,p,tg;
+    for(var s=0;s<2;s++) for(k=0;k<nRail;k++) parts.push({kind:'rail',side:s,t:k/(nRail-1),ph:Math.random()*6.28});
+    for(i=0;i<nR;i++) for(k=0;k<14;k++){
+      var u=0.07+0.86*k/13;
+      parts.push({kind:'rung',rung:i,u:u,base:u<0.5?seq[i]:PAIR[seq[i]],ph:Math.random()*6.28});
+    }
+    for(i=0;i<parts.length;i++){p=parts[i];tg=target(p);p.x=tg.x;p.y=tg.y;}
+  }
+  function geom(t){
+    var pad=26, th=twist*(t*nR*0.62)+rot;
+    return {x:pad+t*(W-2*pad),c:Math.cos(th),s:Math.sin(th)};
+  }
+  function target(p){
+    var R=radius(), cy=H/2, g, v;
+    if(p.kind==='rail'){g=geom(p.t); v=p.side===0?-1:1;}
+    else{g=geom((p.rung+0.5)/nR); v=2*p.u-1;}
+    return {x:g.x,y:cy+v*R*g.c,z:-v*g.s};
+  }
+  function label(text,x,yText,yTo,alpha){
+    ctx.globalAlpha=alpha;
+    ctx.strokeStyle=col.ink; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(x,yText+(yTo>yText?10:-10)); ctx.lineTo(x,yTo); ctx.stroke();
+    ctx.fillStyle=col.ink; ctx.font='700 15px '+fontFam;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(text,x,yText);
+  }
+  function frame(now){
+    var time=now/1000, i, p, tg, z;
+    if(reduce){twist=want;}
+    else{twist+=(want-twist)*0.08; rot+=0.012*twist; if(want===0) rot*=0.92;}
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+    for(i=0;i<parts.length;i++){
+      p=parts[i]; tg=target(p); z=tg.z*twist;
+      if(reduce){p.x=tg.x;p.y=tg.y;}
+      else{
+        p.x+=(tg.x-p.x)*0.12+Math.sin(time*1.6+p.ph)*0.1;
+        p.y+=(tg.y-p.y)*0.12+Math.cos(time*1.3+p.ph)*0.1;
+      }
+      ctx.globalAlpha=0.55+0.45*(z+1)/2;
+      ctx.fillStyle=p.kind==='rail'?col.rail:col[p.base];
+      ctx.beginPath(); ctx.arc(p.x,p.y,Math.max(0.8,(p.kind==='rail'?2.1:2.4)+0.8*z),0,6.2832); ctx.fill();
+    }
+    var R=radius(), cy=H/2, g;
+    ctx.font='700 13px '+fontFam; ctx.textAlign='center'; ctx.textBaseline='middle';
+    for(var r=0;r<nR;r++){
+      g=geom((r+0.5)/nR);
+      var al=Math.max(0,(Math.abs(g.c)-0.25)/0.75);
+      if(al<=0.02) continue;
+      var pair=[[seq[r],-0.5],[PAIR[seq[r]],0.5]];
+      for(var j=0;j<2;j++){
+        var ly=cy+pair[j][1]*R*g.c;
+        ctx.globalAlpha=al;
+        ctx.fillStyle=col.surface; ctx.beginPath(); ctx.arc(g.x,ly,10,0,6.2832); ctx.fill();
+        ctx.strokeStyle=col[pair[j][0]]; ctx.lineWidth=1.5; ctx.stroke();
+        ctx.fillStyle=col[pair[j][0]]; ctx.fillText(pair[j][0],g.x,ly+0.5);
+      }
+    }
+    /* Etiketter syns när stegen är platt */
+    var la=Math.max(0,1-twist*3);
+    if(la>0.02){
+      var xs=26+(1.5/nR)*(W-52)+ (W-52)/nR/2;
+      label('Sträng',xs,cy-R-30,cy-R-5,la);
+      var rr=Math.max(2,nR-3), xb=26+((rr+0.5)/nR)*(W-52);
+      /* Ram runt hela pinnen, så att etiketten inte ser ut att peka på strängen */
+      ctx.globalAlpha=la; ctx.strokeStyle=col.ink; ctx.lineWidth=1.5;
+      ctx.setLineDash([5,4]);
+      ctx.strokeRect(xb-17,cy-R+9,34,2*R-18);
+      ctx.setLineDash([]);
+      label('Baspar',xb,cy+R+30,cy+R-9,la);
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(frame);
+  }
+  function setCaption(){
+    var v=+slider.value;
+    cap.textContent = v<12 ? 'Så här platt är DNA aldrig i verkligheten. Stegen är uträtad bara för att delarna ska synas tydligt: de två grå raderna är strängarna, och varje pinne mellan dem är ett baspar med två bokstäver. Dra reglaget åt höger för att se den riktiga formen.'
+      : v<80 ? 'Nu vrids stegen tillbaka mot sin riktiga form. Det är samma strängar och samma pinnar hela tiden.'
+      : 'Det här är den riktiga formen. I cellen är DNA alltid vridet till en dubbelspiral.';
+  }
+  slider.addEventListener('input',function(){want=slider.value/100; setCaption();});
+  readColors(); build(); setCaption();
+  var rz; window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(build,150);});
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',readColors);
+  new MutationObserver(readColors).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(readColors);
+  requestAnimationFrame(frame);
+
+  /* ---------- Fråga 3: para ihop ---------- */
+  var topRow=document.getElementById('top'), bottom=document.getElementById('bottom');
+  var fb=document.getElementById('feedback'), again=document.getElementById('again');
+  var picks=document.querySelectorAll('.picks button[data-b]');
+  var strand=[], pos=0;
+  function chip(b,cls){var d=document.createElement('div');d.className='chip '+(cls||'');d.textContent=b;return d;}
+  function newStrand(){
+    strand=[]; pos=0; topRow.innerHTML=''; bottom.innerHTML=''; fb.textContent='';
+    for(var i=0;i<6;i++){
+      var b=rnd(); strand.push(b);
+      topRow.appendChild(chip(b,'b'+b));
+      bottom.appendChild(chip('?','empty'+(i===0?' now':'')));
+    }
+    again.hidden=true;
+    picks.forEach(function(p){p.disabled=false;});
+  }
+  picks.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      if(pos>=6) return;
+      var b=btn.getAttribute('data-b'), given=strand[pos];
+      if(b===PAIR[given]){
+        var c=bottom.children[pos];
+        c.className='chip b'+b; c.textContent=b;
+        pos++;
+        if(pos<6){bottom.children[pos].classList.add('now'); fb.textContent='Rätt, '+given+' och '+b+' är ett baspar.';}
+        else{fb.textContent='Alla sex baspar stämmer.'; again.hidden=false; picks.forEach(function(p){p.disabled=true;});}
+      }else{
+        fb.textContent='Prova igen: '+given+' sitter inte ihop med '+b+'.';
+      }
+    });
+  });
+  again.addEventListener('click',newStrand);
+  newStrand();
+
+  /* ---------- Fråga 4: sekvenser ---------- */
+  var seqBox=document.getElementById('seq'), len=document.getElementById('len');
+  var lenText=document.getElementById('lenText'), combos=document.getElementById('combos');
+  var pool=[];
+  function fill(){pool=[];for(var i=0;i<15;i++) pool.push(rnd());}
+  function showSeq(){
+    var n=+len.value; seqBox.innerHTML='';
+    for(var i=0;i<n;i++) seqBox.appendChild(chip(pool[i],'b'+pool[i]));
+    var tot=Math.pow(4,n).toLocaleString('sv-SE');
+    lenText.textContent='Raden ovan är en av alla sekvenser som går att bilda med '+n+(n===1?' kvävebas':' kvävebaser')+' i rad. Sammanlagt finns det';
+    var v=Math.pow(4,n), ord='';
+    function w(x,one,many){var r=Math.round(x*10)/10, t=String(r).replace('.',','); return (x>=r?'drygt ':'knappt ')+t+' '+(r===1?one:many);}
+    if(v>=1e9) ord=w(v/1e9,'miljard','miljarder'); else if(v>=1e6) ord=w(v/1e6,'miljon','miljoner'); else if(v>=1e4) ord=w(v/1e3,'tusen','tusen');
+    combos.textContent=tot+' olika sekvenser'+(ord?' ('+ord+')':'');
+    var parts=[]; for(var q=0;q<Math.min(n,5);q++) parts.push('4');
+    document.getElementById('calc').textContent='Så räknar man: '+(n===1?'4 möjligheter på den enda platsen.':parts.join(' × ')+(n>5?' × … (4 gånger sig själv '+n+' gånger)':'')+' = '+tot+', eftersom varje plats har fyra möjligheter.');
+  }
+  len.addEventListener('input',showSeq);
+  document.getElementById('shuffle').addEventListener('click',function(){fill();showSeq();});
+  fill(); showSeq();
+
+  /* ---------- Fråga 5: recept vid kroppsbilden ---------- */
+  document.querySelectorAll('[data-seq]').forEach(function(el){
+    el.getAttribute('data-seq').split('').forEach(function(b){el.appendChild(chip(b,'b'+b));});
+  });
+})();
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var INK='#15272b',OR='#e8791a';
+  function cl(t){return Math.max(0,Math.min(1,t));}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function rng(seed){var s=seed;return function(){s=(s*16807)%2147483647;return (s-1)/2147483646;};}
+  var ICOL={fabrik:INK,kontor:'#0d6b68',samling:'#566a6d',parm:'#2a76cf',recept:OR,bokstav:'#2a76cf',kopia:'#c49a1a',maskin:INK,bit:'#23915a',produkt:'#9a52c4'}, ICACHE={};
+  function ICON(name){
+    if(ICACHE[name]) return ICACHE[name];
+    var sym=document.getElementById('i-'+name), im=new Image();
+    im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="96" height="96">'+sym.innerHTML.replace(/currentColor/g,ICOL[name])+'</svg>');
+    ICACHE[name]=im; return im;
+  }
+  var GREY=[120,135,138], RED=[217,58,47], AMB=[240,165,0], COPY=[245,196,0], TEAL=[13,107,104], GREEN=[35,145,90], BLUE=[42,118,207], PINK=[194,51,122], ORA=[232,121,26], FRECK=[196,98,40];
+  var AMC=[[31,157,91],[31,120,209],[214,51,127],[224,154,0]];
+
+  var PT={'sw-synt':[[0],[0],[1],[1],[2],[3],[4],[5],[6]],'sw-gen':[[0],[1],[1],[2,3],[4]],'sw-krom':[[0],[1],[2],[3],[4],[5]],
+    'sw-kopia':[[0],[0],[1],[1],[2],[3],[4],[5]],'sw-recept':[[0],[1],[2],[3]],'sw-cmp':[[0,5],[1,4],[2,3],[6]],'sw-gmo':[[0],[1],[2],[3],[3],[4],[5]],'sw-ex':[[0],[1],[2],[3]],'sw-dom':[[0],[1],[1],[2],[3],[4],[4]],'sw-kon':[[0],[1],[2],[3],[4],[5]],'sw-mitos':[[0],[1],[2],[3],[4]],'sw-meios':[[0],[1],[2],[3],[4],[5]],'sw-jmf':[[0],[1],[2],[3]],'sw-arv':[[0],[0],[1],[2],[3],[4]]};
+  var ZOOM={
+    'sw-recept':{1:[0,.29,.45],2:[0,.29,.45]},
+    'sw-arv':{1:[0,.245,.5],2:[0,.245,.5]},
+    'sw-gen':{1:[0,.76,.5],2:[0,.76,.5],3:[0,.76,.5]},
+    'sw-krom':{1:[0,.5,.45],2:[0,.5,.45],4:[0,.5,.45]},
+    'sw-kopia':{2:[1,.225,.42],3:[1,.225,.42],4:[1,.225,.42],5:[1,.225,.42]},
+    'sw-synt':{3:[0,.38,.62],4:[1,.62,.45],5:[1,.62,.45],6:[1,.62,.45]},
+    'sw-mitos':{1:[0,.26,.5],2:[0,.26,.5],3:[0,.26,.5]},
+    'sw-meios':{1:[0,.5,.6],2:[0,.5,.6],3:[0,.5,.6],4:[0,.5,.6]},
+    'sw-gmo':{1:[0,.55,.78],2:[0,.48,.55],3:[0,.48,.55]}
+  };
+  var ZB=0.4, ZK=0.7, ZX=1-0.7-0.012, ZY=1-0.7-0.02;
+  function Swarm(id,cfg){
+    var root=document.getElementById(id); if(!root) return;
+    var cv=root.querySelector('canvas'), ctx=cv.getContext('2d'), cap=root.querySelector('.cap'), pips=root.querySelector('.pips'), sr=root.querySelector('.sr');
+    var layers=root.querySelectorAll('.layers img'), steps=cfg.steps, N=cfg.N;
+    var P=[], T=[], dpr=1, step=0, t0=null, visible=false, fam='sans-serif', fs=14, auto=false;
+    var sec=root.closest('.qa'), lis=sec?sec.querySelectorAll('.answer li'):[], why=sec?sec.querySelector('.why'):null, pts=PT[id]||[];
+    if(sec) sec.classList.add('linked');
+    var Z=ZOOM[id]||null;
+    function zi(i){var b=steps[i].bg||0; return Z&&Z[b]?Z[b]:null;}
+    function card(x,y,bg,alpha,imgA){
+      var w=ZK*h.W, hh=ZK*h.H, X=x*h.W, Y=y*h.H, im=layers[bg];
+      ctx.globalAlpha=cl(alpha); ctx.save(); ctx.shadowColor='rgba(21,39,43,0.25)'; ctx.shadowBlur=18; ctx.shadowOffsetY=4;
+      ctx.fillStyle='#fff'; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(X,Y,w,hh,14); else ctx.rect(X,Y,w,hh); ctx.fill(); ctx.restore();
+      if(im&&im.complete&&im.naturalWidth){ctx.save(); ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(X,Y,w,hh,14); else ctx.rect(X,Y,w,hh); ctx.clip(); ctx.globalAlpha=cl(alpha)*imgA; ctx.drawImage(im,X,Y,w,hh); ctx.restore();}
+      ctx.globalAlpha=cl(alpha); ctx.strokeStyle=INK; ctx.lineWidth=2.5; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(X,Y,w,hh,14); else ctx.rect(X,Y,w,hh); ctx.stroke(); ctx.globalAlpha=1;
+    }
+    function zoomDraw(z,i,a){
+      var prev=[], j, b=steps[i].bg||0, seen={}; seen[b]=1;
+      for(j=i-1;j>=0&&prev.length<2;j--){var q=zi(j); if(!q||q[0]!==z[0]) break; var pb=steps[j].bg||0; if(!seen[pb]){seen[pb]=1; prev.push(pb);}}
+      for(j=prev.length-1;j>=0;j--) card(ZX-0.022*(j+1),ZY-0.036*(j+1),prev[j],1,0.35);
+      var sx=z[1]*ZB, sy=z[2]*ZB, ex=Math.max(ZX,sx), ey=Math.max(ZY,sy);
+      if(prev.length){ex=Math.max(ZX-0.022*prev.length,sx); ey=Math.max(ZY-0.036*prev.length,sy);}
+      ctx.globalAlpha=1; ctx.lineCap='round'; ctx.strokeStyle='#fff'; ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(sx*h.W,sy*h.H); ctx.lineTo(ex*h.W,ey*h.H); ctx.stroke();
+      ctx.strokeStyle=INK; ctx.lineWidth=2; ctx.stroke(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(sx*h.W,sy*h.H,5,0,6.2832); ctx.fill(); ctx.stroke();
+      card(ZX,ZY,b,a,1);
+    }
+    function jump(k){show(k); t0=null;}
+    [].forEach.call(lis,function(li,idx){
+      var k=-1; for(var q=0;q<pts.length;q++) if(pts[q]!=='w'&&pts[q].indexOf(idx)>=0){k=q;break;}
+      if(k<0) return;
+      li.classList.add('go'); li.tabIndex=0; li.setAttribute('role','button');
+      li.addEventListener('click',function(){jump(k);});
+      li.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault(); jump(k);}});
+    });
+    root.querySelector('.scene').addEventListener('click',function(){jump((step+1)%steps.length);});
+    var h={W:0,H:0,R:rng(cfg.seed||21),ctx:ctx};
+    h.at=function(x,y,col,a,jx,jy){return {x:(x+(h.R()-0.5)*(jx||0))*h.W,y:(y+(h.R()-0.5)*(jy||0))*h.H,c:col,a:a===undefined?1:a};};
+    h.ell=function(cx,cy,rx,ry,col,a){var an=h.R()*6.2832,q=Math.sqrt(h.R());return {x:(cx+Math.cos(an)*q*rx)*h.W,y:(cy+Math.sin(an)*q*ry)*h.H,c:col,a:a===undefined?1:a};};
+    h.clusters=function(o,from,to,x0,x1,y0,y1){
+      for(var i=from;i<to;i+=10){var cx=lerp(x0,x1,h.R()), cy=lerp(y0,y1,h.R()), col=AMC[Math.floor(h.R()*4)];
+        for(var j=i;j<Math.min(to,i+10);j++) o[j]=h.ell(cx,cy,0.009,0.016,col);}
+    };
+    h.ring=function(cx,cy,rx,ry,color,alpha,time){
+      if(alpha<=0.01) return; var pu=1+0.025*Math.sin(time*3);
+      ctx.globalAlpha=cl(alpha); ctx.beginPath(); ctx.ellipse(cx*h.W,cy*h.H,rx*h.W*pu,ry*h.H*pu,0,0,6.2832);
+      ctx.strokeStyle='#fff'; ctx.lineWidth=Math.max(5,h.W*0.008); ctx.stroke(); ctx.strokeStyle=color; ctx.lineWidth=Math.max(2.5,h.W*0.004); ctx.stroke(); ctx.globalAlpha=1;
+    };
+    h.line=function(x1,y1,x2,y2,color,alpha,w){
+      if(alpha<=0.01) return; ctx.globalAlpha=cl(alpha); ctx.strokeStyle=color; ctx.lineWidth=w||1.5; ctx.lineCap='round';
+      ctx.beginPath(); ctx.moveTo(x1*h.W,y1*h.H); ctx.lineTo(x2*h.W,y2*h.H); ctx.stroke(); ctx.globalAlpha=1;
+    };
+    steps.forEach(function(s,k){
+      var b=document.createElement('button'); b.type='button'; b.textContent=k+1; b.setAttribute('aria-label','Steg '+(k+1)+' av '+steps.length);
+      b.addEventListener('click',function(){jump(k);});
+      pips.appendChild(b);
+      var li=document.createElement('li'); li.textContent=s.text; sr.appendChild(li);
+    });
+    var hint=document.createElement('span'); hint.className='hint'; hint.textContent='Klicka på en siffra eller på bilden för nästa steg'; pips.appendChild(hint);
+    function build(){
+      var r=cv.getBoundingClientRect(); if(!r.width) return;
+      dpr=Math.min(window.devicePixelRatio||1,2); h.W=r.width; h.H=r.height; cv.width=Math.round(h.W*dpr); cv.height=Math.round(h.H*dpr);
+      fs=Math.max(12,Math.min(17,h.W/50)); fam=getComputedStyle(document.body).fontFamily; h.R=rng(cfg.seed||21);
+      T=cfg.build(h);
+      for(var zs=0;zs<steps.length;zs++) if(zi(zs)) T[zs].forEach(function(t){t.x=ZX*h.W+t.x*ZK; t.y=ZY*h.H+t.y*ZK;});
+      if(!P.length) for(var i=0;i<N;i++){var t=T[0][i]; P.push({x:t.x,y:t.y,vx:0,vy:0,c:t.c.slice(),a:t.a,k:0.012+Math.random()*0.016,ph:Math.random()*6.28});}
+    }
+    function pill(text,x,y,alpha,icon){
+      if(alpha<=0.01) return;
+      ctx.font='700 '+fs+'px '+fam; var isz=icon?fs*1.45:0, gap=icon?fs*0.4:0, w=ctx.measureText(text).width+fs*1.2+isz+gap, hh=fs*2.1;
+      var px=Math.max(4,Math.min(h.W-w-4,x*h.W-w/2)), py=Math.max(4,Math.min(h.H-hh-4,y*h.H-hh/2));
+      ctx.globalAlpha=cl(alpha)*0.96; ctx.fillStyle='#fff'; ctx.strokeStyle=INK; ctx.lineWidth=1.5;
+      ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(px,py,w,hh,hh/2); else ctx.rect(px,py,w,hh); ctx.fill(); ctx.stroke();
+      if(icon){var im=ICON(icon); if(im.complete&&im.naturalWidth) ctx.drawImage(im,px+fs*0.55,py+(hh-isz)/2,isz,isz);}
+      ctx.fillStyle=INK; ctx.textAlign='left'; ctx.textBaseline='middle'; ctx.fillText(text,px+fs*0.6+isz+gap,py+hh/2+0.5); ctx.globalAlpha=1;
+    }
+    function show(i){
+      step=i; cap.textContent=steps[i].text;
+      for(var j=0;j<steps.length;j++) pips.children[j].className=j===i?'on':'';
+      var zz=zi(i);
+      for(j=0;j<layers.length;j++) layers[j].className=zz?(j===zz[0]?'on thumb':''):(j===(steps[i].bg||0)?(steps[i].dim?'on dim':'on'):'');
+      var p=pts[i];
+      if(why) why.classList.toggle('hit',p==='w');
+      for(j=0;j<lis.length;j++) lis[j].classList.toggle('hit',!!p&&p!=='w'&&p.indexOf(j)>=0);
+    }
+    function frame(now){
+      requestAnimationFrame(frame);
+      if(!visible||!h.W) return;
+      if(t0===null) t0=now;
+      var el=(now-t0)/1000, time=now/1000, d=steps[step].dur;
+      if(el>=d){ if(auto){show((step+1)%steps.length); t0=now; el=0; d=steps[step].dur;} else el=d; }
+      ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,h.W,h.H);
+      var tg=T[step], i, p, t, rad=Math.max(2,h.W/(cfg.rad||330)), fadeIn=reduce?1:cl((el-1.4)/0.8);
+      var zc=zi(step);
+      if(zc){zoomDraw(zc,step,reduce?1:cl(el/0.6)); ctx.save(); ctx.translate(ZX*h.W,ZY*h.H); ctx.scale(ZK,ZK);}
+      if(cfg.overlay) cfg.overlay(h,step,el,d,time,fadeIn);
+      if(zc) ctx.restore();
+      ctx.lineWidth=0.8; ctx.strokeStyle='rgba(21,39,43,0.55)';
+      for(i=0;i<N;i++){
+        p=P[i]; t=tg[i];
+        if(reduce){p.x=t.x;p.y=t.y;p.c=t.c.slice();p.a=t.a;}
+        else{
+          p.vx=p.vx*0.86+(t.x-p.x)*p.k; p.vy=p.vy*0.86+(t.y-p.y)*p.k;
+          p.x+=p.vx+Math.sin(time*1.3+p.ph)*0.18; p.y+=p.vy+Math.cos(time*1.1+p.ph)*0.18;
+          p.c[0]+=(t.c[0]-p.c[0])*0.05; p.c[1]+=(t.c[1]-p.c[1])*0.05; p.c[2]+=(t.c[2]-p.c[2])*0.05; p.a+=(t.a-p.a)*0.06;
+        }
+        if(p.a<0.03) continue;
+        ctx.globalAlpha=cl(p.a); ctx.fillStyle='rgb('+(p.c[0]|0)+','+(p.c[1]|0)+','+(p.c[2]|0)+')';
+        ctx.beginPath(); ctx.arc(p.x,p.y,rad,0,6.2832); ctx.fill(); ctx.stroke();
+      }
+      ctx.globalAlpha=1;
+      (steps[step].labels||[]).forEach(function(l){if(zc) pill(l[0],ZX+l[1]*ZK,ZY+l[2]*ZK,fadeIn,l[3]); else pill(l[0],l[1],l[2],fadeIn,l[3]);});
+    }
+    show(0); build();
+    if(window.ResizeObserver) new ResizeObserver(build).observe(cv); else window.addEventListener('resize',build);
+    if(window.IntersectionObserver) new IntersectionObserver(function(es){visible=es[0].isIntersecting;},{threshold:0.2}).observe(root); else visible=true;
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- Recepten i kroppen ---------- */
+  (function(){
+    var INS=[224,154,0], SKIN=ORA, MUS=RED;
+    var body=[[0.308,0.365,0.022,0.018,INS],[0.379,0.395,0.009,0.05,SKIN],[0.267,0.56,0.015,0.07,MUS]];
+    var panel=[[0.835,0.47,0.12,0.09,INS],[0.085,0.52,0.06,0.15,SKIN],[0.5,0.5,0.13,0.3,MUS]];
+    function seg(u){return u>=0.12&&u<0.2?0:(u>=0.35&&u<0.5?1:(u>=0.62&&u<0.9?2:-1));}
+    Swarm('sw-recept',{N:380,seed:9,steps:[
+      {bg:0,dur:9,text:'Prickarna visar tre ställen där kroppen bygger något just nu: bukspottkörteln, huden och en muskel.',labels:[['Insulin i bukspottkörteln',0.62,0.16],['Färgämne i huden',0.62,0.36],['Protein i muskeln',0.55,0.72]]},
+      {bg:1,dur:9,text:'Hur vet kroppen hur varje sak ska byggas? Prickarna samlas till en bit av DNA-tråden.',labels:[['DNA',0.2,0.6,'samling']]},
+      {bg:1,dur:10,text:'Tre bitar av tråden får färg. Varje färgad bit är ett recept, och de är olika långa.',labels:[['Recept på insulin',0.3,0.92,'recept'],['Recept på färgämne',0.3,0.36,'recept'],['Recept på muskelprotein',0.62,0.12,'recept']]},
+      {bg:2,dur:10,text:'Recepten går dit de ska användas: det orange till huden, det röda till muskeln och det gula till bukspottkörteln.',labels:[['Huden',0.165,0.92],['Muskeln',0.5,0.95],['Bukspottkörteln',0.835,0.92]]}
+    ],build:function(h){
+      var T=[[],[],[],[]],k,s,p,u;
+      for(k=0;k<380;k++){
+        u=k/379; s=seg(u); var s2=s>=0?s:Math.floor(h.R()*3);
+        p=body[s2]; T[0].push(h.ell(p[0],p[1],p[2],p[3],p[4]));
+        var q=h.at(0.06+0.88*u,0.9-0.79*u,GREY,1,0.02,0.035); T[1].push(q);
+        T[2].push({x:q.x,y:q.y,c:s>=0?body[s][4]:GREY,a:1});
+        p=panel[s2]; T[3].push(h.ell(p[0],p[1],p[2],p[3],p[4],1));
+      }
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      if(s===0){h.line(0.33,0.36,0.5,0.17,INK,f*0.7); h.line(0.39,0.39,0.52,0.36,INK,f*0.7); h.line(0.28,0.6,0.44,0.71,INK,f*0.7);}
+    }});
+  })();
+
+  /* ---------- Arvsmassan: från människa till DNA ---------- */
+  (function(){
+    var E=[[0.235,0.5,0.1,0.47],[0.753,0.5,0.21,0.375],[0.13,0.52,0.05,0.09],[0.38,0.5,0.125,0.235],[0.63,0.52,0.105,0.4],[0.875,0.5,0.095,0.44]], X=[0,0.255,0.505,0.765,1];
+    Swarm('sw-arv',{N:220,seed:4,rad:300,steps:[
+      {bg:0,dur:8,text:'Vi börjar med en hel människa och zoomar inåt, steg för steg.',labels:[['En människa',0.5,0.5]]},
+      {bg:1,dur:9,text:'Först huden på armen. I förstoringen syns att den är byggd av celler.',labels:[['Hudceller i förstoring',0.75,0.06]]},
+      {bg:2,dur:8,text:'Så här ser en enda cell ut i genomskärning. Prickarna ringar in cellkärnan.',labels:[['Cell',0.13,0.93,'fabrik']]},
+      {bg:2,dur:10,text:'Närmare: cellkärnan är fylld av en lång tråd som ligger som ett nystan.',labels:[['Cellkärna med arvsmassan',0.38,0.93,'kontor']]},
+      {bg:2,dur:10,text:'Ännu närmare: tråden är virad runt små blå kulor, så att den tar mindre plats. Kulorna är proteiner.',labels:[['DNA lindat runt proteiner',0.63,0.05]]},
+      {bg:2,dur:9,text:'Längst in ser man själva tråden. Det är den vridna stegen med sina baspar.',labels:[['Dubbelspiral',0.875,0.05,'samling']]}
+    ],build:function(h){
+      var T=[],s,i,e,an;
+      for(s=0;s<6;s++){T[s]=[]; e=E[s]; for(i=0;i<220;i++){an=i/220*6.2832; T[s].push(h.at(e[0]+Math.cos(an)*e[2],e[1]+Math.sin(an)*e[3],TEAL,1,0.006,0.01));}}
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      if(s<2) return; var ctx=h.ctx; ctx.fillStyle='#fff';
+      for(var k=0;k<4;k++){ if(k===s-2) continue; ctx.globalAlpha=0.6*cl(el/1.2); ctx.fillRect(X[k]*h.W,0,(X[k+1]-X[k])*h.W,h.H); }
+      ctx.globalAlpha=1;
+    }});
+  })();
+
+  /* ---------- Vad är en gen? (fräknar) ---------- */
+  (function(){
+    var PIG=[[0.165,0.8],[0.48,0.78],[0.77,0.81]];
+    Swarm('sw-gen',{N:300,seed:7,steps:[
+      {bg:0,dur:8,text:'Prickarna visar var hennes fräknar sitter. Varför har hon dem?',labels:[['Fräknar',0.6,0.2]]},
+      {bg:1,dur:9,text:'Vi går närmare huden. Varje fräkne är en liten brun fläck.',labels:[['Huden på nära håll',0.5,0.07]]},
+      {bg:2,dur:10,text:'Ännu närmare syns hudens celler. De bruna cellerna längst ner är de som gör färgämnet. Men hur vet de att de ska göra det?',labels:[['Celler som bildar färgämne',0.48,0.95]]},
+      {bg:3,dur:10,text:'Varje cell har en cellkärna, och där inne ligger DNA. Prickarna visar den bit av tråden som är genen för fräknar.',labels:[['DNA',0.1,0.25,'samling'],['Gen: receptet för fräknar',0.5,0.8,'recept']]},
+      {bg:0,dur:10,text:'Tillbaka till ansiktet. Hudcellerna har följt receptet, och resultatet syns.',labels:[['Fräknar',0.6,0.2,'produkt']]}
+    ],build:function(h){
+      var T=[[],[],[],[],[]],i,sp=[],p;
+      for(i=0;i<30;i++) sp.push([0.06+h.R()*0.88,0.1+h.R()*0.8]);
+      for(i=0;i<300;i++){
+        T[0].push(h.ell(0.75,0.43,0.085,0.05,FRECK));
+        p=sp[i%30]; T[1].push(h.ell(p[0],p[1],0.012,0.02,FRECK));
+        p=PIG[i%3]; T[2].push(h.ell(p[0],p[1],0.03,0.05,FRECK));
+        var u=h.R(); T[3].push(h.at(0.385+u*0.235,0.52+0.085*Math.sin(u*9.4+(i%2?0:3.14)),ORA,1,0.006,0.02));
+        T[4].push(h.ell(0.75,0.43,0.085,0.05,FRECK));
+      }
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      if(s===3){var ctx=h.ctx; ctx.globalAlpha=f; ctx.strokeStyle='#e8791a'; ctx.lineWidth=3; ctx.setLineDash([8,6]); ctx.strokeRect(0.375*h.W,0.36*h.H,0.255*h.W,0.32*h.H); ctx.setLineDash([]); ctx.globalAlpha=1;}
+    }});
+  })();
+
+  /* ---------- Kromosomer: från familjen till befruktningen och tillbaka ---------- */
+  (function(){
+    Swarm('sw-krom',{N:276,seed:11,rad:380,steps:[
+      {bg:0,dur:9,text:'Han i mitten har pappans lockiga hår och mammans gröna ögon. Hur kan man få drag från två personer?',labels:[['Mamma',0.165,0.06],['Pappa',0.83,0.06]]},
+      {bg:1,dur:10,text:'Svaret finns i hur han blev till. De blå strecken är kromosomerna i pappans spermie, de rosa är kromosomerna i mammans äggcell.',labels:[['23 från pappan',0.3,0.14,'parm'],['23 från mamman',0.755,0.05,'parm']]},
+      {bg:2,dur:9,text:'Spermien har nått äggcellen. Nu ligger de blå och de rosa i samma cell.',labels:[['Den befruktade äggcellen',0.5,0.05]]},
+      {bg:4,dur:11,text:'Kromosomerna ordnar sig två och två, en blå och en rosa. Räkna paren: 8, 8 och 7, alltså 23.',labels:[['46 kromosomer = 23 par',0.5,0.04,'parm']]},
+      {bg:3,dur:10,text:'Ur den första cellen växte ett barn. Prickarna visar att samma kromosomer nu finns i hela kroppen.',labels:[['Samma 46 kromosomer i varje cell',0.68,0.5,'parm']]},
+      {bg:0,dur:10,text:'Blått och rosa följer med hela livet, i varje cell.',labels:[['23 från mamma + 23 från pappa',0.5,0.06,'parm']]}
+    ],build:function(h){
+      var T=[[],[],[],[],[],[]],c,j,k,col,row,off;
+      for(c=0;c<46;c++){
+        var dad=c<23, C=dad?BLUE:PINK; k=dad?c:c-23; col=k%5; row=Math.floor(k/5);
+        var gx=(col-2)*0.043+(dad?-0.0085:0.0085), gy=(row-2)*0.078;
+        var ROW=[[0.25,[0.09,0.23,0.357,0.478,0.595,0.71,0.82,0.928],0.03,0.2],[0.575,[0.082,0.208,0.335,0.455,0.578,0.695,0.812,0.928],0.024,0.14],[0.85,[0.09,0.233,0.375,0.512,0.648,0.785,0.915],0.02,0.1]];
+        var rw=k<8?ROW[0]:(k<16?ROW[1]:ROW[2]), ki=k<8?k:(k<16?k-8:k-16), sh=1-ki*0.035;
+        var P=[ dad?h.ell(0.83,0.86,0.12,0.06,C):h.ell(0.165,0.86,0.12,0.06,C),
+                dad?h.ell(0.30,0.36,0.07,0.1,C):h.ell(0.786,0.505,0.04,0.07,C),
+                dad?h.ell(0.40,0.5,0.06,0.2,C):h.ell(0.60,0.5,0.06,0.2,C),
+                {x:(rw[1][ki]+(dad?-1:1)*rw[2]*sh)*h.W,y:rw[0]*h.H},
+                {x:(0.24+gx*0.8)*h.W,y:(0.47+gy*0.9)*h.H},
+                {x:(0.5+gx*1.3)*h.W,y:(0.86+gy*0.3)*h.H} ];
+        for(j=0;j<6;j++){ off=(j/5-0.5)*0.048*h.H; for(var s=0;s<6;s++) T[s].push({x:P[s].x,y:P[s].y+(s===3?(j/5-0.5)*rw[3]*sh*h.H:off*(s===5?0.6:1)),c:C,a:1}); }
+      }
+      return T;
+    }});
+  })();
+
+  /* ---------- DNA kopieras: från fallet till ny hud ---------- */
+  (function(){
+    Swarm('sw-kopia',{N:320,seed:5,steps:[
+      {bg:0,dur:8,text:'Aj. Knät fick ta smällen.',labels:[['Aj!',0.3,0.42]]},
+      {bg:1,dur:8,text:'Huden har gått sönder där prickarna sitter.',labels:[['Här behövs ny hud',0.285,0.6]]},
+      {bg:2,dur:10,text:'Så här ser huden ut i genomskärning. Gropen till höger är såret. Prickarna visar en hudcell vid sårkanten som vi ska följa.',labels:[['Såret',0.72,0.24],['En hudcell',0.5,0.2]]},
+      {bg:3,dur:10,text:'Vi går in i den cellen. Prickarna visar var dess DNA ligger, packat i kromosomer.',labels:[['Cellens DNA',0.5,0.08,'samling']]},
+      {bg:3,dur:10,text:'Prickarna blir dubbelt så många. Nu finns det två uppsättningar DNA i cellen.',labels:[['DNA kopieras',0.5,0.08,'kopia']]},
+      {bg:4,dur:10,text:'Cellen snörs av på mitten, och uppsättningarna hamnar i var sin halva.',labels:[['Två celler med samma DNA',0.5,0.1]]},
+      {bg:5,dur:10,text:'Nu finns det fler celler, men de måste också göra sitt jobb: bygga ny hud. Recepten läses i cellkärnan, och proteinerna byggs vid de orange ribosomerna.',labels:[['Cellkärnan: här finns recepten',0.27,0.1,'kontor'],['Ribosomerna: här byggs proteinerna',0.76,0.86,'maskin']]},
+      {bg:6,dur:10,text:'Efter någon vecka är huden hel igen. Bara en ljusare fläck visar var såret satt.',labels:[['Ny hud',0.305,0.72]]}
+    ],build:function(h){
+      var T=[[],[],[],[],[],[],[],[]],i,g,y,jx;
+      for(g=0;g<2;g++) for(i=0;i<160;i++){
+        y=0.25+0.5*(i/159); jx=(h.R()-0.5)*0.03;
+        T[0].push(h.ell(0.174,0.484,0.012,0.02,RED));
+        T[1].push(h.ell(0.285,0.40,0.032,0.045,RED));
+        T[2].push(h.ell(0.553,0.365,0.022,0.04,TEAL));
+        T[3].push({x:(0.5+jx)*h.W,y:y*h.H,c:TEAL,a:g?0:1});
+        T[4].push({x:(0.5+jx+(g?0.045:-0.045))*h.W,y:y*h.H,c:g?[60,160,150]:TEAL,a:1});
+        T[5].push(h.ell(g?0.625:0.345,0.515,0.045,0.08,TEAL));
+        T[6].push(g?h.ell(0.765,0.40,0.11,0.25,ORA):h.ell(0.27,0.52,0.1,0.19,TEAL));
+        T[7].push(h.ell(0.305,0.525,0.04,0.055,GREEN));
+      }
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      if(s===0) h.ring(0.174,0.484,0.025,0.045,'#e8791a',f,time);
+      if(s===1) h.ring(0.285,0.40,0.045,0.065,'#e8791a',1,time);
+      if(s===2) h.ring(0.553,0.365,0.035,0.06,'#0d6b68',f,time);
+      if(s===7) h.ring(0.305,0.525,0.05,0.075,'#23915a',f,time);
+    }});
+  })();
+
+  /* ---------- Proteinsyntesen: från träning och mat till starkare muskel ---------- */
+  (function(){
+    var beads=[];
+    Swarm('sw-synt',{N:480,seed:21,steps:[
+      {bg:0,dur:8,text:'En armhävning. Prickarna visar muskeln som gör det tyngsta jobbet.',labels:[['Musklerna får jobba',0.33,0.5]]},
+      {bg:1,dur:9,text:'Samma muskel i närbild. Efter träningen behöver den lagas och byggas på.',labels:[['Här behövs nytt protein',0.5,0.93]]},
+      {bg:2,dur:9,text:'Prickarna visar var proteinet finns på tallriken: i ägget, kycklingen och bönorna.',labels:[['Protein i maten',0.5,0.06]]},
+      {bg:3,dur:10,text:'Maten hamnar i magsäcken och tunntarmen. Där faller proteinet isär i små färgade bitar.',labels:[['Magsäcken',0.74,0.4],['Tunntarmen',0.76,0.7],['Aminosyror',0.24,0.7,'bit']]},
+      {bg:4,dur:9,text:'Bitarna följer med blodet i blodkärlet överst och når muskelns celler.',labels:[['Blodkärl',0.5,0.07],['Muskelceller',0.4,0.94]]},
+      {bg:5,dur:11,text:'Vi går in i en av muskelcellerna. Den lila bollen är cellkärnan. De gula prickarna är en kopia av receptet på muskelprotein.',labels:[['Cellkärna: här finns DNA',0.29,0.05,'kontor'],['Kopia av genen för muskelprotein',0.29,0.95,'kopia'],['Aminosyror',0.74,0.1,'bit']]},
+      {bg:5,dur:8,text:'Kopian tar sig ut genom en av öppningarna i cellkärnans vägg.',labels:[['Kopian lämnar kärnan',0.66,0.38,'kopia']]},
+      {bg:6,dur:11,text:'Den orange klumpen är en ribosom. Kopian löper genom den som en remsa, och ovanför växer en kedja av färgade bitar fram.',labels:[['Ribosom: här bildas protein',0.48,0.94,'maskin'],['Muskelprotein',0.78,0.08,'produkt'],['Kopia av genen',0.14,0.62,'kopia']]},
+      {bg:1,dur:9,text:'Tillbaka till armen. Det nya proteinet har hamnat i muskeln.',labels:[['Starkare muskel',0.5,0.93]]}
+    ],build:function(h){
+      var T=[],i,N=480,food=[[0.367,0.378,0.034,0.085],[0.458,0.32,0.034,0.085],[0.596,0.49,0.052,0.19],[0.596,0.49,0.052,0.19],[0.44,0.69,0.068,0.105],[0.44,0.69,0.068,0.105]];
+      function cls(o,from,to,fn){for(var i=from;i<to;i+=10){var c=fn(), col=AMC[Math.floor(h.R()*4)]; for(var j=i;j<Math.min(to,i+10);j++) o[j]=h.ell(c[0],c[1],0.009,0.016,col);}}
+      T[0]=[];T[1]=[];T[2]=[];T[8]=[];
+      for(i=0;i<N;i++){T[0].push(h.ell(0.327,0.77,0.02,0.08,RED)); T[1].push(h.ell(0.50,0.69,0.105,0.085,RED)); var f=food[i%6]; T[2].push(h.ell(f[0],f[1],f[2],f[3],AMB)); T[8].push(h.ell(0.50,0.69,0.12,0.1,RED));}
+      T[3]=[]; for(i=0;i<160;i++) T[3].push(h.ell(0.52,0.42,0.05,0.075,AMB));
+      cls(T[3],160,N,function(){var a=h.R()*6.2832,q=Math.sqrt(h.R());return [0.5+Math.cos(a)*q*0.085,0.68+Math.sin(a)*q*0.13];});
+      T[4]=[]; cls(T[4],0,240,function(){var u=h.R();return [0.82-0.52*u+(h.R()-0.5)*0.02,0.13+0.27*u+(h.R()-0.5)*0.03];});
+      cls(T[4],240,N,function(){return [0.26+h.R()*0.44,0.44+h.R()*0.36];});
+      var cin=[],cout=[],thr=[],free=[],free2=[];
+      for(i=0;i<40;i++){cin.push(h.at(0.29+(i/39-0.5)*0.17,0.5,COPY,1,0,0.02)); cout.push(h.at(0.62+(i/39-0.5)*0.17,0.5,COPY,1,0,0.02)); thr.push(h.at(0.1+(i/39)*0.8,0.722,COPY,1,0,0.012));}
+      cls(free,0,440,function(){return [0.56+h.R()*0.34,0.2+h.R()*0.6];});
+      T[5]=cin.concat(free); T[6]=cout.concat(free);
+      beads=[]; var chain=[];
+      for(i=0;i<12;i++) beads.push([0.5+i*0.034,0.38-0.02*i+0.035*Math.sin(i*0.9)]);
+      for(i=0;i<120;i++){var b=Math.floor(i/10); chain.push(h.ell(beads[b][0],beads[b][1],0.009,0.016,AMC[(b*3+1)%4]));}
+      cls(free2,0,320,function(){return [0.06+h.R()*0.36,0.08+h.R()*0.42];});
+      T[7]=thr.concat(chain,free2);
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      var ctx=h.ctx;
+      if(s===0) h.ring(0.327,0.77,0.04,0.12,'rgb(217,58,47)',f,time);
+      if(s===1||s===8) h.ring(0.5,0.69,s===8?0.145:0.125,s===8?0.132:0.115,'rgb(217,58,47)',f,time);
+      if(s===7){
+        ctx.globalAlpha=cl((el-2.5)/2); ctx.strokeStyle=INK; ctx.lineWidth=Math.max(2,h.W/260); ctx.lineJoin='round';
+        ctx.beginPath(); beads.forEach(function(b,j){if(j) ctx.lineTo(b[0]*h.W,b[1]*h.H); else ctx.moveTo(b[0]*h.W,b[1]*h.H);}); ctx.stroke(); ctx.globalAlpha=1;
+      }
+    }});
+  })();
+
+  /* ================= Område 4: celldelning ================= */
+  function ringPts(h,o,n,cx,cy,rx,ry,col){for(var i=0;i<n;i++){var an=i/n*6.2832; o.push(h.at(cx+Math.cos(an)*rx,cy+Math.sin(an)*ry,col,1,0.006,0.01));}}
+
+  /* ---------- Vanlig celldelning: du växer ---------- */
+  (function(){
+    Swarm('sw-mitos',{N:240,seed:31,steps:[
+      {bg:0,dur:8,text:'Strecken på väggen är gamla mätningar. Det översta är nytt.',labels:[['Så mycket har du vuxit',0.44,0.12]]},
+      {bg:1,dur:9,text:'Två bitar av samma vävnad, vid olika tidpunkter. Cellerna är lika stora, men till höger är de många fler.',labels:[['Få celler',0.195,0.85],['Många celler, lika stora',0.68,0.97]]},
+      {bg:2,dur:10,text:'Hur blir en cell till två? Vi tittar på en enda cell. De små kryssen i cellkärnan är kromosomer som just har kopierats.',labels:[['Kromosomerna har kopierats',0.5,0.06,'kopia']]},
+      {bg:3,dur:10,text:'Kryssen har delats till stavar, och varje ny cell har fått en uppsättning. Jämför de två cellkärnorna: de är likadana.',labels:[['46 kromosomer',0.27,0.88,'parm'],['46 kromosomer',0.72,0.88,'parm']]},
+      {bg:4,dur:10,text:'Samma person vid tre, nio och femton år. Ju fler prickar, desto fler celler.',labels:[['Samma DNA i varje cell',0.5,0.06,'samling']]}
+    ],build:function(h){
+      var T=[[],[],[],[],[]],i,marks=[0.075,0.12,0.165,0.21,0.257];
+      for(i=0;i<240;i++){
+        T[0].push(h.at(0.205,marks[i%5],TEAL,1,0.03,0.012));
+        T[1].push(i<30?h.ell(0.195,0.52,0.085,0.14,TEAL):h.ell(0.68,0.5,0.24,0.4,TEAL));
+        var p=i<40?[0.283,0.63,0.03,0.2]:(i<120?[0.463,0.53,0.035,0.27]:[0.678,0.42,0.04,0.35]);
+        T[4].push(h.ell(p[0],p[1],p[2],p[3],TEAL));
+      }
+      ringPts(h,T[2],240,0.497,0.52,0.128,0.228,TEAL);
+      ringPts(h,T[3],120,0.347,0.5,0.082,0.147,TEAL); ringPts(h,T[3],120,0.64,0.5,0.082,0.147,TEAL);
+      return T;
+    }});
+  })();
+
+  /* ---------- Reduktionsdelning: syskon blir olika ---------- */
+  (function(){
+    var SIB=[[0.2,AMC[0]],[0.515,AMC[2]],[0.83,AMC[3]]];
+    Swarm('sw-meios',{N:240,seed:33,steps:[
+      {bg:0,dur:9,text:'Tre syskon med samma mamma och pappa. Olika hår, olika ögon, och bara en har fräknar.',labels:[['Samma föräldrar, tre olika barn',0.5,0.05]]},
+      {bg:4,dur:10,text:'För att förstå det måste vi börja med hur ett barn blir till: en spermie och en äggcell slås ihop. De blå prickarna visar spermiernas kromosomer och de rosa äggcellens.',labels:[['Äggcell: 23',0.22,0.16,'parm'],['Spermier: 23 var',0.75,0.16,'parm'],['23 + 23 = 46',0.5,0.85]]},
+      {bg:1,dur:10,text:'Hur får en könscell bara hälften? Den bildas ur en vanlig cell, där kromosomerna ligger i par. Här visas tre par i stället för 23.',labels:[['Tre par här, 23 par i verkligheten',0.5,0.05,'parm']]},
+      {bg:2,dur:10,text:'Till vänster ligger två kromosomer i ett par över varandra. Till höger har de bytt en bit med varandra.',labels:[['Före: armarna korsar varandra',0.24,0.04],['Efter: bitarna har bytt plats',0.72,0.04]]},
+      {bg:3,dur:11,text:'Cellen har delats i fyra. Jämför dem: var och en har tre kromosomer, men ingen har samma färger som en annan.',labels:[['Fyra könsceller, alla olika',0.5,0.12],['En kromosom ur varje par: 23 i verkligheten',0.5,0.9,'parm']]},
+      {bg:0,dur:10,text:'Varje syskon blev till av en egen spermie och en egen äggcell. Tre barn, tre olika blandningar.',labels:[['Tre olika blandningar',0.5,0.05]]}
+    ],build:function(h){
+      var T=[[],[],[],[],[],[]],i,s;
+      for(i=0;i<240;i++){
+        s=SIB[i%3]; T[0].push(h.ell(s[0],0.86,0.1,0.06,s[1])); T[5].push(h.ell(s[0],0.86,0.1,0.06,s[1]));
+        T[1].push(i<120?h.ell(0.75,0.5,0.15,0.22,BLUE):h.ell(0.22,0.5,0.085,0.15,PINK));
+      }
+      ringPts(h,T[2],240,0.497,0.53,0.212,0.38,TEAL);
+      ringPts(h,T[3],120,0.3,0.8,0.115,0.17,TEAL); ringPts(h,T[3],120,0.718,0.83,0.1,0.15,TEAL);
+      [0.132,0.375,0.618,0.862].forEach(function(x){ringPts(h,T[4],60,x,0.5,0.123,0.22,TEAL);});
+      return T;
+    }});
+  })();
+
+  /* ---------- Skillnaden: de två delningarna sida vid sida ---------- */
+  (function(){
+    Swarm('sw-jmf',{N:240,seed:35,steps:[
+      {bg:0,dur:9,text:'Två rader, en för varje sorts delning. Startcellerna till vänster är likadana. Här visas fyra kromosomer i stället för 46.',labels:[['Vanlig celldelning',0.153,0.03],['Reduktionsdelning',0.153,0.5]]},
+      {bg:0,dur:10,text:'Övre raden: två celler, och båda ser ut precis som startcellen.',labels:[['Två likadana celler, 46 kromosomer var',0.62,0.03,'parm']]},
+      {bg:0,dur:10,text:'Nedre raden: fyra mindre celler med två kromosomer var. Titta på färgerna, ingen är den andra lik.',labels:[['Könsceller, 23 kromosomer var, alla olika',0.64,0.5,'parm']]},
+      {bg:0,dur:11,text:'Jämför raderna: uppe kopior med allt kvar, nere hälften så mycket och ny blandning.',labels:[['Vanlig celldelning: kopior',0.62,0.03],['Reduktionsdelning: hälften och olika',0.64,0.5]]}
+    ],build:function(h){
+      var T=[[],[],[],[]],X=[0.39,0.553,0.718,0.883];
+      ringPts(h,T[0],120,0.153,0.275,0.115,0.205,TEAL); ringPts(h,T[0],120,0.153,0.73,0.115,0.205,TEAL);
+      ringPts(h,T[1],120,0.507,0.275,0.115,0.205,TEAL); ringPts(h,T[1],120,0.737,0.275,0.115,0.205,TEAL);
+      X.forEach(function(x){ringPts(h,T[2],60,x,0.72,0.078,0.14,TEAL);});
+      ringPts(h,T[3],60,0.507,0.275,0.115,0.205,TEAL); ringPts(h,T[3],60,0.737,0.275,0.115,0.205,TEAL);
+      X.forEach(function(x){ringPts(h,T[3],30,x,0.72,0.078,0.14,TEAL);});
+      return T;
+    }});
+  })();
+
+  /* ================= Område 5: arv, med förstoringar i lager ================= */
+  var LENSC={};
+  function LENS(n){if(!LENSC[n]){LENSC[n]=new Image(); LENSC[n].src='img/l_'+n+'.jpg';} return LENSC[n];}
+  var ASP=1376/768;
+  /* En rund förstoring som ligger ovanpå bilden, med en linje till stället den visar */
+  function lens(h,n,fx,fy,cx,cy,r,alpha){
+    if(alpha<=0.01) return; var c=h.ctx, X=cx*h.W, Y=cy*h.H, R=r*h.W, im=LENS(n);
+    var dx=X-fx*h.W, dy=Y-fy*h.H, L=Math.sqrt(dx*dx+dy*dy)||1;
+    c.globalAlpha=cl(alpha); c.lineCap='round';
+    c.strokeStyle='#fff'; c.lineWidth=5; c.beginPath(); c.moveTo(fx*h.W,fy*h.H); c.lineTo(X-dx/L*R,Y-dy/L*R); c.stroke();
+    c.strokeStyle=INK; c.lineWidth=2; c.stroke();
+    c.fillStyle='#fff'; c.beginPath(); c.arc(fx*h.W,fy*h.H,5,0,6.2832); c.fill(); c.stroke();
+    c.beginPath(); c.arc(X,Y,R,0,6.2832); c.fillStyle='#fff'; c.fill();
+    if(im.complete&&im.naturalWidth){c.save(); c.clip(); c.drawImage(im,X-R,Y-R,2*R,2*R); c.restore();}
+    c.beginPath(); c.arc(X,Y,R,0,6.2832); c.strokeStyle=INK; c.lineWidth=3; c.stroke(); c.globalAlpha=1;
+  }
+  /* Var en punkt i förstoringens bild hamnar på ytan */
+  function lp(cx,cy,r,u,v){return [cx+(u-0.5)*2*r, cy+(v-0.5)*2*r*ASP];}
+  var UP=0.337, UB=0.666, VU=0.277, VL=0.745;
+
+  /* ---------- Dominant och vikande: fräknarna ---------- */
+  (function(){
+    var L1=[0.2,0.42,0.14], L2=[0.8,0.42,0.16];
+    var FAM=[[0.196,0.17,0.085,'Ff',0.196,0.36],[0.503,0.17,0.085,'Ff',0.503,0.37],[0.803,0.16,0.085,'ff',0.803,0.33]];
+    var SIB=[[0.5,0.2,0.09,'Ff',0.3,0.55],[0.5,0.62,0.085,'ff',0.69,0.56]];
+    Swarm('sw-dom',{N:240,seed:41,steps:[
+      {bg:0,dur:8,text:'En familj. Prickarna visar fräknarna hos mamman och dottern. Pappan har inga.',labels:[['Mamma: fräknar',0.196,0.93],['Dottern: fräknar',0.503,0.93],['Pappa: inga fräknar',0.803,0.93]]},
+      {bg:0,dim:1,dur:8,text:'Vi zoomar in på dotterns kind, ända in i en enda hudcell. Den lila bollen till vänster är cellkärnan, och där ligger kromosomerna.',labels:[['En hudcell',0.2,0.09],['Cellkärnan',0.13,0.6]]},
+      {bg:0,dim:1,dur:10,text:'Ännu närmare: ett av kromosomparen i cellkärnan. Den rosa kromosomen kom från mamma och den blå från pappa. Banden sitter på samma ställe. De är samma gen, i två varianter.',labels:[['Ett genpar',0.8,0.07],['Från mamma',0.72,0.79],['Från pappa',0.885,0.79]]},
+      {bg:0,dim:1,dur:9,text:'Det bruna bandet är anlaget för fräknar. Det räcker med ett enda sådant för att fräknarna ska synas.',labels:[['F: fräknar, dominant',0.8,0.07]]},
+      {bg:0,dim:1,dur:9,text:'Det ljusa bandet är anlaget för inga fräknar. Det märks inte så länge det bruna finns bredvid.',labels:[['f: inga fräknar, vikande',0.8,0.07]]},
+      {bg:0,dur:10,text:'Så ser genparet ut hos var och en. Mamman och dottern har ett brunt band och får fräknar. Pappan har två ljusa.',labels:[['Mamma: Ff',0.196,0.93],['Dottern: Ff',0.503,0.93],['Pappa: ff',0.803,0.93]]},
+      {bg:1,dur:10,text:'Dotterns bror fick det ljusa anlaget från båda föräldrarna. Därför har han inga fräknar, trots samma mamma och pappa.',labels:[['Systern: Ff, fräknar',0.25,0.93],['Brodern: ff, inga fräknar',0.74,0.93]]}
+    ],build:function(h){
+      var T=[[],[],[],[],[],[],[]],i,b;
+      for(i=0;i<240;i++) T[0].push(i<120?h.ell(0.196,0.585,0.05,0.045,FRECK):h.ell(0.503,0.6,0.045,0.045,FRECK));
+      ringPts(h,T[1],240,L1[0],L1[1],L1[2]+0.008,(L1[2]+0.008)*ASP,TEAL);
+      ringPts(h,T[2],240,L2[0],L2[1],L2[2]+0.008,(L2[2]+0.008)*ASP,TEAL);
+      b=lp(L2[0],L2[1],L2[2],UP,VU); ringPts(h,T[3],240,b[0],b[1],0.034,0.045,FRECK);
+      b=lp(L2[0],L2[1],L2[2],UB,VU); ringPts(h,T[4],240,b[0],b[1],0.034,0.045,AMB);
+      FAM.forEach(function(f){ringPts(h,T[5],80,f[0],f[1],f[2]+0.007,(f[2]+0.007)*ASP,f[3]==='Ff'?FRECK:GREY);});
+      SIB.forEach(function(f){ringPts(h,T[6],120,f[0],f[1],f[2]+0.007,(f[2]+0.007)*ASP,f[3]==='Ff'?FRECK:GREY);});
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      var a=cl(el/0.7);
+      if(s>=1&&s<=4) lens(h,'cell',0.475,0.61,L1[0],L1[1],L1[2],s===1?a:1);
+      if(s>=2&&s<=4) lens(h,'Ff',L1[0]-0.069,L1[1],L2[0],L2[1],L2[2],s===2?a:1);
+      if(s===5) FAM.forEach(function(q){lens(h,q[3],q[4],q[5],q[0],q[1],q[2],a);});
+      if(s===6) SIB.forEach(function(q){lens(h,q[3],q[4],q[5],q[0],q[1],q[2],a);});
+    }});
+  })();
+
+  /* ---------- Könsbundet arv: färgblindhet ---------- */
+  (function(){
+    var G=[0.1,0.42,0.09], B=[0.91,0.42,0.085], C=[0.5,0.45,0.13];
+    Swarm('sw-kon',{N:240,seed:43,steps:[
+      {bg:0,dur:9,text:'Två bilder av samma test. Till vänster syns triangeln direkt. Till höger ser man ungefär det som en person med röd-grön färgblindhet ser.',labels:[['Normalt färgseende',0.262,0.05],['Röd-grön färgblindhet',0.729,0.05]]},
+      {bg:1,dur:9,text:'Förklaringen finns i det 23:e kromosomparet. Flickan har två stora X-kromosomer. Pojken har en X-kromosom och en liten Y-kromosom.',labels:[['Flicka: X och X',0.11,0.72],['Pojke: X och Y',0.89,0.72]]},
+      {bg:1,dur:9,text:'På X-kromosomen sitter en gen för färgseende, här markerad med ett band. Y-kromosomen är så liten att den saknar den genen.',labels:[['Gen för färgseende',0.5,0.1],['Två band',0.11,0.72],['Ett band',0.89,0.72]]},
+      {bg:1,dim:1,dur:10,text:'Den här pojken har fått ett mörkt band på sin X-kromosom. Det är anlaget för färgblindhet. Y-kromosomen har inget band som kan väga upp.',labels:[['Pojke: ett anlag, och det är för färgblindhet',0.5,0.1],['Färgblind',0.5,0.9]]},
+      {bg:1,dim:1,dur:10,text:'Den här flickan har samma mörka band på sin ena X-kromosom. Men den andra har ett ljust band, ett friskt anlag, och det räcker.',labels:[['Flicka: ett friskt anlag väger upp',0.5,0.1],['Anlagsbärare, ser färger normalt',0.5,0.9]]},
+      {bg:0,dur:9,text:'Därför är det mest pojkar som inte ser triangeln. Blödarsjuka ärvs på samma sätt.',labels:[['Vanligast hos pojkar',0.729,0.05]]}
+    ],build:function(h){
+      var T=[[],[],[],[],[],[]],b;
+      ringPts(h,T[0],120,0.262,0.5,0.195,0.345,TEAL); ringPts(h,T[0],120,0.729,0.5,0.195,0.345,TEAL);
+      ringPts(h,T[1],120,G[0],G[1],G[2]+0.007,(G[2]+0.007)*ASP,PINK); ringPts(h,T[1],120,B[0],B[1],B[2]+0.007,(B[2]+0.007)*ASP,BLUE);
+      b=lp(G[0],G[1],G[2],UP,VL); ringPts(h,T[2],80,b[0],b[1],0.022,0.032,AMB);
+      b=lp(G[0],G[1],G[2],UB,VL); ringPts(h,T[2],80,b[0],b[1],0.022,0.032,AMB);
+      b=lp(B[0],B[1],B[2],UP,VL); ringPts(h,T[2],80,b[0],b[1],0.022,0.032,AMB);
+      b=lp(C[0],C[1],C[2],UP,VL); ringPts(h,T[3],240,b[0],b[1],0.032,0.045,GREY);
+      ringPts(h,T[4],120,b[0],b[1],0.032,0.045,GREY); b=lp(C[0],C[1],C[2],UB,VL); ringPts(h,T[4],120,b[0],b[1],0.032,0.045,AMB);
+      ringPts(h,T[5],240,0.729,0.5,0.195,0.345,TEAL);
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      var a=cl(el/0.7);
+      if(s===1||s===2){lens(h,s===1?'xx':'xxFF',0.24,0.42,G[0],G[1],G[2],s===1?a:1); lens(h,s===1?'xy':'xyF',0.77,0.42,B[0],B[1],B[2],s===1?a:1);}
+      if(s===3) lens(h,'xyf',0.7,0.45,C[0],C[1],C[2],a);
+      if(s===4) lens(h,'xxc',0.31,0.45,C[0],C[1],C[2],a);
+    }});
+  })();
+
+  /* ================= Område 6: genmodifiering ================= */
+  (function(){
+    var GOLD=[236,190,0];
+    Swarm('sw-gmo',{N:240,seed:51,rad:230,steps:[
+      {bg:0,dur:9,text:'Ett bomullsfält. Prickarna ringar in ogräset som har tagit över ett hörn och tar ljus och näring från bomullen.',labels:[['Ogräs',0.2,0.3],['Bomull',0.62,0.08]]},
+      {bg:1,dur:9,text:'Hos en bakterie, till exempel en som lever i jorden, finns en gen som gör att den tål bekämpningsmedlet. Det gula stycket på DNA-tråden är den genen.',labels:[['En bakterie',0.5,0.14],['Genen man vill åt',0.5,0.78]]},
+      {bg:1,dur:9,text:'Genen klipps ut ur bakteriens DNA. De streckade linjerna visar var gensaxen klipper, och prickarna är genen som lyfts ut.',labels:[['Genen har klippts ut',0.5,0.07]]},
+      {bg:2,dur:10,text:'En cell från en bomullsplanta. Den är kantig och har gröna kloroplaster, som alla växtceller. Genen sätts in i DNA i den lila cellkärnan.',labels:[['En växtcell',0.5,0.1],['Genen på sin nya plats',0.3,0.9]]},
+      {bg:3,dur:10,text:'Cellen odlas i en skål och delar sig om och om igen. Ur den växer en planta, och eftersom alla celler är kopior av den första har alla den nya genen.',labels:[['Den nya genen finns i varje cell',0.5,0.12]]},
+      {bg:0,dur:10,text:'Tillbaka på fältet. Bomullen innanför ringen har den nya genen och tål att man sprutar, så att bara ogräset dör.',labels:[['GMO: genmodifierad bomull',0.62,0.08]]},
+      {bg:0,dur:10,text:'Med vanlig förädling hade man fått korsa plantor i många generationer och hoppas på rätt egenskap. Här flyttades en enda gen, från en helt annan art.',labels:[['Snabbare och mer exakt än förädling',0.5,0.08]]}
+    ],build:function(h){
+      var T=[[],[],[],[],[],[],[]],i;
+      for(i=0;i<240;i++){
+        T[2].push(h.at(0.455+0.11*(i/239),0.2,GOLD,1,0.004,0.03));
+        T[3].push(h.ell(0.335,0.5,0.03,0.035,GOLD));
+        T[4].push(i<160?h.ell(0.49,0.4,0.085,0.055,GOLD):h.at(0.495,0.5,GOLD,1,0.012,0.14));
+      }
+      ringPts(h,T[1],240,0.51,0.455,0.075,0.07,GOLD);
+      ringPts(h,T[0],240,0.2,0.62,0.185,0.28,RED); ringPts(h,T[5],240,0.69,0.52,0.3,0.4,GOLD); ringPts(h,T[6],240,0.5,0.52,0.485,0.43,GOLD);
+      return T;
+    },overlay:function(h,s,el,d,time,f){
+      if(s===2){var c=h.ctx; c.save(); c.setLineDash([6,5]); h.line(0.455,0.36,0.455,0.56,INK,f,2.5); h.line(0.567,0.36,0.567,0.56,INK,f,2.5); c.restore(); h.line(0.51,0.42,0.51,0.27,INK,f*0.8,2);}
+    }});
+  })();
+
+  /* ---------- Fyra exempel ---------- */
+  (function(){
+    var GOLD=[236,190,0], ICE=[120,170,220];
+    Swarm('sw-ex',{N:200,seed:53,steps:[
+      {bg:0,dur:8,text:'Sojabönor, i baljan och torkade. Soja är den gröda där genmodifiering är vanligast, och det mesta blir djurfoder.',labels:[['Soja som tål bekämpningsmedel',0.5,0.08]]},
+      {bg:1,dur:8,text:'Rimfrost på bladen. En vanlig potatisplanta skadas av kylan. Med anti-frysgenen klarar den sig bättre.',labels:[['Potatis som tål kyla',0.5,0.92]]},
+      {bg:2,dur:8,text:'Två laxar som är lika gamla. Den övre har fått en gen som gör att den växer snabbare.',labels:[['Genmodifierad lax',0.5,0.06],['Vanlig lax, lika gammal',0.5,0.93]]},
+      {bg:3,dur:8,text:'Samma sorts ris i båda skålarna. Det gula har fått gener som ger det extra näring, och färgen har gett det namnet.',labels:[['Vanligt ris',0.28,0.1],['Det gyllene riset',0.72,0.1]]}
+    ],build:function(h){
+      var T=[[],[],[],[]],i;
+      ringPts(h,T[0],200,0.68,0.75,0.13,0.14,TEAL);
+      for(i=0;i<200;i++) T[1].push(h.ell(0.5,0.25,0.25,0.2,ICE));
+      ringPts(h,T[2],200,0.5,0.3,0.44,0.21,TEAL);
+      ringPts(h,T[3],200,0.72,0.42,0.19,0.3,GOLD);
+      return T;
+    }});
+  })();
+
+  /* ---------- Fördelar mot nackdelar, par för par ---------- */
+  (function(){
+    function rect(h,o,n,x0,y0,x1,y1,col){var P=2*((x1-x0)+(y1-y0)*0.558), i; for(i=0;i<n;i++){var t=i/n*P, w=x1-x0, hh=(y1-y0)*0.558, x, y;
+      if(t<w){x=x0+t;y=y0;} else if(t<w+hh){x=x1;y=y0+(t-w)/0.558;} else if(t<2*w+hh){x=x1-(t-w-hh);y=y1;} else {x=x0;y=y1-(t-2*w-hh)/0.558;}
+      o.push(h.at(x,y,col,1,0.004,0.006));}}
+    var L=[0.009,0.258,0.491,0.741], R=[0.509,0.258,0.991,0.741];
+    Swarm('sw-cmp',{N:240,seed:61,rad:260,steps:[
+      {bg:0,dur:9,text:'Skörden. Till vänster det man vinner: mer bomull från samma åker. Till höger det som det kostar: utsädet och bekämpningsmedlet måste köpas, och från samma företag.',labels:[['Fördel',0.25,0.13],['Nackdel',0.75,0.13],['Större skörd, mer mat',0.25,0.84],['Dyrt utsäde, beroende av ett företag',0.75,0.84]]},
+      {bg:1,dur:9,text:'Giftet. Till vänster går odlaren på fältet utan skyddsutrustning, eftersom det sprutas mindre. Till höger har några ogräsplantor överlevt sprutningen och står kvar gröna bland de döda.',labels:[['Fördel',0.25,0.13],['Nackdel',0.75,0.13],['Mindre bekämpningsmedel',0.25,0.84],['Ogräset blir motståndskraftigt',0.75,0.84]]},
+      {bg:2,dur:9,text:'Naturen. Till vänster får forskaren fram egenskapen på några år, i ett laboratorium. Till höger en växt som har spridit sig utom kontroll och täcker en hel sjö. Så kan det gå när en art saknar fiender.',labels:[['Fördel',0.25,0.13],['Nackdel',0.75,0.13],['Snabbt och exakt',0.25,0.84],['Kan spridas i naturen',0.75,0.84]]},
+      {bg:3,dur:10,text:'Etiken. Till vänster en varg och en tax: människan har ändrat djur genom avel i tusentals år. Till höger orörd natur: en del menar att vi inte har rätt att ändra på andra arters arvsmassa.',labels:[['Det ena synsättet',0.25,0.13],['Det andra synsättet',0.75,0.13],['Vi har alltid ändrat på arter',0.25,0.84],['Vi bör visa respekt för livet',0.75,0.84]]}
+    ],build:function(h){
+      var T=[[],[],[],[]],k;
+      for(k=0;k<4;k++){rect(h,T[k],120,L[0],L[1],L[2],L[3],k<3?GREEN:TEAL); rect(h,T[k],120,R[0],R[1],R[2],R[3],k<3?RED:TEAL);}
+      return T;
+    }});
+  })();
+
+  /* ---------- Cellen som en fabrik: prickarna ritar fabrikens delar ovanpå cellen ---------- */
+  (function(){
+    function circ(cx,cy,r,n){var p=[],i; for(i=0;i<=(n||20);i++){var a=i/(n||20)*6.2832; p.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r]);} return p;}
+    function box(x0,y0,x1,y1){return [[x0,y0],[x1,y0],[x1,y1],[x0,y1],[x0,y0]];}
+    var SH={
+      fabrik:[[[-1,1],[-1,-0.1],[-0.5,-0.5],[-0.5,-0.1],[0,-0.5],[0,-0.1],[0.45,-0.1],[0.45,-1],[0.75,-1],[0.75,-0.1],[1,-0.1],[1,1],[-1,1]],[[-0.2,1],[-0.2,0.45],[0.2,0.45],[0.2,1]],box(-0.75,0.2,-0.45,0.5),box(0.45,0.2,0.75,0.5)],
+      kontor:[[[-1,1],[-1,-0.2],[0,-1],[1,-0.2],[1,1],[-1,1]],[[-0.25,1],[-0.25,0.2],[0.25,0.2],[0.25,1]],box(0.45,0.1,0.8,0.45),box(-0.8,0.1,-0.45,0.45)],
+      samling:[box(-1,-1,1,1),[[-1,-0.33],[1,-0.33]],[[-1,0.33],[1,0.33]]].concat([-0.8,-0.55,-0.3,-0.05,0.2,0.5].map(function(x){return [[x,-0.33],[x,-0.85]];}),[-0.7,-0.4,-0.15,0.15,0.45,0.7].map(function(x){return [[x,0.33],[x,-0.2]];}),[-0.8,-0.5,-0.2,0.1,0.4].map(function(x){return [[x,1],[x,0.48]];})),
+      parm:[box(-0.6,-1,0.6,1),[[-0.3,-1],[-0.3,1]],circ(0.15,0.35,0.2),box(-0.05,-0.7,0.4,-0.4)],
+      recept:[box(-0.7,-1,0.7,1),[[-0.45,-0.6],[0.45,-0.6]],[[-0.45,-0.3],[0.45,-0.3]],[[-0.45,0],[0.45,0]],[[-0.45,0.3],[0.45,0.3]],[[-0.45,0.6],[0.15,0.6]]],
+      bokstav:[[[-1,0.45],[-0.8,-0.45],[-0.6,0.45]],[[-0.9,0.1],[-0.7,0.1]],[[-0.45,-0.45],[-0.05,-0.45]],[[-0.25,-0.45],[-0.25,0.45]],[[0.5,-0.3],[0.38,-0.45],[0.22,-0.45],[0.1,-0.25],[0.1,0.25],[0.22,0.45],[0.38,0.45],[0.5,0.3]],[[1,-0.3],[0.88,-0.45],[0.72,-0.45],[0.6,-0.25],[0.6,0.25],[0.72,0.45],[0.88,0.45],[1,0.3],[1,0.05],[0.82,0.05]]],
+      kopia:[box(-0.9,-0.6,0.3,1),box(-0.3,-1,0.9,0.6),[[-0.05,-0.6],[0.65,-0.6]],[[-0.05,-0.3],[0.65,-0.3]],[[-0.05,0],[0.65,0]]],
+      maskin:[circ(0,0,0.72,28),circ(0,0,0.3,14)].concat([0,1,2,3,4,5,6,7].map(function(k){var a=k/8*6.2832; return [[Math.cos(a)*0.72,Math.sin(a)*0.72],[Math.cos(a),Math.sin(a)]];})),
+      bit:[box(-1,-0.1,-0.2,0.7),box(-0.85,-0.3,-0.65,-0.1),box(-0.55,-0.3,-0.35,-0.1),box(0.1,-0.7,0.9,0.1),box(0.25,-0.9,0.45,-0.7),box(0.55,-0.9,0.75,-0.7)],
+      grind:[[[-1,1],[-1,-0.5]],[[1,1],[1,-0.5]],[[-1,-0.5],[-0.6,-0.9],[0.6,-0.9],[1,-0.5]],[[-0.5,1],[-0.5,-0.5]],[[0,1],[0,-0.5]],[[0.5,1],[0.5,-0.5]],[[-1,-0.5],[1,-0.5]],[[-1,0.3],[1,0.3]]],
+      golv:[box(-1,-0.7,1,0.7),[[-1,-0.23],[1,-0.23]],[[-1,0.23],[1,0.23]],[[-0.5,-0.7],[-0.5,0.7]],[[0,-0.7],[0,0.7]],[[0.5,-0.7],[0.5,0.7]]],
+      paket:[box(-0.8,-0.5,0.8,0.9),[[0,-0.5],[0,0.9]],[[-0.8,0.2],[0.8,0.2]],[[0,-0.5],[-0.4,-0.95],[-0.6,-0.6],[0,-0.5]],[[0,-0.5],[0.4,-0.95],[0.6,-0.6],[0,-0.5]]],
+      blixt:[[[0.25,-1],[-0.55,0.1],[-0.05,0.1],[-0.25,1],[0.55,-0.15],[0.05,-0.15],[0.25,-1]]],
+      tunna:[[[-0.6,-0.45],[-0.45,1],[0.45,1],[0.6,-0.45],[-0.6,-0.45]],[[-0.78,-0.55],[0.78,-0.55]],box(-0.2,-0.85,0.2,-0.55),[[-0.2,-0.2],[-0.15,0.75]],[[0.2,-0.2],[0.15,0.75]]],
+      tegel:[box(-1,-0.8,1,0.8),[[-1,-0.27],[1,-0.27]],[[-1,0.27],[1,0.27]],[[-0.33,-0.8],[-0.33,-0.27]],[[0.33,-0.8],[0.33,-0.27]],[[0,-0.27],[0,0.27]],[[-0.66,-0.27],[-0.66,0.27]],[[0.66,-0.27],[0.66,0.27]],[[-0.33,0.27],[-0.33,0.8]],[[0.33,0.27],[0.33,0.8]]],
+      produkt:[circ(-0.8,0.3,0.17,10),circ(-0.48,-0.1,0.17,10),circ(-0.16,0.3,0.17,10),circ(0.16,-0.1,0.17,10),circ(0.48,0.3,0.17,10),circ(0.8,-0.1,0.17,10),[[-0.69,0.17],[-0.59,0.03]],[[-0.37,0.03],[-0.27,0.17]],[[-0.05,0.17],[0.05,0.03]],[[0.27,0.03],[0.37,0.17]],[[0.59,0.17],[0.69,0.03]]]
+    };
+    function shape(h,o,n,polys,cx,cy,sx,col){
+      var segs=[],tot=0,i,j; polys.forEach(function(p){for(j=0;j<p.length-1;j++){var dx=p[j+1][0]-p[j][0],dy=p[j+1][1]-p[j][1],l=Math.sqrt(dx*dx+dy*dy); segs.push([p[j],p[j+1],l]); tot+=l;}});
+      for(i=0;i<n;i++){var t=(i+0.5)/n*tot,k=0; while(k<segs.length-1&&t>segs[k][2]){t-=segs[k][2];k++;} var g=segs[k],u=g[2]?t/g[2]:0;
+        o.push(h.at(cx+(g[0][0]+(g[1][0]-g[0][0])*u)*sx,cy+(g[0][1]+(g[1][1]-g[0][1])*u)*sx*ASP,col,1,0.002,0.003));}
+    }
+    var LZ=[0.86,0.76,0.125], NUC=[0.27,0.5], GOLD=[250,205,40];
+    var N1=[[0.27,0.5,0.155,0.3]], R1=[[0.775,0.385,0.15,0.32]];
+    var S=[
+      ['Cellen är hela fabriken','fabrik','Cellen är hela fabriken. Allt som behövs för att bygga finns innanför väggarna.',[0.5,0.52,0.19,TEAL],[0.5,0.06],null,[[0.5,0.5,0.455,0.49]]],
+      ['Cellmembranet är ytterväggen med portar',null,'Cellmembranet är den tunna hinnan runt hela cellen. Det är fabrikens yttervägg, med portar som bestämmer vad som får komma in och ut.',[0.925,0.5,0.045,TEAL,'grind'],[0.5,0.06],null,[[0.5,0.5,0.44,0.475]]],
+      ['Cellplasman är fabriksgolvet',null,'Cellplasman är vätskan som fyller cellen. Den är fabriksgolvet, där alla maskiner står och allt arbete sker.',[0.6,0.42,0.09,TEAL,'golv'],[0.6,0.1],null,[[0.6,0.42,0.12,0.2]]],
+      ['Cellkärnan är kontoret','kontor','Cellkärnan är den lila bollen innanför ringen. Den är kontoret, där originalrecepten förvaras. De lämnar aldrig rummet.',[0.27,0.5,0.1,GOLD],[0.27,0.1],null,N1],
+      ['DNA är receptsamlingen','samling','DNA är hela receptsamlingen: alla recept som fabriken har, som en full bokhylla. I verkligheten är det en lång, hoprullad tråd i cellkärnan.',[0.27,0.5,0.085,GOLD],[0.27,0.1],'dna',N1],
+      ['Kromosomerna är pärmarna','parm','DNA-tråden är uppdelad i kromosomer. De är pärmarna som recepten sitter i, och människan har 46 pärmar i varje kontor.',[0.27,0.5,0.075,GOLD],[0.27,0.1],'xx',N1],
+      ['En gen är ett recept','recept','En gen är ett enda recept i en pärm. Varje recept beskriver hur en viss produkt ska byggas.',[0.27,0.5,0.065,GOLD],[0.27,0.1],'gen',N1],
+      ['Kvävebaserna är bokstäverna','bokstav','Kvävebaserna A, T, C och G är bokstäverna som receptet är skrivet med. De syns som färgade pinnar i förstoringen.',[0.27,0.5,0.095,GOLD],[0.27,0.1],'dna',N1],
+      ['Genkopian är kopian av receptet','kopia','Originalet stannar på kontoret. En kopia av receptet görs i cellkärnan och skickas ut genom en öppning i väggen, vid den lilla ringen.',[0.5,0.5,0.055,TEAL],[0.52,0.26],null,[[0.43,0.5,0.03,0.055]]],
+      ['Ribosomerna är maskinerna','maskin','Ribosomerna är de orange prickarna innanför ringen. De är maskinerna på fabriksgolvet, som läser kopian och bygger efter den.',[0.77,0.38,0.1,TEAL],[0.77,0.05],null,R1],
+      ['Aminosyrorna är byggbitarna','bit','Aminosyrorna är byggbitarna. De kommer från maten och finns lösa i cellplasman, redo att sättas ihop. De är för små för att synas i bilden.',[0.57,0.5,0.07,TEAL],[0.57,0.26],null,[[0.57,0.5,0.1,0.17]]],
+      ['Proteinet är den färdiga produkten','produkt','Proteinet är den färdiga produkten: en lång kedja av byggbitar, hopsatta vid ribosomerna i den ordning receptet anger.',[0.77,0.4,0.12,TEAL],[0.77,0.05],null,R1],
+      ['Golgiapparaten är packningen',null,'Golgiapparaten är stapeln av platta säckar innanför ringen. Den är packningen och utlastningen: här görs proteinerna färdiga, packas och skickas dit de ska.',[0.5,0.7,0.05,TEAL,'paket'],[0.66,0.93],null,[[0.658,0.697,0.085,0.125]]],
+      ['Mitokondrierna är kraftverket',null,'Mitokondrierna är de tre avlånga, veckade delarna innanför ringarna. De är fabrikens kraftverk: de omvandlar näring och syre till energi som cellen kan använda.',[0.68,0.3,0.05,TEAL,'blixt'],[0.56,0.33],null,[[0.556,0.163,0.065,0.1],[0.488,0.805,0.065,0.1],[0.813,0.7,0.06,0.1]]],
+      ['Lysosomerna är återvinningen',null,'Lysosomerna är små blåsor, som dem innanför ringarna. De är fabrikens återvinning: de bryter ner sådant som är trasigt eller förbrukat, så att delarna kan användas igen.',[0.47,0.2,0.045,TEAL,'tunna'],[0.5,0.4],null,[[0.387,0.1,0.03,0.05],[0.36,0.87,0.03,0.05],[0.63,0.19,0.025,0.045]]],
+      ['Cellväggen är en extra mur',null,'Cellväggen finns bara hos växter, svampar och bakterier, inte i djurceller som den här. I förstoringen syns en växtcell med sin tjocka, gröna cellvägg. Den är en extra mur utanför cellmembranet, som gör cellen stadig.',[0.86,0.36,0.07,TEAL,'tegel'],[0.82,0.16],'vaxt',[]]
+    ];
+    Swarm('sw-fab',{N:320,seed:71,rad:300,steps:S.map(function(s){return {bg:0,dur:8,text:s[2],labels:[s[1]?[s[0],s[4][0],s[4][1],s[1]]:[s[0],s[4][0],s[4][1]]]};}),
+    build:function(h){return S.map(function(s){var o=[]; shape(h,o,320,SH[s[3][4]||s[1]],s[3][0],s[3][1],s[3][2],s[3][3]); return o;});},
+    overlay:function(h,s,el,d,time,f){ S[s][6].forEach(function(m){h.ring(m[0],m[1],m[2],m[3],'#0d6b68',1,time);});
+      if(S[s][5]==='vaxt') lens(h,'vaxt',LZ[0],LZ[1],LZ[0],LZ[1],LZ[2],cl(el/0.7)); else if(S[s][5]) lens(h,S[s][5],NUC[0],NUC[1],LZ[0],LZ[1],LZ[2],cl(el/0.7)); }});
+  })();
+})();
+</script>
+<script>
+(function(){
+  var RANK={F:0,f:1,XF:0,Xf:1,Y:2};
+  function th(t){return t==='XF'?'X<sup>F</sup>':(t==='Xf'?'X<sup>f</sup>':t);}
+  function gh(g){return g.map(th).join(g[0].length>1?' ':'');}
+  function geno(a,b){return [a,b].sort(function(x,y){return RANK[x]-RANK[y];});}
+  function key(g){return g.join('|');}
+  var CFG={
+    auto:{mom:[['F','F'],['F','f'],['f','f']],dad:[['F','F'],['F','f'],['f','f']],m0:1,d0:2,
+      opts:[['F','F'],['F','f'],['f','f']],
+      ph:function(g){return g.indexOf('F')>=0?'fräknar':'inga fräknar';},
+      sum:function(cells){var n=cells.filter(function(g){return g.indexOf('F')>=0;}).length;
+        return 'Alla fyra fälten stämmer. '+n+' av 4 fält har minst ett stort F, så sannolikheten att ett barn får fräknar är '+n*25+' %.';}},
+    x:{mom:[['XF','XF'],['XF','Xf'],['Xf','Xf']],dad:[['XF','Y'],['Xf','Y']],m0:1,d0:0,
+      opts:[['XF','XF'],['XF','Xf'],['Xf','Xf'],['XF','Y'],['Xf','Y']],
+      ph:function(g){if(g.indexOf('Y')>=0) return g[0]==='XF'?'ser färger':'färgblind';
+        var n=g.filter(function(t){return t==='Xf';}).length; return n===0?'ser färger':(n===1?'anlagsbärare':'färgblind');},
+      who:function(g){return g.indexOf('Y')>=0?'pojke':'flicka';},
+      sum:function(cells){var s=0,d=0,c=0;cells.forEach(function(g){if(g.indexOf('Y')>=0){if(g[0]==='Xf') s++;}else{var n=g.filter(function(t){return t==='Xf';}).length; if(n===2) d++; if(n===1) c++;}});
+        return 'Alla fyra fälten stämmer. Söner: '+s+' av 2 blir färgblinda. Döttrar: '+d+' av 2 blir färgblinda och '+c+' av 2 blir anlagsbärare.';}}
+  };
+  function Punnett(id,kind){
+    var root=document.getElementById(id); if(!root) return;
+    var C=CFG[kind], mi=C.m0, di=C.d0, pos=0, filled=[];
+    var pick=root.querySelector('.pn-pick'), tbl=root.querySelector('.pn'), opts=root.querySelector('.pn-opts'), fb=root.querySelector('.pn-fb');
+    function label(g,isMom){
+      if(kind==='auto') return C.ph(g);
+      return isMom?C.ph(g):(g[0]==='XF'?'ser färger':'färgblind');
+    }
+    function row(name,list,cur,isMom){
+      var d=document.createElement('div'); d.className='pn-row';
+      var s=document.createElement('span'); s.className='pn-who'; s.textContent=name; d.appendChild(s);
+      list.forEach(function(g,i){
+        var b=document.createElement('button'); b.type='button'; b.innerHTML='<b>'+gh(g)+'</b> '+label(g,isMom);
+        b.setAttribute('aria-pressed',i===cur?'true':'false');
+        b.addEventListener('click',function(){if(isMom) mi=i; else di=i; reset();});
+        d.appendChild(b);
+      });
+      return d;
+    }
+    function answer(k){var m=C.mom[mi], d=C.dad[di]; return geno(m[Math.floor(k/2)],d[k%2]);}
+    function draw(){
+      var m=C.mom[mi], d=C.dad[di], h='<thead><tr><td></td><th colspan="2" class="pn-cap">Pappa</th></tr><tr><td class="pn-cap pn-side">Mamma</td><th>'+th(d[0])+'</th><th>'+th(d[1])+'</th></tr></thead><tbody>';
+      for(var r=0;r<2;r++){
+        h+='<tr><th>'+th(m[r])+'</th>';
+        for(var c=0;c<2;c++){var k=r*2+c, g=filled[k];
+          h+='<td class="'+(g?'ok':(k===pos?'now':''))+'">'+(g?'<b>'+gh(g)+'</b><span>'+(C.who?C.who(g)+', ':'')+C.ph(g)+'</span>':'?')+'</td>';}
+        h+='</tr>';
+      }
+      tbl.innerHTML=h+'</tbody>';
+    }
+    function reset(){
+      pos=0; filled=[]; fb.textContent='Fyll i det markerade fältet: ta anlaget till vänster och anlaget ovanför.';
+      pick.innerHTML=''; pick.appendChild(row('Mamma',C.mom,mi,true)); pick.appendChild(row('Pappa',C.dad,di,false));
+      [].forEach.call(opts.children,function(b){b.disabled=false;});
+      draw();
+    }
+    C.opts.forEach(function(g){
+      var b=document.createElement('button'); b.type='button'; b.innerHTML=gh(g);
+      b.addEventListener('click',function(){
+        if(pos>3) return;
+        var a=answer(pos);
+        if(key(a)===key(g)){
+          filled[pos]=a; pos++;
+          if(pos>3){fb.textContent=C.sum(filled); [].forEach.call(opts.children,function(x){x.disabled=true;});}
+          else fb.textContent='Rätt. Ta nästa fält.';
+        }else{
+          var m=C.mom[mi][Math.floor(pos/2)], d=C.dad[di][pos%2];
+          fb.innerHTML='Inte riktigt. Till vänster om fältet står '+th(m)+' och ovanför står '+th(d)+'. Sätt ihop de två.';
+        }
+        draw();
+      });
+      opts.appendChild(b);
+    });
+    reset();
+  }
+  Punnett('pn-auto','auto'); Punnett('pn-x','x');
+})();
+</script>
+<script>
+(function(){
+  /* ---------- Sortera: fördel, nackdel eller etisk fråga ---------- */
+  (function(){
+    var root=document.getElementById('gm-sort'); if(!root) return;
+    var Q=[
+      ['I Indien sprutar bomullsodlarna mycket mindre gift än förut, och de som arbetar på fälten mår bättre.','f','Mindre bekämpningsmedel är bra både för miljön och för arbetsmiljön.'],
+      ['Pollen från en genmodifierad gröda blåser över till en vild släkting vid åkerkanten, som också får den nya genen.','n','Genen har spridits i naturen utan att någon har kontroll över den.'],
+      ['Det tar några år att få fram en egenskap som skulle ha tagit många generationer med vanlig förädling.','f','Genmodifiering är snabbare och mer exakt än avel och förädling.'],
+      ['Odlaren måste köpa både fröna och bekämpningsmedlet från ett och samma företag.','n','Odlaren blir beroende av ett företag, och utsädet kan bli dyrt.'],
+      ['Har människan rätt att ändra på andra arters arvsmassa?','e','Det går inte att mäta sig fram till svaret. Det handlar om vad man tycker är rätt.'],
+      ['Ogräset på åkern tål efter några år samma bekämpningsmedel som grödan.','n','Då krävs starkare medel, och giftspridningen ökar i stället för att minska.'],
+      ['En gröda ger större skörd på samma åker.','f','Mer mat på samma yta är ett av de viktigaste argumenten för genmodifiering.'],
+      ['Snabbväxande lax rymmer från odlingen och tar maten från den vilda laxen.','n','En genmodifierad art kan breda ut sig som en invasiv art och tränga undan andra.'],
+      ['Vi har redan ändrat djur och växter genom avel i tusentals år. Är det här något annat?','e','Det är ett argument i den etiska diskussionen, och människor svarar olika.']
+    ];
+    var NAME={f:'Fördel',n:'Nackdel',e:'Etisk fråga'}, i=0, right=0, first=true;
+    var st=root.querySelector('.gs-text'), fb=root.querySelector('.gs-fb'), pr=root.querySelector('.gs-prog'), btns=root.querySelectorAll('.gs-btn'), nx=root.querySelector('.gs-next');
+    function draw(){
+      if(i>=Q.length){st.textContent='Klart. '+right+' av '+Q.length+' rätt på första försöket.'; fb.textContent=''; pr.textContent=''; nx.textContent='Börja om'; nx.hidden=false; [].forEach.call(btns,function(b){b.disabled=true;}); return;}
+      st.textContent=Q[i][0]; fb.textContent=''; pr.textContent='Påstående '+(i+1)+' av '+Q.length; nx.hidden=true; first=true; [].forEach.call(btns,function(b){b.disabled=false;});
+    }
+    [].forEach.call(btns,function(b){b.addEventListener('click',function(){
+      if(i>=Q.length) return;
+      if(b.dataset.k===Q[i][1]){if(first) right++; fb.textContent='Rätt, '+NAME[Q[i][1]].toLowerCase()+'. '+Q[i][2]; [].forEach.call(btns,function(x){x.disabled=true;}); nx.textContent='Nästa'; nx.hidden=false;}
+      else{first=false; fb.textContent='Inte riktigt. Fundera på om påståendet beskriver något man vinner, något man riskerar, eller en fråga om vad som är rätt.';}
+    });});
+    nx.addEventListener('click',function(){if(i>=Q.length){i=0; right=0;} else i++; draw();});
+    draw();
+  })();
+
+  /* ---------- Bygg ett resonemang i flera led ---------- */
+  (function(){
+    var root=document.getElementById('gm-chain'); if(!root) return;
+    var C=[
+      {name:'Bomull som tål bekämpningsmedel', start:'Bomullen har fått en gen som gör att den tål ett bekämpningsmedel.', steps:[
+        ['Det leder till att','odlaren kan spruta hela fältet, så att ogräset dör men bomullen klarar sig.',['bomullen växer dubbelt så fort som förut.','bomullen inte behöver något vatten.']],
+        ['vilket gör att','skörden blir större, och att det går åt mindre gift än när man sprutade flera olika medel.',['bomullen får en annan färg.','ogräset blir större.']],
+        ['Å andra sidan kan','ogräset med tiden bli motståndskraftigt mot medlet, genom mutationer eller korsning med grödan.',['bomullen sluta att växa helt.','bekämpningsmedlet ta slut i hela världen.']],
+        ['Då måste','odlaren ta till starkare medel, och giftspridningen ökar i stället för att minska.',['odlaren sluta att odla bomull.','ogräset klippas bort för hand.']]]},
+      {name:'Lax som växer snabbt', start:'Laxen har fått en gen som gör att den växer mycket snabbare.', steps:[
+        ['Det leder till att','fisken blir färdig att äta på kortare tid.',['fisken kan leva på land.','fisken inte behöver någon mat.']],
+        ['vilket gör att','det går att få fram mer mat med mindre foder.',['fisken smakar som kyckling.','haven blir varmare.']],
+        ['Å andra sidan kan','laxar rymma från odlingen ut i havet.',['laxarna sluta att simma.','laxarna bli för små att äta.']],
+        ['Då finns risken att','de tar maten från den vilda laxen och tränger undan den, som en invasiv art.',['den vilda laxen också växer snabbare.','havet blir saltare.']]]},
+      {name:'Det gyllene riset', start:'Riset har fått gener som gör att det innehåller ett vitamin som vanligt ris saknar.', steps:[
+        ['Det leder till att','den som mest äter ris får i sig vitaminet ändå.',['riset inte behöver kokas.','riset växer utan vatten.']],
+        ['vilket gör att','undernäringen skulle kunna minska i fattiga länder.',['riset blir billigare än allt annat.','ingen behöver äta grönsaker längre.']],
+        ['Å andra sidan är','genmodifiering dyrt, och utsädet kan kosta mer än fattiga odlare har råd med.',['riset omöjligt att odla utomhus.','vitaminet farligt för alla.']],
+        ['Dessutom är','problemet sällan brist på mat, utan brist på pengar. Då löser inte riset hela problemet.',['riset för gult för att säljas.','riset bara möjligt att odla i Europa.']]]}
+    ];
+    var ci=0, pos=0, pick=root.querySelector('.gc-pick'), list=root.querySelector('.gc-list'), opts=root.querySelector('.gc-opts'), fb=root.querySelector('.gc-fb');
+    C.forEach(function(c,k){var b=document.createElement('button'); b.type='button'; b.textContent=c.name; b.addEventListener('click',function(){ci=k; pos=0; draw();}); pick.appendChild(b);});
+    function draw(){
+      var c=C[ci], k; [].forEach.call(pick.children,function(b,j){b.setAttribute('aria-pressed',j===ci?'true':'false');});
+      list.innerHTML=''; var li=document.createElement('li'); li.textContent=c.start; list.appendChild(li);
+      for(k=0;k<pos;k++){li=document.createElement('li'); li.className=k>=2?'but':''; li.innerHTML='<b>'+c.steps[k][0]+'</b> '+c.steps[k][1]; list.appendChild(li);}
+      opts.innerHTML='';
+      if(pos>=c.steps.length){fb.textContent='Kedjan är klar: två led som visar nyttan och två som visar risken. Avsluta med vad du själv tycker väger tyngst, och varför.'; return;}
+      var s=c.steps[pos], arr=[[s[1],true],[s[2][0],false],[s[2][1],false]], rot=(ci+pos)%3; arr=arr.slice(rot).concat(arr.slice(0,rot));
+      li=document.createElement('li'); li.className='next'; li.innerHTML='<b>'+s[0]+' …</b>'; list.appendChild(li);
+      fb.textContent='Välj fortsättningen som följer av det som står ovanför.';
+      arr.forEach(function(a){var b=document.createElement('button'); b.type='button'; b.textContent='… '+a[0];
+        b.addEventListener('click',function(){if(a[1]){pos++; draw();} else fb.textContent='Det följer inte av ledet innan. Läs det sista ledet igen och fråga dig: vad händer då?';});
+        opts.appendChild(b);});
+    }
+    draw();
+  })();
+})();
+</script>
+<script>
+(function(){
+  var root=document.getElementById('begrepp'); if(!root) return;
+  var T=[
+   ['genetik','Läran om ärftlighet, alltså hur generna för det biologiska arvet vidare.','dna','omrade-1'],
+   ['gen','Ett bestämt avsnitt av DNA som är receptet på ett visst protein.','dna','b1'],
+   ['DNA','Den jättelika molekyl som innehåller arvsmassan. Den ser ut som en vriden repstege.','dna','q1'],
+   ['kvävebas','En av de fyra "bokstäverna" i DNA: A, T, C och G.','dna','q4'],
+   ['baspar','Två kvävebaser som sitter ihop i DNA. A sitter alltid med T, och C med G.','dna','q3'],
+   ['DNA-sekvens','Ett avsnitt av DNA, alltså en viss följd av kvävebaser.','dna','q5'],
+   ['arvsmassa','Allt DNA i en cell, både generna och det som ligger mellan dem.','dna','q6'],
+   ['protein','Ämnen som bygger upp kroppen och sköter dess arbete. De består av långa kedjor av aminosyror.','dna','c3'],
+   ['koda för','Att en gen kodar för ett protein betyder att genen innehåller receptet på just det proteinet.','dna','b1',1],
+   ['aminosyra','Byggstenarna som proteiner sätts ihop av. Det finns 20 olika.','dna','c3'],
+   ['triplett','Tre kvävebaser i följd i en genkopia. Varje sådan grupp står för en bestämd aminosyra.','dna','c3'],
+   ['ribosom','Den del av cellen där proteinerna byggs, utanför cellkärnan.','dna','c3'],
+   ['kromosom','En bunt av tätt hoplindat DNA. Människan har 46 i varje kroppscell.','arv','b2'],
+   ['kromosompar','Två kromosomer som hör ihop, en från mamma och en från pappa. Människan har 23 sådana.','arv','b2'],
+   ['vanlig celldelning','När en kroppscell delar sig till två likadana celler med 46 kromosomer var. Kallas också mitos.','arv','d1'],
+   ['reduktionsdelning','Delningen som bildar könsceller. Antalet kromosomer halveras från 46 till 23. Kallas också meios.','arv','d2'],
+   ['könscell','En spermie eller en äggcell. Den har 23 kromosomer.','arv','d2'],
+   ['könskromosom','Kromosomerna i det 23:e paret, som avgör biologiskt kön. Flickor har XX och pojkar XY.','arv','e3'],
+   ['allel','En av de två varianterna av en gen i ett genpar, en från vardera föräldern. Kallas också anlag.','arv','e1'],
+   ['dominant anlag','Ett anlag som alltid slår igenom, även om man bara har fått det från en förälder.','arv','e1'],
+   ['vikande anlag','Ett anlag som bara slår igenom om man har fått det från båda föräldrarna. Kallas också recessivt.','arv','e1'],
+   ['korsningsschema','En ruta med fyra fält som visar vilka kombinationer av anlag ett barn kan få från sina föräldrar.','arv','e2'],
+   ['könsbundet arv','Arv av anlag som sitter på X-kromosomen. De slår oftast igenom hos pojkar, som bara har en X-kromosom.','arv','e3'],
+   ['anlagsbärare','En person som har ett vikande sjukdomsanlag utan att själv vara sjuk, men som kan föra det vidare.','arv','e3'],
+   ['mutation','En bestående förändring i arvsmassan.','arv',''],
+   ['avel','Att medvetet korsa djur för att de ska få önskade egenskaper.','gm','f1'],
+   ['förädling','Att medvetet korsa växter för att de ska få önskade egenskaper.','gm','f1'],
+   ['gensax','En teknik för att klippa i DNA, till exempel för att flytta en gen från en organism till en annan.','gm','f1'],
+   ['genmodifiering','Att flytta en gen från en art till en annan för att ändra artens egenskaper.','gm','f1'],
+   ['GMO','Förkortning för genmodifierad organism.','gm','f1'],
+   ['invasiv art','En art som hamnar i ett ekosystem där den saknar fiender och därför breder ut sig kraftigt.','gm','f3'],
+   ['anti-frysgen','En gen som hindrar iskristaller från att växa sig stora, så att organismen tål kyla.','gm','f2'],
+   ['skräddarsydd gröda','En gröda som har genmodifierats så att den tål ett visst bekämpningsmedel.','gm','f2'],
+   ['ekologisk odling','Odling där man byter gröda mellan åren och väljer sorter med naturlig motståndskraft.','gm',''],
+   ['gyllene ris','Ett genmodifierat ris som innehåller mycket vitamin A.','gm','f2']
+  ];
+  var EXTRA=[
+   ['genreglering','Att gener slås av och på vid olika tidpunkter. Därför blir celler olika, trots att de har samma arvsmassa.'],
+   ['monogen sjukdom','En ärftlig sjukdom som orsakas av en mutation i en enda gen.'],
+   ['dominant sjukdomsanlag','Ett sjukdomsanlag som alltid slår igenom. Har en förälder det är risken 50 % för varje barn.'],
+   ['vikande sjukdomsanlag','Ett sjukdomsanlag som bara ger sjukdom om man har fått det från båda föräldrarna. Bär båda föräldrarna på det är risken 25 %.'],
+   ['kromosomförändring','En förändring av en hel kromosom eller en del av den, inte bara av en enda gen.'],
+   ['modellorganism','En organism som forskare använder för att studera gener, till exempel bananflugor och möss.'],
+   ['genterapi','Att försöka ersätta en skadad gen genom att föra över en frisk gen till den som är sjuk.'],
+   ['precisionsmedicin','Behandling som riktas mot just den förändring som orsakar sjukdomen.'],
+   ['bioteknik','Teknik där man tar hjälp av levande organismer, till exempel för att framställa livsmedel.'],
+   ['jäsning','Att låta jästsvampar förändra maten så att den blir mer ätbar eller hållbar.'],
+   ['syrning','Att låta bakterier eller jästsvampar förändra maten så att den blir mer ätbar eller hållbar.'],
+   ['ensilage','Hö som har fått jäsa under kontroll.'],
+   ['försiktighetsprincipen','Att undvika teknik som man tror kan medföra risker, även utan direkta bevis.']
+  ];
+  /* ---- Öva ---- */
+  var q=root.querySelector('.bg-q'), kind=root.querySelector('.bg-kind'), opts=root.querySelector('.bg-opts'), fb=root.querySelector('.bg-fb'), nx=root.querySelector('.bg-next'), pr=root.querySelector('.bg-prog');
+  var queue=[], done=0, cur=null, missed=false;
+  function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a;}
+  function start(){queue=shuf(T.map(function(_,i){return i;})); done=0; next();}
+  function next(){
+    nx.hidden=true; fb.textContent=''; opts.innerHTML='';
+    if(!queue.length){kind.textContent='Klart'; q.textContent='Du har klarat alla '+T.length+' begreppen.'; pr.textContent=T.length+' av '+T.length+' klara'; nx.textContent='Börja om'; nx.hidden=false; cur=null; return;}
+    cur=queue.shift(); missed=false; var t=T[cur], toTerm=!t[4]&&Math.random()<0.5;
+    var pool=shuf(T.map(function(_,i){return i;}).filter(function(i){return i!==cur&&T[i][2]===t[2];})).slice(0,3), all=shuf(pool.concat([cur]));
+    kind.textContent=toTerm?'Vilket begrepp är det här?':'Vad betyder begreppet?'; q.textContent=toTerm?t[1]:t[0];
+    pr.textContent=done+' av '+T.length+' klara';
+    all.forEach(function(i){var b=document.createElement('button'); b.type='button'; b.textContent=toTerm?T[i][0]:T[i][1];
+      b.addEventListener('click',function(){
+        if(i===cur){[].forEach.call(opts.children,function(x){x.disabled=true;}); b.classList.add('ok');
+          if(missed){queue.push(cur); fb.textContent='Rätt nu. Begreppet kommer tillbaka en gång till.';} else {done++; fb.textContent='Rätt.';}
+          pr.textContent=done+' av '+T.length+' klara'; nx.textContent='Nästa'; nx.hidden=false;}
+        else{missed=true; b.disabled=true; fb.textContent=toTerm?'Inte det. '+T[i][0]+' betyder: '+T[i][1]:'Inte det. Den förklaringen hör till '+T[i][0]+'.';}
+      }); opts.appendChild(b);});
+  }
+  nx.addEventListener('click',function(){if(cur===null) start(); else next();});
+  /* ---- Slå upp ---- */
+  var list=root.querySelector('.bg-list'), search=root.querySelector('.bg-search');
+  var ALL=T.map(function(t){return [t[0],t[1],t[3],true];}).concat(EXTRA.map(function(t){return [t[0],t[1],'',false];})).sort(function(a,b){return a[0].localeCompare(b[0],'sv');});
+  function draw(){
+    var f=search.value.trim().toLowerCase(); list.innerHTML='';
+    ALL.forEach(function(t){
+      if(f&&t[0].toLowerCase().indexOf(f)<0&&t[1].toLowerCase().indexOf(f)<0) return;
+      var d=document.createElement('div'); d.className='bg-item'+(t[3]?'':' extra');
+      var h='<dt>'+t[0]+(t[3]?'':' <span>utanför provpunkterna</span>')+'</dt><dd>'+t[1]+(t[2]?' <a href="#'+t[2]+'">Se frågan</a>':'')+'</dd>';
+      d.innerHTML=h; list.appendChild(d);});
+    if(!list.children.length) list.innerHTML='<p class="bg-none">Inget begrepp matchar sökningen.</p>';
+  }
+  search.addEventListener('input',draw);
+  var tabs=root.querySelectorAll('.bg-tab'), panes=root.querySelectorAll('.bg-pane');
+  [].forEach.call(tabs,function(b,k){b.addEventListener('click',function(){[].forEach.call(tabs,function(x,j){x.setAttribute('aria-pressed',j===k?'true':'false'); panes[j].hidden=j!==k;});});});
+  draw(); start();
+})();
+</script>
+<script>
+/* En fråga per sida */
+(function(){
+  var main=document.querySelector('main'); if(!main) return;
+  var kids=[].slice.call(main.children), header=null, footer=null, pages=[], groups=[], area=null;
+  kids.forEach(function(k){
+    if(k.tagName==='HEADER'){header=k; return;}
+    if(k.tagName==='FOOTER'){footer=k; return;}
+    if(k.tagName==='H2'){var sp=k.querySelector('span'); area={h:k,label:sp?sp.textContent:'',name:k.textContent.replace(sp?sp.textContent:'','').trim(),pages:[]}; groups.push(area); return;}
+    if(k.tagName!=='SECTION') return;
+    var g=area, h3=k.querySelector('h3'), id, title;
+    if(k.classList.contains('factory')){g={h:null,label:'Minnesbild',name:'Cellen som en fabrik',pages:[]}; groups.push(g); id='fabriken'; title='Klicka dig igenom cellens delar';}
+    else if(h3){id=h3.id; title=h3.textContent;}
+    else {id=k.id; title='Öva och slå upp begreppen';}
+    var p={el:k,g:g,id:id,title:title,n:g.pages.length+1}; g.pages.push(p); pages.push(p);
+  });
+  function load(k,d){try{var v=localStorage.getItem(k); return v?JSON.parse(v):d;}catch(e){return d;}}
+  function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  var seen=load('genetik-seen',{}), cur=-1;
+
+  var oldNav=header.querySelector('nav'); if(oldNav) oldNav.hidden=true;
+  var start=document.createElement('div'); start.className='toc'; header.appendChild(start);
+  var bar=document.createElement('div'); bar.className='pbar'; bar.innerHTML='<a href="#" class="phome">Innehåll</a><span class="ppos"></span>'; main.insertBefore(bar,main.firstChild);
+  var nav=document.createElement('div'); nav.className='pnav'; nav.innerHTML='<button type="button" class="pprev">Föregående</button><button type="button" class="pnext">Nästa</button>'; main.insertBefore(nav,footer);
+  var prev=nav.querySelector('.pprev'), next=nav.querySelector('.pnext');
+  main.classList.add('paged');
+
+  function drawToc(){
+    var last=load('genetik-last',''), h='';
+    var lp=pages.filter(function(p){return p.id===last;})[0];
+    if(lp) h+='<p class="tcont"><a href="#'+lp.id+'">Fortsätt där du var: '+lp.title+'</a></p>';
+    else h+='<p class="tcont"><a href="#'+pages[0].id+'">Börja från början</a></p>';
+    groups.forEach(function(g){
+      var done=g.pages.filter(function(p){return seen[p.id];}).length;
+      h+='<div class="tgroup"><h2><span>'+g.label+'</span>'+g.name+'<small>'+done+' av '+g.pages.length+' klara</small></h2><ol>';
+      g.pages.forEach(function(p){h+='<li class="'+(seen[p.id]?'done':'')+'"><a href="#'+p.id+'">'+p.title+'</a></li>';});
+      h+='</ol></div>';
+    });
+    start.innerHTML=h;
+  }
+  function show(i,push){
+    cur=i; var p=i>=0?pages[i]:null;
+    kids.forEach(function(k){if(k!==header&&k!==footer) k.hidden=true;});
+    header.hidden=!!p; footer.hidden=!!p; bar.hidden=!p; nav.hidden=!p;
+    if(p){
+      p.el.hidden=false; if(p.g.h) p.g.h.hidden=false;
+      bar.querySelector('.ppos').textContent=p.g.label+(p.g.h?' · '+p.g.name:'')+(p.g.pages.length>1?' · Fråga '+p.n+' av '+p.g.pages.length:'');
+      prev.disabled=i===0; prev.textContent=i===0?'Föregående':'Föregående';
+      next.textContent=i===pages.length-1?'Till innehållet':'Nästa: '+pages[i+1].title;
+      seen[p.id]=1; save('genetik-seen',seen); save('genetik-last',p.id);
+    } else drawToc();
+    if(push){try{history.pushState(null,'',p?'#'+p.id:location.pathname+location.search);}catch(e){}}
+    window.scrollTo(0,0);
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));},30);
+  }
+  function route(){
+    var hsh=decodeURIComponent(location.hash.slice(1)), i, el;
+    if(!hsh){show(-1,false); return;}
+    for(i=0;i<pages.length;i++) if(pages[i].id===hsh){show(i,false); return;}
+    el=document.getElementById(hsh);
+    if(el) for(i=0;i<pages.length;i++) if(pages[i].el.contains(el)||pages[i].g.h===el){show(i,false); return;}
+    show(-1,false);
+  }
+  prev.addEventListener('click',function(){if(cur>0) show(cur-1,true);});
+  next.addEventListener('click',function(){if(cur<pages.length-1) show(cur+1,true); else show(-1,true);});
+  bar.querySelector('.phome').addEventListener('click',function(e){e.preventDefault(); show(-1,true);});
+  window.addEventListener('hashchange',route); window.addEventListener('popstate',route);
+  document.addEventListener('keydown',function(e){
+    if(cur<0||e.altKey||e.ctrlKey||e.metaKey) return;
+    var t=e.target.tagName; if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT') return;
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft') return;
+    var sw=pages[cur].el.querySelector('.swarm'); if(!sw) return;
+    var b=[].slice.call(sw.querySelectorAll('.pips button')), k=-1; b.forEach(function(x,j){if(x.classList.contains('on')) k=j;});
+    var n=k+(e.key==='ArrowRight'?1:-1); if(n>=0&&n<b.length){b[n].click(); e.preventDefault();}
+  });
+  route();
+})();
+</script>
+</body>
+</html>
