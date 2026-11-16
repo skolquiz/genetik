@@ -349,6 +349,10 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 .steps ol{margin:6px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:5px;font-size:16px}
 .cap{font-size:18px;min-height:6.4em}
 
+.vhead{margin:0;font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.story>.vhead{padding:12px 16px 10px}
+.vhead span{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);margin-left:6px;font-size:14px}
+
 /* Bildplats */
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
@@ -409,6 +413,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>repstege</b> <i>·</i> <b>två strängar</b> <i>·</i> <b>baspar som pinnar</b> <i>·</i> <b>dubbelspiral</b></p>
     </div>
     <div class="card stage">
+      <p class="vhead">Förklaring och övning</p>
       <p class="expl">Stegens två långa sidor kallas strängar, och pinnarna mellan dem är baspar. Namnet dubbelspiral kommer av att de två strängarna vrider sig runt varandra. DNA finns i nästan varje cell i din kropp.</p>
       <canvas id="ladder" role="img" aria-label="En repstege med två strängar och pinnar av baspar. Med reglaget vrids stegen till en dubbelspiral."></canvas>
       <label class="twist" for="twist"><span>Uträtad för att visa</span><input type="range" id="twist" min="0" max="100" value="0" step="1"><span>Så ser DNA ut</span></label>
@@ -424,6 +429,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>kvävebaser</b> <i>·</i> <b>baspar</b> <i>·</i> <b>A med T</b> <i>·</i> <b>C med G</b></p>
     </div>
     <div class="card">
+      <p class="vhead">Förklaring och övning</p>
       <p class="expl">Varje pinne är två kvävebaser som hakar i varandra. Ett sådant par kallas ett baspar. De fyra kvävebaserna heter adenin (A), tymin (T), cytosin (C) och guanin (G). A sitter alltid ihop med T, och C alltid med G.</p>
       <div class="names">
         <div class="name"><div class="chip bA">A</div><span>adenin</span></div>
@@ -456,6 +462,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>fyra bokstäver</b> <i>·</i> <b>ordningen bär informationen</b> <i>·</i> <b>ROT, ORT, TRO</b></p>
     </div>
     <div class="card">
+      <p class="vhead">Förklaring och övning</p>
       <p class="expl">Du, en hund, en banan och en bakterie använder exakt samma fyra kvävebaser. Ändå är ni helt olika. Jämför med bokstäverna R, O och T. De kan bli ROT, ORT eller TRO: samma bokstäver, men olika betydelse. På samma sätt kan kvävebaserna komma i vilken följd som helst längs DNA-molekylen.</p>
       <p class="how">På varje plats i en sekvens kan det stå A, T, C eller G, alltså fyra möjligheter. Dra i reglaget för att göra sekvensen längre, och se hur många olika sekvenser som då går att bilda.</p>
       <div class="seq" id="seq" aria-hidden="true"></div>
@@ -475,6 +482,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>DNA-sekvens</b> <i>→</i> <b>recept</b> <i>→</i> <b>protein</b></p>
     </div>
     <div class="card story swarm" id="sw-recept">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/kropp.jpg" alt=""><img src="img/r2.jpg" alt=""><img src="img/r4.jpg" alt=""></div>
         <canvas role="img" aria-label="En svärm av prickar går mellan tre ställen i kroppen och tre recept på en DNA-tråd."></canvas>
@@ -493,6 +501,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>allt DNA</b> <i>·</i> <b>cellkärnan</b> <i>·</i> <b>virat runt proteiner</b> <i>·</i> <b>tre miljarder baspar</b></p>
     </div>
     <div class="card story swarm" id="sw-arv">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/z1.jpg" alt=""><img src="img/z2.jpg" alt=""><img src="img/zoom.jpg" alt=""></div>
         <canvas role="img" aria-label="Prickar ringar in ett steg i taget i en inzoomning från cell till cellkärna, packat DNA och dubbelspiral."></canvas>
@@ -513,6 +522,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>bit av DNA</b> <i>·</i> <b>recept</b> <i>·</i> <b>arvsanlag</b> <i>·</i> <b>styr egenskaper</b></p>
     </div>
     <div class="card story swarm" id="sw-gen">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/fraknar.jpg" alt=""><img src="img/g2.jpg" alt=""><img src="img/g3.jpg" alt=""><img src="img/g4.jpg" alt=""></div>
         <canvas role="img" aria-label="En svärm av prickar går från fräknarna i ett ansikte till en bit DNA, där en gen färgas, och tillbaka till huden."></canvas>
@@ -531,6 +541,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>46 kromosomer</b> <i>·</i> <b>23 par</b> <i>·</i> <b>en från mamma, en från pappa</b></p>
     </div>
     <div class="card story swarm" id="sw-krom">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/k1.jpg" alt=""><img src="img/befruktning.jpg" alt=""><img src="img/k3.jpg" alt=""><img src="img/k5.jpg" alt=""><img src="img/k4.jpg" alt=""></div>
         <canvas role="img" aria-label="Blå streck vid en spermie och rosa streck i en äggcell möts och ordnar sig i 23 par."></canvas>
@@ -551,6 +562,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>1. lagra och kopiera</b> <i>·</i> <b>2. tillverka protein</b></p>
     </div>
     <div class="card story swarm" id="sw-kopia">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/d0.jpg" alt=""><img src="img/kna.jpg" alt=""><img src="img/d2.jpg" alt=""><img src="img/d3.jpg" alt=""><img src="img/d4.jpg" alt=""><img src="img/cell.jpg" alt=""><img src="img/d5.jpg" alt=""></div>
         <canvas role="img" aria-label="Prickar går från ett sår på ett knä till en hudcell i förstoring, där de fördubblas och delas upp på två celler."></canvas>
@@ -569,6 +581,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>gen</b> <i>→</i> <b>kopia</b> <i>→</i> <b>ribosom</b> <i>→</i> <b>aminosyror</b> <i>→</i> <b>protein</b></p>
     </div>
     <div class="card story swarm" id="sw-synt">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/p0.jpg" alt=""><img src="img/arm.jpg" alt=""><img src="img/mat.jpg" alt=""><img src="img/p3.jpg" alt=""><img src="img/p4.jpg" alt=""><img src="img/p5.jpg" alt=""><img src="img/p6.jpg" alt=""></div>
         <canvas role="img" aria-label="En svärm av prickar på bilder av en arm, en tallrik mat och en cell visar hur protein från maten bryts ner till aminosyror och byggs ihop till muskelprotein."></canvas>
@@ -589,6 +602,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>DNA kopieras</b> <i>→</i> <b>halvorna dras isär</b> <i>→</i> <b>två likadana celler</b> <i>→</i> <b>46 kromosomer</b> <i>→</i> <b>mitos</b></p>
     </div>
     <div class="card story swarm" id="sw-mitos">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/v1.jpg" alt=""><img src="img/v2.jpg" alt=""><img src="img/v3.jpg" alt=""><img src="img/v4.jpg" alt=""><img src="img/v5.jpg" alt=""></div>
         <canvas role="img" aria-label="Prickar visar hur en person växer genom att celler kopierar sina kromosomer och delar sig i två likadana celler."></canvas>
@@ -607,6 +621,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>könsceller</b> <i>·</i> <b>46 blir 23</b> <i>·</i> <b>arvsmassan blandas</b> <i>·</i> <b>alla unika</b> <i>·</i> <b>meios</b></p>
     </div>
     <div class="card story swarm" id="sw-meios">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/m1.jpg" alt=""><img src="img/m3.jpg" alt=""><img src="img/m4.jpg" alt=""><img src="img/m5.jpg" alt=""><img src="img/m2.jpg" alt=""></div>
         <canvas role="img" aria-label="Prickar visar hur könsceller bildas: kromosomparen blandas och delas upp så att varje könscell får hälften och blir unik."></canvas>
@@ -625,6 +640,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>kroppsceller eller könsceller</b> <i>·</i> <b>46 eller 23</b> <i>·</i> <b>likadana eller olika</b></p>
     </div>
     <div class="card story swarm" id="sw-jmf">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/j1.jpg" alt=""></div>
         <canvas role="img" aria-label="Två rader: överst en cell som blir två likadana celler, nederst en cell som blir fyra olika celler med hälften så många kromosomer."></canvas>
@@ -645,6 +661,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>dominant slår alltid igenom (F)</b> <i>·</i> <b>vikande syns bara dubbelt (f)</b> <i>·</i> <b>FF och Ff ger fräknar</b> <i>·</i> <b>ff ger inga</b></p>
     </div>
     <div class="card story swarm" id="sw-dom">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/a1.jpg" alt=""><img src="img/a3.jpg" alt=""></div>
         <canvas role="img" aria-label="En familj där förstoringar i lager visar dotterns hudcell och genparet för fräknar."></canvas>
@@ -663,6 +680,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>föräldrarnas anlag</b> <i>→</i> <b>fyra fält</b> <i>→</i> <b>kombinera</b> <i>→</i> <b>läs av: 25 % per fält</b></p>
     </div>
     <div class="card punnett" id="pn-auto">
+      <p class="vhead">Förklaring och övning</p>
       <div class="steps"><strong>Så gör du</strong><ol><li>Skriv först upp föräldrarnas anlag. Varje förälder har två, till exempel Ff och ff.</li><li>Rita en ruta med fyra fält. Skriv pappans två anlag ovanför, ett över varje kolumn, och mammans till vänster, ett vid varje rad.</li><li>Fyll i varje fält med anlaget till vänster och anlaget ovanför. Varje fält är en kombination som ett barn kan få.</li><li>Läs av resultatet. Fält med minst ett stort F ger fräknar. Varje fält motsvarar 25 %, så två fält av fyra betyder 50 % sannolikhet.</li></ol></div>
       <p class="how">Välj föräldrarnas anlag och fyll i fälten ett i taget. Börja gärna med exemplet som redan är valt: en mamma med fräknar (Ff) och en pappa utan (ff).</p>
       <div class="pn-pick"></div>
@@ -680,6 +698,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>anlag på X-kromosomen</b> <i>·</i> <b>pojkar har XY</b> <i>·</i> <b>flickor har XX</b> <i>·</i> <b>anlagsbärare</b></p>
     </div>
     <div class="card story swarm" id="sw-kon">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/a4.jpg" alt=""><img src="img/a5.jpg" alt=""></div>
         <canvas role="img" aria-label="Ett färgseendetest och en flicka och en pojke, med förstoringar som visar deras könskromosomer."></canvas>
@@ -698,6 +717,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>X med liten bokstav</b> <i>·</i> <b>Y utan bokstav</b> <i>·</i> <b>söner drabbas</b> <i>·</i> <b>döttrar bär anlaget</b></p>
     </div>
     <div class="card punnett" id="pn-x">
+      <p class="vhead">Förklaring och övning</p>
       <div class="steps"><strong>Så gör du</strong><ol><li>Anlaget för färgseende sitter på X-kromosomen. Då räcker det inte att skriva F och f som för fräknarna. Man måste också visa vilken kromosom anlaget sitter på.</li><li>Därför skriver man kromosomen med stor bokstav, X, och anlaget som en liten bokstav uppe till höger. X<sup>F</sup> betyder en X-kromosom med det friska anlaget. X<sup>f</sup> betyder en X-kromosom med anlaget för färgblindhet.</li><li>Stort F står för det dominanta anlaget och litet f för det vikande, precis som för fräknarna.</li><li>Y skrivs utan någon liten bokstav, eftersom Y-kromosomen saknar genen för färgseende.</li><li>Skriv pappans X och Y ovanför fälten och mammans två X till vänster, och fyll i fälten som vanligt. Fält med Y är söner, och fält med två X är döttrar.</li><li>En son med X<sup>f</sup> Y blir färgblind, eftersom han inte har något friskt anlag. En dotter med X<sup>F</sup> X<sup>f</sup> ser färger normalt men är anlagsbärare.</li><li>Så används schemat som bevis: om mamman är anlagsbärare och pappan ser färger normalt blir hälften av sönerna färgblinda, men ingen av döttrarna.</li></ol></div>
       <p class="how">Välj föräldrarna och fyll i fälten ett i taget. Exemplet som redan är valt är det vanligaste på prov: mamman är anlagsbärare och pappan ser färger normalt.</p>
       <div class="pn-pick"></div>
@@ -717,6 +737,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>en gen flyttas</b> <i>→</i> <b>ny egenskap</b> <i>→</i> <b>GMO</b> <i>→</i> <b>gensaxen</b></p>
     </div>
     <div class="card story swarm" id="sw-gmo">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/gm1.jpg" alt=""><img src="img/gm2.jpg" alt=""><img src="img/gm3.jpg" alt=""><img src="img/gm4.jpg" alt=""></div>
         <canvas role="img" aria-label="Ett bomullsfält med förstoringar som visar hur en gen flyttas från en bakterie till en växtcell."></canvas>
@@ -735,6 +756,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>tål bekämpningsmedel</b> <i>·</i> <b>tål kyla</b> <i>·</i> <b>snabbväxande lax</b> <i>·</i> <b>gyllene ris</b></p>
     </div>
     <div class="card story swarm" id="sw-ex">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/gm5.jpg" alt=""><img src="img/gm6.jpg" alt=""><img src="img/gm7.jpg" alt=""><img src="img/gm8.jpg" alt=""></div>
         <canvas role="img" aria-label="Fyra exempel på genmodifiering: soja, potatis, lax och ris."></canvas>
@@ -753,6 +775,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>för: skörd, mindre gift, snabbt</b> <i>·</i> <b>mot: sprids, resistens, beroende</b> <i>·</i> <b>etik</b></p>
     </div>
     <div class="card story swarm" id="sw-cmp">
+      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
       <div class="scene" style="aspect-ratio:1376/768">
         <div class="layers" aria-hidden="true"><img src="img/cmp1.jpg" alt=""><img src="img/cmp2.jpg" alt=""><img src="img/cmp3.jpg" alt=""><img src="img/cmp4.jpg" alt=""></div>
         <canvas role="img" aria-label="Fyra bildpar som ställer en fördel med genmodifiering mot en nackdel."></canvas>
@@ -771,6 +794,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="kom"><span>Kom ihåg</span><b>förändringen</b> <i>→</i> <b>det leder till</b> <i>→</i> <b>å andra sidan</b> <i>→</i> <b>slutsats</b></p>
     </div>
     <div class="card" id="gm-chain">
+      <p class="vhead">Förklaring och övning</p>
       <div class="steps"><strong>Så gör du</strong><ol><li>Börja med själva förändringen: vilken egenskap har organismen fått?</li><li>Skriv vad det leder till, och vad det i sin tur leder till. Ord som "det leder till att" och "vilket gör att" binder ihop leden.</li><li>Vänd sedan på det med "å andra sidan" och följ risken på samma sätt, i minst två led.</li><li>Avsluta med en egen slutsats: vad väger tyngst, och varför?</li></ol></div>
       <p class="how">Bygg ett resonemang led för led. Välj ett exempel och sedan den fortsättning som följer av ledet innan.</p>
       <div class="gc-pick pn-row"></div>
