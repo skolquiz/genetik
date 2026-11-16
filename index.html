@@ -314,6 +314,14 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 .pn tbody td b{font-size:20px;margin-top:4px}
 .pn th{width:84px}
 
+.pn-key{display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--bg)}
+.pn-key div{display:flex;gap:12px;align-items:center;font-size:16px}
+.pn-key img{width:22px;height:86px;object-fit:cover;flex:none}
+.pn-key b{font-family:var(--display);font-size:19px}
+.pn-h{display:inline-flex;gap:8px;align-items:center;justify-content:center}
+.pn-h img{width:13px;height:50px;object-fit:cover}
+.pn th{height:64px}
+
 /* Bildplats */
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
@@ -748,10 +756,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <div class="answer">
       <p class="short">Man skriver X och Y, med anlaget som en liten bokstav uppe till höger om X. Schemat visar då varför söner kan drabbas när döttrar inte gör det.</p>
       <ol>
-        <li class="core">Anlaget sitter på X-kromosomen. Skriv X<sup>F</sup> för normalt färgseende, som är dominant, och X<sup>f</sup> för färgblindhet, som är vikande. Y-kromosomen har inget sådant anlag.</li>
-        <li class="core">Mamman har två X-kromosomer och pappan har en X och en Y. Skriv pappans X och Y ovanför fälten och mammans två X till vänster.</li>
-        <li class="core">Fyll i fälten som vanligt. Fält med Y är söner, och fält med två X är döttrar.</li>
-        <li class="core">En son med X<sup>f</sup> blir färgblind. En dotter med X<sup>F</sup> X<sup>f</sup> ser färger normalt men är anlagsbärare.</li>
+        <li class="core">Anlaget för färgseende sitter på X-kromosomen. Då räcker det inte att skriva F och f som för fräknarna. Man måste också visa vilken kromosom anlaget sitter på.</li>
+        <li class="core">Därför skriver man kromosomen med stor bokstav, X, och anlaget som en liten bokstav uppe till höger. X<sup>F</sup> betyder en X-kromosom med det friska anlaget. X<sup>f</sup> betyder en X-kromosom med anlaget för färgblindhet.</li>
+        <li class="core">Stort F står för det dominanta anlaget och litet f för det vikande, precis som för fräknarna.</li>
+        <li class="core">Y skrivs utan någon liten bokstav, eftersom Y-kromosomen saknar genen för färgseende.</li>
+        <li class="core">Skriv pappans X och Y ovanför fälten och mammans två X till vänster, och fyll i fälten som vanligt. Fält med Y är söner, och fält med två X är döttrar.</li>
+        <li class="core">En son med X<sup>f</sup> Y blir färgblind, eftersom han inte har något friskt anlag. En dotter med X<sup>F</sup> X<sup>f</sup> ser färger normalt men är anlagsbärare.</li>
         <li class="core">Så används schemat som bevis: om mamman är anlagsbärare och pappan ser färger normalt blir hälften av sönerna färgblinda, men ingen av döttrarna.</li>
       </ol>
     </div>
@@ -1670,6 +1680,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   function Punnett(id,kind){
     var root=document.getElementById(id); if(!root) return;
     var C=CFG[kind], mi=C.m0, di=C.d0, pos=0, filled=[];
+    var keyBox=document.createElement('div'); keyBox.className='pn-key'; keyBox.innerHTML=kind==='auto'
+      ?'<strong>Så läser du bokstäverna</strong><div><img src="img/s_F.jpg" alt=""><span><b>F</b> är anlaget för fräknar. Stor bokstav betyder dominant. I bilderna är det ett brunt band.</span></div><div><img src="img/s_f.jpg" alt=""><span><b>f</b> är anlaget för inga fräknar. Liten bokstav betyder vikande. I bilderna är det ett ljust band.</span></div>'
+      :'<strong>Så läser du beteckningarna</strong><div><img src="img/s_XF.jpg" alt=""><span><b>X<sup>F</sup></b> är en X-kromosom med det friska anlaget, det ljusa bandet. Stort F betyder dominant.</span></div><div><img src="img/s_Xf.jpg" alt=""><span><b>X<sup>f</sup></b> är en X-kromosom med anlaget för färgblindhet, det mörka bandet. Litet f betyder vikande.</span></div><div><img src="img/s_Y.jpg" alt=""><span><b>Y</b> är den lilla Y-kromosomen. Den har inget band, eftersom genen inte finns där.</span></div>';
+    root.insertBefore(keyBox,root.querySelector('.pn-pick'));
     var par=document.createElement('div'); par.className='pn-par'; root.insertBefore(par,root.querySelector('.pn')); var pick=root.querySelector('.pn-pick'), tbl=root.querySelector('.pn'), opts=root.querySelector('.pn-opts'), fb=root.querySelector('.pn-fb');
     function label(g,isMom){
       if(kind==='auto') return C.ph(g);
@@ -1705,10 +1719,11 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       var m=C.mom[mi], d=C.dad[di];
       par.innerHTML='<div><strong>Mamma</strong>'+pics(m,false)+'<span>'+gh(m)+': '+label(m,true)+'</span></div><div><strong>Pappa</strong>'+pics(d,false)+'<span>'+gh(d)+': '+label(d,false)+'</span></div>';
     }
+    function thi(t){var n={F:'s_F',f:'s_f',XF:'s_XF',Xf:'s_Xf',Y:'s_Y'}[t]; return '<span class="pn-h"><img src="img/'+n+'.jpg" alt=""><span>'+th(t)+'</span></span>';}
     function draw(){
-      var m=C.mom[mi], d=C.dad[di], h='<thead><tr><td></td><th colspan="2" class="pn-cap">Pappa</th></tr><tr><td class="pn-cap pn-side">Mamma</td><th>'+th(d[0])+'</th><th>'+th(d[1])+'</th></tr></thead><tbody>';
+      var m=C.mom[mi], d=C.dad[di], h='<thead><tr><td></td><th colspan="2" class="pn-cap">Pappa</th></tr><tr><td class="pn-cap pn-side">Mamma</td><th>'+thi(d[0])+'</th><th>'+thi(d[1])+'</th></tr></thead><tbody>';
       for(var r=0;r<2;r++){
-        h+='<tr><th>'+th(m[r])+'</th>';
+        h+='<tr><th>'+thi(m[r])+'</th>';
         for(var c=0;c<2;c++){var k=r*2+c, g=filled[k];
           h+='<td class="'+(g?'ok':(k===pos?'now':''))+'">'+(g?pics(g,true)+'<b>'+gh(g)+'</b><span>'+(C.who?C.who(g)+', ':'')+C.ph(g)+'</span>':'?')+'</td>';}
         h+='</tr>';
