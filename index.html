@@ -305,6 +305,15 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 .tgroup li a::before{content:"";position:absolute;left:11px;top:50%;width:13px;height:13px;margin-top:-8px;border:1.5px solid var(--muted);border-radius:50%}
 .tgroup li.done a::before{content:"\2713";border:0;color:var(--accent);font-weight:700;width:auto;height:auto;margin-top:-13px;left:12px}
 
+.pn-par{display:flex;gap:14px;flex-wrap:wrap}
+.pn-par>div{display:flex;flex-direction:column;gap:4px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.pn-par span{font-size:14px;color:var(--muted)}
+.pn-imgs{display:flex;gap:6px;justify-content:center}
+.pn-imgs img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:1.5px solid var(--line);background:#fff}
+.pn tbody td{width:210px;height:150px;padding:8px 4px}
+.pn tbody td b{font-size:20px;margin-top:4px}
+.pn th{width:84px}
+
 /* Bildplats */
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
@@ -1661,7 +1670,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   function Punnett(id,kind){
     var root=document.getElementById(id); if(!root) return;
     var C=CFG[kind], mi=C.m0, di=C.d0, pos=0, filled=[];
-    var pick=root.querySelector('.pn-pick'), tbl=root.querySelector('.pn'), opts=root.querySelector('.pn-opts'), fb=root.querySelector('.pn-fb');
+    var par=document.createElement('div'); par.className='pn-par'; root.insertBefore(par,root.querySelector('.pn')); var pick=root.querySelector('.pn-pick'), tbl=root.querySelector('.pn'), opts=root.querySelector('.pn-opts'), fb=root.querySelector('.pn-fb');
     function label(g,isMom){
       if(kind==='auto') return C.ph(g);
       return isMom?C.ph(g):(g[0]==='XF'?'ser färger':'färgblind');
@@ -1678,19 +1687,37 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       return d;
     }
     function answer(k){var m=C.mom[mi], d=C.dad[di]; return geno(m[Math.floor(k/2)],d[k%2]);}
+    function pics(g,child){
+      var k=g.slice().sort(function(x,y){return RANK[x]-RANK[y];}).join(''), o=[];
+      function im(n,alt){return '<img src="img/'+n+'.jpg" alt="'+alt+'">';}
+      if(kind==='auto'){
+        o.push(im({FF:'l_FF',Ff:'l_Ff',ff:'l_ff'}[k],k==='ff'?'Två ljusa band':(k==='FF'?'Två bruna band':'Ett brunt och ett ljust band')));
+        if(child) o.push(im(g.indexOf('F')>=0?'f_fr':'f_no',g.indexOf('F')>=0?'Ansikte med fräknar':'Ansikte utan fräknar'));
+      } else {
+        var boy=g.indexOf('Y')>=0, blind=boy?g.indexOf('Xf')>=0:(g[0]==='Xf'&&g[1]==='Xf');
+        o.push(im({XFXF:'l_xxFF',XFXf:'l_xxc',XfXf:'l_xxff',XFY:'l_xyF',XfY:'l_xyf'}[k],boy?'En X-kromosom och en Y-kromosom':'Två X-kromosomer'));
+        if(child) o.push(im(boy?'p_boy':'p_girl',boy?'Pojke':'Flicka'));
+        o.push(im(blind?'t_nej':'t_ja',blind?'Ser inte triangeln':'Ser triangeln'));
+      }
+      return '<div class="pn-imgs">'+o.join('')+'</div>';
+    }
+    function parents(){
+      var m=C.mom[mi], d=C.dad[di];
+      par.innerHTML='<div><strong>Mamma</strong>'+pics(m,false)+'<span>'+gh(m)+': '+label(m,true)+'</span></div><div><strong>Pappa</strong>'+pics(d,false)+'<span>'+gh(d)+': '+label(d,false)+'</span></div>';
+    }
     function draw(){
       var m=C.mom[mi], d=C.dad[di], h='<thead><tr><td></td><th colspan="2" class="pn-cap">Pappa</th></tr><tr><td class="pn-cap pn-side">Mamma</td><th>'+th(d[0])+'</th><th>'+th(d[1])+'</th></tr></thead><tbody>';
       for(var r=0;r<2;r++){
         h+='<tr><th>'+th(m[r])+'</th>';
         for(var c=0;c<2;c++){var k=r*2+c, g=filled[k];
-          h+='<td class="'+(g?'ok':(k===pos?'now':''))+'">'+(g?'<b>'+gh(g)+'</b><span>'+(C.who?C.who(g)+', ':'')+C.ph(g)+'</span>':'?')+'</td>';}
+          h+='<td class="'+(g?'ok':(k===pos?'now':''))+'">'+(g?pics(g,true)+'<b>'+gh(g)+'</b><span>'+(C.who?C.who(g)+', ':'')+C.ph(g)+'</span>':'?')+'</td>';}
         h+='</tr>';
       }
       tbl.innerHTML=h+'</tbody>';
     }
     function reset(){
       pos=0; filled=[]; fb.textContent='Fyll i det markerade fältet: ta anlaget till vänster och anlaget ovanför.';
-      pick.innerHTML=''; pick.appendChild(row('Mamma',C.mom,mi,true)); pick.appendChild(row('Pappa',C.dad,di,false));
+      pick.innerHTML=''; pick.appendChild(row('Mamma',C.mom,mi,true)); pick.appendChild(row('Pappa',C.dad,di,false)); parents();
       [].forEach.call(opts.children,function(b){b.disabled=false;});
       draw();
     }
