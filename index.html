@@ -353,6 +353,28 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 .story>.vhead{padding:12px 16px 10px}
 .vhead span{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);margin-left:6px;font-size:14px}
 
+/* Mätare för hur mycket man har övat */
+.lvl{display:inline-flex;gap:3px;vertical-align:middle;margin-right:9px}
+.lvl i{width:9px;height:14px;border-radius:3px;background:var(--line)}
+.lvl.l1 i:nth-child(1),.lvl.l2 i:nth-child(-n+2){background:#e0a526}
+.lvl.l3 i{background:#1f9d6b}
+.tgroup li a{padding-left:12px}
+.tgroup li a::before{display:none}
+.pbarx{display:block;height:7px;border-radius:99px;background:var(--line);margin-top:5px;overflow:hidden;max-width:260px}
+.pbarx i{display:block;height:100%;background:#1f9d6b;border-radius:99px}
+.tsum{grid-column:1/-1;display:flex;gap:28px;align-items:flex-end;flex-wrap:wrap}
+.tsum p{margin:0}.tsum strong{font-family:var(--display);font-size:20px}.tsum .pbarx{min-width:260px;height:9px}
+.tkey{font-size:14px;color:var(--muted)}.tkey .lvl{margin-right:4px}
+.toc .tcont{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toc .tcont a.alt{background:var(--surface);color:var(--accent);border:1.5px solid var(--accent)}
+.treset{margin-left:auto;font:inherit;font-size:15px;padding:9px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer}
+.trate{display:none;gap:8px;align-items:center;flex-wrap:wrap}
+.trate span{font-weight:700}
+.trate button{font:inherit;font-weight:700;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.trate .tyes{background:#1f9d6b;border-color:#1f9d6b;color:#fff}
+.answer.cmp .trate{display:flex}
+.answer.cmp .tbtn{display:none}
+
 /* Bildplats */
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
@@ -1819,7 +1841,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   var q=root.querySelector('.bg-q'), kind=root.querySelector('.bg-kind'), opts=root.querySelector('.bg-opts'), fb=root.querySelector('.bg-fb'), nx=root.querySelector('.bg-next'), pr=root.querySelector('.bg-prog');
   var queue=[], done=0, cur=null, missed=false;
   function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;} return a;}
-  function start(){queue=shuf(T.map(function(_,i){return i;})); done=0; next();}
+  function bload(){try{return JSON.parse(localStorage.getItem('genetik-begrepp')||'[]');}catch(e){return [];}}
+  function bsave(v){try{localStorage.setItem('genetik-begrepp',JSON.stringify(v));}catch(e){}}
+  var klara=bload().filter(function(n){return T.some(function(t){return t[0]===n;});});
+  function start(){if(klara.length>=T.length){klara=[]; bsave(klara);} queue=shuf(T.map(function(_,i){return i;}).filter(function(i){return klara.indexOf(T[i][0])<0;})); done=klara.length; next();}
   function next(){
     nx.hidden=true; fb.textContent=''; opts.innerHTML='';
     if(!queue.length){kind.textContent='Klart'; q.textContent='Du har klarat alla '+T.length+' begreppen.'; pr.textContent=T.length+' av '+T.length+' klara'; nx.textContent='Börja om'; nx.hidden=false; cur=null; return;}
@@ -1830,7 +1855,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     all.forEach(function(i){var b=document.createElement('button'); b.type='button'; b.textContent=toTerm?T[i][0]:T[i][1];
       b.addEventListener('click',function(){
         if(i===cur){[].forEach.call(opts.children,function(x){x.disabled=true;}); b.classList.add('ok');
-          if(missed){queue.push(cur); fb.textContent='Rätt nu. Begreppet kommer tillbaka en gång till.';} else {done++; fb.textContent='Rätt.';}
+          if(missed){queue.push(cur); fb.textContent='Rätt nu. Begreppet kommer tillbaka en gång till.';} else {done++; klara.push(T[cur][0]); bsave(klara); fb.textContent='Rätt.';}
           pr.textContent=done+' av '+T.length+' klara'; nx.textContent='Nästa'; nx.hidden=false;}
         else{missed=true; b.disabled=true; fb.textContent=toTerm?'Inte det. '+T[i][0]+' betyder: '+T[i][1]:'Inte det. Den förklaringen hör till '+T[i][0]+'.';}
       }); opts.appendChild(b);});
@@ -1872,7 +1897,18 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   });
   function load(k,d){try{var v=localStorage.getItem(k); return v?JSON.parse(v):d;}catch(e){return d;}}
   function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-  var seen=load('genetik-seen',{}), cur=-1;
+  var prog=load('genetik-prog',{}), cur=-1;
+  function lvl(id){return (prog[id]&&prog[id].l)||0;}
+  function setL(id,l){prog[id]=prog[id]||{}; prog[id].l=l; save('genetik-prog',prog);}
+  window.GProg={raise:function(id,l){if(lvl(id)<l) setL(id,l);},set:setL,get:lvl};
+  function hasAns(p){return !!p.el.querySelector('.answer');}
+  function track(){
+    if(cur<0) return; var p=pages[cur], sw=p.el.querySelector('.swarm'); if(!sw) return;
+    var b=[].slice.call(sw.querySelectorAll('.pips button')), k=-1; b.forEach(function(x,j){if(x.classList.contains('on')) k=j;}); if(k<0) return;
+    prog[p.id]=prog[p.id]||{}; var st=prog[p.id].s||[]; if(st.indexOf(k)<0){st.push(k); prog[p.id].s=st; save('genetik-prog',prog);}
+    if(st.length>=b.length) window.GProg.raise(p.id,hasAns(p)?1:3);
+  }
+  document.addEventListener('click',function(){setTimeout(track,60);}); document.addEventListener('keyup',function(){setTimeout(track,60);});
 
   var oldNav=header.querySelector('nav'); if(oldNav) oldNav.hidden=true;
   var start=document.createElement('div'); start.className='toc'; header.appendChild(start);
@@ -1881,18 +1917,28 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   var prev=nav.querySelector('.pprev'), next=nav.querySelector('.pnext');
   main.classList.add('paged');
 
+  function meter(l){return '<span class="lvl l'+l+'" title="'+['Inte påbörjad','Läst','Testat','Kan'][l]+'"><i></i><i></i><i></i></span>';}
+  function pbar(n,t){return '<span class="pbarx"><i style="width:'+(t?Math.round(n/t*100):0)+'%"></i></span>';}
   function drawToc(){
-    var last=load('genetik-last',''), h='';
-    var lp=pages.filter(function(p){return p.id===last;})[0];
-    if(lp) h+='<p class="tcont"><a href="#'+lp.id+'">Fortsätt där du var: '+lp.title+'</a></p>';
-    else h+='<p class="tcont"><a href="#'+pages[0].id+'">Börja från början</a></p>';
+    var last=load('genetik-last',''), h='', q=pages.filter(hasAns), kan=q.filter(function(p){return lvl(p.id)===3;}).length;
+    var lp=pages.filter(function(p){return p.id===last;})[0], nextp=q.filter(function(p){return lvl(p.id)<3;})[0];
+    h+='<div class="tsum"><p><strong>'+kan+' av '+q.length+' frågor kan du</strong>'+pbar(kan,q.length)+'</p><p class="tkey">'+meter(1)+' läst &nbsp; '+meter(2)+' testat &nbsp; '+meter(3)+' kan</p></div>';
+    h+='<p class="tcont">'+(lp?'<a href="#'+lp.id+'">Fortsätt där du var</a>':'<a href="#'+pages[0].id+'">Börja från början</a>')+(nextp&&kan>0?'<a class="alt" href="#'+nextp.id+'">Öva på det du inte kan än</a>':'')+'<button type="button" class="treset">Nollställ</button></p>';
     groups.forEach(function(g){
-      var done=g.pages.filter(function(p){return seen[p.id];}).length;
-      h+='<div class="tgroup"><h2><span>'+g.label+'</span>'+g.name+'<small>'+done+' av '+g.pages.length+' klara</small></h2><ol>';
-      g.pages.forEach(function(p){h+='<li class="'+(seen[p.id]?'done':'')+'"><a href="#'+p.id+'">'+p.title+'</a></li>';});
+      var gq=g.pages.filter(hasAns), gk=gq.filter(function(p){return lvl(p.id)===3;}).length, sub='';
+      if(gq.length) sub=gk+' av '+gq.length+' kan du'+pbar(gk,gq.length);
+      else if(g.pages[0].id==='begrepp'){var bd=load('genetik-begrepp',[]).length; sub=bd+' av 35 begrepp klara'+pbar(bd,35);}
+      h+='<div class="tgroup"><h2><span>'+g.label+'</span>'+g.name+'<small>'+sub+'</small></h2><ol>';
+      g.pages.forEach(function(p){h+='<li><a href="#'+p.id+'">'+(p.id==='begrepp'?'':meter(lvl(p.id)))+p.title+'</a></li>';});
       h+='</ol></div>';
     });
     start.innerHTML=h;
+    var rb=start.querySelector('.treset'), armed=false;
+    rb.addEventListener('click',function(){
+      if(!armed){armed=true; rb.textContent='Tryck igen för att nollställa allt'; setTimeout(function(){armed=false; rb.textContent='Nollställ';},4000); return;}
+      try{localStorage.removeItem('genetik-prog'); localStorage.removeItem('genetik-begrepp'); localStorage.removeItem('genetik-last');}catch(e){}
+      location.hash=''; location.reload();
+    });
   }
   function show(i,push){
     cur=i; var p=i>=0?pages[i]:null;
@@ -1903,7 +1949,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       bar.querySelector('.ppos').textContent=p.g.label+(p.g.h?' · '+p.g.name:'')+(p.g.pages.length>1?' · Fråga '+p.n+' av '+p.g.pages.length:'');
       prev.disabled=i===0; prev.textContent=i===0?'Föregående':'Föregående';
       next.textContent=i===pages.length-1?'Till innehållet':'Nästa: '+pages[i+1].title;
-      seen[p.id]=1; save('genetik-seen',seen); save('genetik-last',p.id);
+      save('genetik-last',p.id); if(hasAns(p)&&!p.el.querySelector('.swarm')) window.GProg.raise(p.id,1); setTimeout(track,400);
     } else drawToc();
     if(push){try{history.pushState(null,'',p?'#'+p.id:location.pathname+location.search);}catch(e){}}
     window.scrollTo(0,0);
@@ -1956,10 +2002,14 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       a.classList.toggle('test',state===1); a.classList.toggle('cmp',state===2);
       var q=a.closest('.qa'); if(q) q.classList.toggle('testing',state===1);
       b.textContent=state===0?'Testa dig':(state===1?'Visa svaret':'Stäng');
+      var sec=a.closest('section'), h3=sec&&sec.querySelector('h3'); if(state===1&&h3&&window.GProg) window.GProg.raise(h3.id,2);
       lab.textContent=state===2?'Ditt svar':'Skriv ditt svar här';
       if(state===1){ta.value=''; ta.focus();}
     });
-    a.insertBefore(box,a.firstChild); a.appendChild(b);
+    var rate=document.createElement('div'); rate.className='trate'; rate.innerHTML='<span>Hur gick det?</span><button type="button" class="tyes">Jag kunde det</button><button type="button" class="tno">Inte än</button>';
+    function done(l){var sec=a.closest('section'), h3=sec&&sec.querySelector('h3'); if(h3&&window.GProg) window.GProg.set(h3.id,l); state=2; b.click();}
+    rate.querySelector('.tyes').addEventListener('click',function(){done(3);}); rate.querySelector('.tno').addEventListener('click',function(){done(2);});
+    a.insertBefore(box,a.firstChild); a.appendChild(rate); a.appendChild(b);
   });
 })();
 </script>
