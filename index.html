@@ -330,6 +330,21 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 .xbtn{align-self:flex-start;font:inherit;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--accent);cursor:pointer}
 .xbtn:hover{border-color:var(--accent)}
 
+/* Svar, minnesord och självtest */
+.kom{margin:0;font-size:16px;line-height:1.9}
+.kom span{display:block;font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);line-height:1.4}
+.kom b{font-weight:700;background:var(--accent-soft);border-radius:7px;padding:2px 8px;white-space:nowrap}
+.kom i{font-style:normal;color:var(--muted)}
+.answer .short{font-size:19px}
+.tbtn{align-self:flex-start;font:inherit;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--accent);cursor:pointer}
+.tprompt{display:none;margin:0;font-weight:700}
+.answer.test .short,.answer.test .kom{display:none}
+.answer.test .tprompt{display:block}
+.expl{margin:0}
+.steps{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--bg)}
+.steps ol{margin:6px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:5px;font-size:16px}
+.cap{font-size:18px;min-height:6.4em}
+
 /* Bildplats */
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
@@ -353,7 +368,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   <header>
     <p class="eyebrow">Biologi åk 9 · Kapitel 10</p>
     <h1>Genetik inför provet</h1>
-    <p class="lead">Varje fråga har ett svar: först det korta svaret i fet stil, sedan punkterna du ska kunna skriva på provet. Knappen Förklaring visar sammanhanget, alltså varför det är så och var det märks i verkligheten.</p>
+    <p class="lead">Varje fråga har ett kort svar och några ord att komma ihåg. Förklaringen finns i bilderna bredvid, som du klickar dig igenom steg för steg. Med knappen Testa dig döljer du svaret och försöker själv.</p>
     <nav aria-label="Områden">
       <a href="#fabriken">Cellen som en fabrik</a>
       <a href="#omrade-1">1. DNA-molekylen</a>
@@ -387,14 +402,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="q1">Hur ser DNA-molekylen ut?</h3>
     <div class="answer">
       <p class="short">DNA är en mycket lång molekyl som ser ut som en repstege vriden till en spiral. Formen kallas dubbelspiral.</p>
-      <ol>
-        <li>DNA finns i nästan varje cell i din kropp och styr mycket av hur du ser ut och fungerar.</li>
-        <li class="core">Stegens två långa sidor kallas <strong>strängar</strong>, och pinnarna mellan dem är baspar.</li>
-        <li class="core">Namnet <strong>dubbelspiral</strong> kommer av att de två strängarna vrider sig runt varandra.</li>
-        <li>Formen gör att molekylen kan delas på mitten och kopieras. Det är så en enda befruktad äggcell kunde bli en hel människa med samma DNA i alla celler.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>repstege</b> <i>·</i> <b>två strängar</b> <i>·</i> <b>baspar som pinnar</b> <i>·</i> <b>dubbelspiral</b></p>
     </div>
     <div class="card stage">
+      <p class="expl">Stegens två långa sidor kallas strängar, och pinnarna mellan dem är baspar. Namnet dubbelspiral kommer av att de två strängarna vrider sig runt varandra. DNA finns i nästan varje cell i din kropp.</p>
       <canvas id="ladder" role="img" aria-label="En repstege med två strängar och pinnar av baspar. Med reglaget vrids stegen till en dubbelspiral."></canvas>
       <label class="twist" for="twist"><span>Uträtad för att visa</span><input type="range" id="twist" min="0" max="100" value="0" step="1"><span>Så ser DNA ut</span></label>
       <p class="caption" id="caption" aria-live="polite"></p>
@@ -406,13 +417,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="q3">Vad består stegens pinnar av, och vilka kvävebaser sitter ihop?</h3>
     <div class="answer">
       <p class="short">Pinnarna består av kvävebaser som sitter ihop två och två i baspar: A med T, och C med G.</p>
-      <ol>
-        <li class="core">Varje pinne är två <strong>kvävebaser</strong> som hakar i varandra. Ett sådant par kallas ett <strong>baspar</strong>.</li>
-        <li class="core">De fyra kvävebaserna heter adenin (<span class="base bA">A</span>), tymin (<span class="base bT">T</span>), cytosin (<span class="base bC">C</span>) och guanin (<span class="base bG">G</span>).</li>
-        <li class="core">A sitter alltid ihop med T, och C alltid med G.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>kvävebaser</b> <i>·</i> <b>baspar</b> <i>·</i> <b>A med T</b> <i>·</i> <b>C med G</b></p>
     </div>
     <div class="card">
+      <p class="expl">Varje pinne är två kvävebaser som hakar i varandra. Ett sådant par kallas ett baspar. De fyra kvävebaserna heter adenin (A), tymin (T), cytosin (C) och guanin (G). A sitter alltid ihop med T, och C alltid med G.</p>
       <div class="names">
         <div class="name"><div class="chip bA">A</div><span>adenin</span></div>
         <div class="name"><div class="chip bT">T</div><span>tymin</span></div>
@@ -441,13 +449,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="q4">Hur kan fyra bokstäver räcka till så mycket information?</h3>
     <div class="answer">
       <p class="short">Det är ordningen på kvävebaserna som bär informationen, och ordningen kan varieras nästan hur mycket som helst.</p>
-      <ol>
-        <li>Du, en hund, en banan och en bakterie använder exakt samma fyra kvävebaser. Ändå är ni helt olika.</li>
-        <li class="core">Jämför med bokstäverna R, O och T. De kan bli ROT, ORT eller TRO: samma bokstäver, men olika betydelse.</li>
-        <li class="core">På samma sätt kan kvävebaserna komma i vilken följd som helst längs DNA-molekylen.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>fyra bokstäver</b> <i>·</i> <b>ordningen bär informationen</b> <i>·</i> <b>ROT, ORT, TRO</b></p>
     </div>
     <div class="card">
+      <p class="expl">Du, en hund, en banan och en bakterie använder exakt samma fyra kvävebaser. Ändå är ni helt olika. Jämför med bokstäverna R, O och T. De kan bli ROT, ORT eller TRO: samma bokstäver, men olika betydelse. På samma sätt kan kvävebaserna komma i vilken följd som helst längs DNA-molekylen.</p>
       <p class="how">På varje plats i en sekvens kan det stå A, T, C eller G, alltså fyra möjligheter. Dra i reglaget för att göra sekvensen längre, och se hur många olika sekvenser som då går att bilda.</p>
       <div class="seq" id="seq" aria-hidden="true"></div>
       <div class="len">
@@ -463,12 +468,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="q5">Vad står det i DNA-sekvenserna?</h3>
     <div class="answer">
       <p class="short">I DNA-sekvenserna står recept på allt som kroppen ska bygga, till exempel proteiner.</p>
-      <ol>
-        <li>Din kropp bygger nya saker hela tiden: färgämne i huden när du solar, protein i musklerna när du tränar och insulin när du har ätit.</li>
-        <li class="core">Instruktionerna för allt detta finns i ditt DNA.</li>
-        <li class="core">Varje recept beskriver hur en viss sak ska byggas. Det kan vara flera tusen bokstäver långt.</li>
-        <li class="core">Olika recept ger olika saker, och varje recept används där det behövs: i huden, i musklerna eller i bukspottkörteln.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>DNA-sekvens</b> <i>→</i> <b>recept</b> <i>→</i> <b>protein</b></p>
     </div>
     <div class="card story swarm" id="sw-recept">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -486,13 +486,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="q6">Vad är arvsmassa, och hur får den plats i cellen?</h3>
     <div class="answer">
       <p class="short">Arvsmassa är allt DNA som finns hos en organism. Den får plats i cellkärnan eftersom DNA är hårt lindat och packat runt proteiner.</p>
-      <ol>
-        <li>Du består av tiotusentals miljarder celler, och i nästan var och en finns hela receptsamlingen.</li>
-        <li>I varje cell ligger DNA samlat i cellkärnan.</li>
-        <li class="core">Det DNA som fyller cellkärnan är din <strong>arvsmassa</strong>.</li>
-        <li class="core">Den är ungefär tre meter lång, fast kärnan bara är en hundradels millimeter bred. Därför är tråden virad runt små proteiner, som sytråd på trådrullar, och sedan packad ännu tätare.</li>
-        <li class="core">Längst in är tråden en dubbelspiral. Hela arvsmassan består av drygt tre miljarder baspar.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>allt DNA</b> <i>·</i> <b>cellkärnan</b> <i>·</i> <b>virat runt proteiner</b> <i>·</i> <b>tre miljarder baspar</b></p>
     </div>
     <div class="card story swarm" id="sw-arv">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -512,13 +506,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="b1">Vad är en gen?</h3>
     <div class="answer">
       <p class="short">En gen är en bit av DNA som är ett recept på något som kroppen ska bygga.</p>
-      <ol>
-        <li>En del har fräknar, andra har det inte. Skillnaden syns i huden, men den börjar någon annanstans.</li>
-        <li>Fräknar är små fläckar där huden har extra mycket färgämne. Färgämnet bildas i särskilda celler i huden.</li>
-        <li class="core">Cellerna gör det eftersom det står i deras DNA. DNA är indelat i delar som kallas <strong>gener</strong>, eller arvsanlag.</li>
-        <li class="core">En av generna är just receptet som ger fräknar.</li>
-        <li class="core">Generna avgör därför mycket av hur du ser ut och fungerar. Med en annan variant av genen hade hon inte haft fräknar.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>bit av DNA</b> <i>·</i> <b>recept</b> <i>·</i> <b>arvsanlag</b> <i>·</i> <b>styr egenskaper</b></p>
     </div>
     <div class="card story swarm" id="sw-gen">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -536,14 +524,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="b2">Hur många kromosomer har en människa?</h3>
     <div class="answer">
       <p class="short">En människa har 46 kromosomer i varje kroppscell. De hör ihop två och två i 23 kromosompar.</p>
-      <ol>
-        <li>Du liknar både din mamma och din pappa, men är inte en kopia av någon av dem. Förklaringen finns i hur ditt DNA är uppdelat.</li>
-        <li class="core">DNA är packat i buntar som kallas <strong>kromosomer</strong>. En spermie har 23 stycken och en äggcell har 23.</li>
-        <li>Vid befruktningen hamnar de i samma cell.</li>
-        <li class="core">Där bildar de <strong>kromosompar</strong>. I varje par kommer en kromosom från mamma och en från pappa.</li>
-        <li class="core">När den första cellen delar sig kopieras kromosomerna, så att varje ny kroppscell får alla 46.</li>
-        <li>Därför har du drag från båda dina föräldrar.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>46 kromosomer</b> <i>·</i> <b>23 par</b> <i>·</i> <b>en från mamma, en från pappa</b></p>
     </div>
     <div class="card story swarm" id="sw-krom">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -563,14 +544,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="c1">Vilka två uppgifter har DNA?</h3>
     <div class="answer">
       <p class="short">DNA har två uppgifter: att lagra och kopiera informationen, och att tillverka protein.</p>
-      <ol>
-        <li>När du skrapar knät läker såret av sig självt. Kroppen bygger ny hud.</li>
-        <li>Ny hud blir till genom att hudceller delar sig. Men en ny cell klarar sig inte utan DNA, för där står alla recept.</li>
-        <li class="core">Uppgift 1: innan en cell delar sig kopieras allt DNA.</li>
-        <li class="core">När cellen sedan delar sig får båda cellerna samma gener.</li>
-        <li class="core">Uppgift 2: generna används som recept när cellen bygger de proteiner den behöver, till exempel till ny hud.</li>
-        <li>Så fylls såret med nya hudceller tills huden är hel igen.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>1. lagra och kopiera</b> <i>·</i> <b>2. tillverka protein</b></p>
     </div>
     <div class="card story swarm" id="sw-kopia">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -588,15 +562,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="c3">Var bildas proteinerna, och hur går proteinsyntesen till?</h3>
     <div class="answer">
       <p class="short">Proteinerna bildas i ribosomerna, utanför cellkärnan. Vid proteinsyntesen görs en kopia av en gen i cellkärnan, och ribosomen bygger proteinet efter kopian.</p>
-      <ol>
-        <li>Dina muskler är byggda av protein. När du tränar slits de lite och behöver nytt protein för att lagas och bli starkare.</li>
-        <li>Byggmaterialet kommer från maten. I magsäcken och tunntarmen bryts matens protein ner till små bitar som kallas <strong>aminosyror</strong>.</li>
-        <li class="core">Blodet för aminosyrorna ut till muskelcellerna. Där ska de sättas ihop på nytt, i den ordning som ditt DNA bestämmer. Det arbetet kallas <strong>proteinsyntes</strong>.</li>
-        <li class="core">DNA finns i <strong>cellkärnan</strong> och lämnar den aldrig. Därför börjar det med att genen för proteinet kopieras.</li>
-        <li class="core">Kopian tar sig ut genom öppningar i cellkärnans vägg och når en <strong>ribosom</strong>.</li>
-        <li class="core">Ribosomen läser kopian tre bokstäver i taget. Varje sådan grupp, en <strong>triplett</strong>, står för en aminosyra, och ribosomen kopplar ihop aminosyrorna i den ordningen. Kedjan av aminosyror är det färdiga proteinet.</li>
-        <li>Det nya proteinet byggs in i muskeln. Därför blir du starkare av att träna och äta ordentligt.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>gen</b> <i>→</i> <b>kopia</b> <i>→</i> <b>ribosom</b> <i>→</i> <b>aminosyror</b> <i>→</i> <b>protein</b></p>
     </div>
     <div class="card story swarm" id="sw-synt">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -616,13 +582,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="d1">Vad händer vid vanlig celldelning?</h3>
     <div class="answer">
       <p class="short">En cell blir två likadana celler. Först kopieras allt DNA, så att båda cellerna får 46 kromosomer.</p>
-      <ol>
-        <li>Du har vuxit flera centimeter på ett år. Allt det nya måste komma någonstans ifrån.</li>
-        <li>Cellerna har inte blivit större. De har blivit fler, genom att celler delar sig.</li>
-        <li class="core">Före delningen kopieras alla 46 kromosomerna: DNA-stegen öppnas på mitten, och varje halva byggs på med nya kvävebaser. Varje kromosom består då av två likadana halvor som sitter ihop.</li>
-        <li class="core">Tunna trådar fäster i varje kromosom och drar de två halvorna åt var sitt håll. Sedan snörs cellen av på mitten. Båda cellerna får exakt samma DNA. Det kallas <strong>vanlig celldelning</strong>, eller mitos.</li>
-        <li>Så har en enda befruktad äggcell blivit till hela du, och alla dina kroppsceller har samma DNA.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>DNA kopieras</b> <i>→</i> <b>halvorna dras isär</b> <i>→</i> <b>två likadana celler</b> <i>→</i> <b>46 kromosomer</b> <i>→</i> <b>mitos</b></p>
     </div>
     <div class="card story swarm" id="sw-mitos">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -640,14 +600,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="d2">Vad händer vid reduktionsdelning?</h3>
     <div class="answer">
       <p class="short">Vid reduktionsdelning bildas könsceller. Antalet kromosomer halveras från 46 till 23, och arvsmassan blandas så att varje könscell blir unik.</p>
-      <ol>
-        <li>Syskon har samma föräldrar men blir ändå olika. Förklaringen finns i hur könscellerna bildas.</li>
-        <li class="core">Ett barn får kromosomer från både spermien och äggcellen. Därför får en könscell bara ha 23, annars skulle barnet få 92.</li>
-        <li class="core">Könsceller bildas ur celler som har alla 46 kromosomerna, ordnade i par. I varje par kommer en från mamma och en från pappa.</li>
-        <li class="core">Först blandas arvsmassan: kromosomerna i ett par lägger sig tätt intill varandra och byter motsvarande bitar.</li>
-        <li class="core">Sedan delas cellen så att varje könscell bara får en kromosom ur varje par. Slumpen avgör vilken. Det kallas <strong>reduktionsdelning</strong>, eller meios.</li>
-        <li>Därför är ingen könscell den andra lik, och därför blir syskon olika.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>könsceller</b> <i>·</i> <b>46 blir 23</b> <i>·</i> <b>arvsmassan blandas</b> <i>·</i> <b>alla unika</b> <i>·</i> <b>meios</b></p>
     </div>
     <div class="card story swarm" id="sw-meios">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -665,12 +618,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="d3">Vad är skillnaden mellan vanlig celldelning och reduktionsdelning?</h3>
     <div class="answer">
       <p class="short">Vanlig celldelning ger två likadana kroppsceller med 46 kromosomer. Reduktionsdelning ger könsceller med 23 kromosomer, och alla är olika.</p>
-      <ol>
-        <li class="core">Båda börjar med en cell som har 46 kromosomer.</li>
-        <li class="core">Vanlig celldelning sker i hela kroppen, när du växer och när skador ska lagas. Cellerna som bildas är kopior av den gamla.</li>
-        <li class="core">Reduktionsdelning sker bara i äggstockarna och testiklarna, när äggceller och spermier bildas. Cellerna som bildas har hälften så många kromosomer och är alla olika.</li>
-        <li class="core">Skillnaden har ett syfte. Kroppsceller ska vara kopior. Könsceller ska ha hälften, så att det blir 46 igen vid befruktningen, och vara olika, så att varje barn blir unikt.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>kroppsceller eller könsceller</b> <i>·</i> <b>46 eller 23</b> <i>·</i> <b>likadana eller olika</b></p>
     </div>
     <div class="card story swarm" id="sw-jmf">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -690,13 +638,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="e1">Vad är dominanta och vikande anlag?</h3>
     <div class="answer">
       <p class="short">Ett dominant anlag slår alltid igenom. Ett vikande anlag, som också kallas recessivt, syns bara om man har fått det från båda föräldrarna.</p>
-      <ol>
-        <li>Tjejen med fräknar har fått dem från sin mamma. Pappan har inga. Varför var det mammans anlag som vann?</li>
-        <li class="core">Alla gener finns i dubbel uppsättning, en från mamma och en från pappa. De två varianterna i ett genpar kallas <strong>alleler</strong> eller anlag.</li>
-        <li class="core">Ett <strong>dominant</strong> anlag slår alltid igenom, det vill säga egenskapen syns. Anlaget för fräknar är dominant och skrivs med stor bokstav, F.</li>
-        <li class="core">Ett <strong>vikande</strong> anlag märks bara om det inte finns något dominant anlag i genparet. Anlaget för inga fräknar är vikande och skrivs med liten bokstav, f.</li>
-        <li class="core">Den som har FF eller Ff får alltså fräknar. Bara den som har ff blir utan.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>dominant slår alltid igenom (F)</b> <i>·</i> <b>vikande syns bara dubbelt (f)</b> <i>·</i> <b>FF och Ff ger fräknar</b> <i>·</i> <b>ff ger inga</b></p>
     </div>
     <div class="card story swarm" id="sw-dom">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -714,15 +656,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="e2">Hur ritar man ett korsningsschema?</h3>
     <div class="answer">
       <p class="short">Man skriver den ena förälderns två anlag överst och den andras till vänster, och fyller i de fyra fälten. Fälten visar vilka kombinationer barnen kan få.</p>
-      <ol>
-        <li>Mamman har fräknar och pappan har inga. Hur stor var chansen att deras barn skulle få fräknar? Det kan man räkna ut med ett korsningsschema.</li>
-        <li class="core">Skriv först upp föräldrarnas anlag. Varje förälder har två, till exempel Ff och ff.</li>
-        <li class="core">Rita en ruta med fyra fält. Skriv pappans två anlag ovanför, ett över varje kolumn, och mammans till vänster, ett vid varje rad.</li>
-        <li class="core">Fyll i varje fält med anlaget till vänster och anlaget ovanför. Varje fält är en kombination som ett barn kan få.</li>
-        <li class="core">Läs av resultatet. Fält med minst ett stort F ger fräknar. Varje fält motsvarar 25 %, så två fält av fyra betyder 50 % sannolikhet.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>föräldrarnas anlag</b> <i>→</i> <b>fyra fält</b> <i>→</i> <b>kombinera</b> <i>→</i> <b>läs av: 25 % per fält</b></p>
     </div>
     <div class="card punnett" id="pn-auto">
+      <div class="steps"><strong>Så gör du</strong><ol><li>Skriv först upp föräldrarnas anlag. Varje förälder har två, till exempel Ff och ff.</li><li>Rita en ruta med fyra fält. Skriv pappans två anlag ovanför, ett över varje kolumn, och mammans till vänster, ett vid varje rad.</li><li>Fyll i varje fält med anlaget till vänster och anlaget ovanför. Varje fält är en kombination som ett barn kan få.</li><li>Läs av resultatet. Fält med minst ett stort F ger fräknar. Varje fält motsvarar 25 %, så två fält av fyra betyder 50 % sannolikhet.</li></ol></div>
       <p class="how">Välj föräldrarnas anlag och fyll i fälten ett i taget. Börja gärna med exemplet som redan är valt: en mamma med fräknar (Ff) och en pappa utan (ff).</p>
       <div class="pn-pick"></div>
       <table class="pn"></table>
@@ -736,14 +673,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="e3">Vad är könsbundet arv?</h3>
     <div class="answer">
       <p class="short">Könsbundet arv är arv av anlag som sitter på X-kromosomen. De slår oftast igenom hos pojkar, eftersom pojkar bara har en X-kromosom.</p>
-      <ol>
-        <li>Röd-grön färgblindhet är mycket vanligare hos pojkar än hos flickor. Det beror på var anlaget sitter.</li>
-        <li class="core">Det 23:e kromosomparet är <strong>könskromosomerna</strong>. Flickor har två X-kromosomer, och pojkar har en X och en Y.</li>
-        <li class="core">En del anlag sitter på X-kromosomen. När de ärvs kallas det <strong>könsbundet arv</strong>.</li>
-        <li class="core">En pojke har bara en X-kromosom. Får han ett vikande sjukdomsanlag där finns inget friskt anlag som kan väga upp, och anlaget slår igenom.</li>
-        <li class="core">En flicka har två X-kromosomer. Har hon anlaget på den ena blir hon inte sjuk, eftersom den andra har ett friskt anlag. Hon är då <strong>anlagsbärare</strong>.</li>
-        <li>Färgblindhet och blödarsjuka ärvs på det här sättet.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>anlag på X-kromosomen</b> <i>·</i> <b>pojkar har XY</b> <i>·</i> <b>flickor har XX</b> <i>·</i> <b>anlagsbärare</b></p>
     </div>
     <div class="card story swarm" id="sw-kon">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -761,17 +691,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="e4">Hur visar man könsbundet arv i ett korsningsschema?</h3>
     <div class="answer">
       <p class="short">Man skriver X och Y, med anlaget som en liten bokstav uppe till höger om X. Schemat visar då varför söner kan drabbas när döttrar inte gör det.</p>
-      <ol>
-        <li class="core">Anlaget för färgseende sitter på X-kromosomen. Då räcker det inte att skriva F och f som för fräknarna. Man måste också visa vilken kromosom anlaget sitter på.</li>
-        <li class="core">Därför skriver man kromosomen med stor bokstav, X, och anlaget som en liten bokstav uppe till höger. X<sup>F</sup> betyder en X-kromosom med det friska anlaget. X<sup>f</sup> betyder en X-kromosom med anlaget för färgblindhet.</li>
-        <li class="core">Stort F står för det dominanta anlaget och litet f för det vikande, precis som för fräknarna.</li>
-        <li class="core">Y skrivs utan någon liten bokstav, eftersom Y-kromosomen saknar genen för färgseende.</li>
-        <li class="core">Skriv pappans X och Y ovanför fälten och mammans två X till vänster, och fyll i fälten som vanligt. Fält med Y är söner, och fält med två X är döttrar.</li>
-        <li class="core">En son med X<sup>f</sup> Y blir färgblind, eftersom han inte har något friskt anlag. En dotter med X<sup>F</sup> X<sup>f</sup> ser färger normalt men är anlagsbärare.</li>
-        <li class="core">Så används schemat som bevis: om mamman är anlagsbärare och pappan ser färger normalt blir hälften av sönerna färgblinda, men ingen av döttrarna.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>X med liten bokstav</b> <i>·</i> <b>Y utan bokstav</b> <i>·</i> <b>söner drabbas</b> <i>·</i> <b>döttrar bär anlaget</b></p>
     </div>
     <div class="card punnett" id="pn-x">
+      <div class="steps"><strong>Så gör du</strong><ol><li>Anlaget för färgseende sitter på X-kromosomen. Då räcker det inte att skriva F och f som för fräknarna. Man måste också visa vilken kromosom anlaget sitter på.</li><li>Därför skriver man kromosomen med stor bokstav, X, och anlaget som en liten bokstav uppe till höger. X<sup>F</sup> betyder en X-kromosom med det friska anlaget. X<sup>f</sup> betyder en X-kromosom med anlaget för färgblindhet.</li><li>Stort F står för det dominanta anlaget och litet f för det vikande, precis som för fräknarna.</li><li>Y skrivs utan någon liten bokstav, eftersom Y-kromosomen saknar genen för färgseende.</li><li>Skriv pappans X och Y ovanför fälten och mammans två X till vänster, och fyll i fälten som vanligt. Fält med Y är söner, och fält med två X är döttrar.</li><li>En son med X<sup>f</sup> Y blir färgblind, eftersom han inte har något friskt anlag. En dotter med X<sup>F</sup> X<sup>f</sup> ser färger normalt men är anlagsbärare.</li><li>Så används schemat som bevis: om mamman är anlagsbärare och pappan ser färger normalt blir hälften av sönerna färgblinda, men ingen av döttrarna.</li></ol></div>
       <p class="how">Välj föräldrarna och fyll i fälten ett i taget. Exemplet som redan är valt är det vanligaste på prov: mamman är anlagsbärare och pappan ser färger normalt.</p>
       <div class="pn-pick"></div>
       <table class="pn"></table>
@@ -787,14 +710,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="f1">Vad är genmodifiering?</h3>
     <div class="answer">
       <p class="short">Vid genmodifiering flyttar man en gen från en organism till en annan, så att den får en ny egenskap. Resultatet kallas en genmodifierad organism, GMO.</p>
-      <ol>
-        <li>På ett bomullsfält växer ogräs som tar ljus och näring från bomullen. Odlaren vill kunna spruta bort ogräset utan att bomullen tar skada.</li>
-        <li class="core">Lösningen är att ge bomullen en gen som gör att den tål bekämpningsmedlet. En sådan gen kan finnas hos en helt annan art, till exempel en bakterie.</li>
-        <li class="core">Genen klipps ut ur bakteriens DNA. Verktyget kallas gensaxen.</li>
-        <li class="core">Genen sätts in i DNA i en cell från växten. Cellen odlas, och ur den växer en planta där alla celler har den nya genen.</li>
-        <li class="core">Plantan är en <strong>genmodifierad organism</strong>, förkortat GMO.</li>
-        <li class="core">Skillnaden mot avel och förädling: där korsar man individer och hoppas att avkomman får rätt egenskaper. Genmodifiering går mycket snabbare, ger exakt den egenskap man vill ha, och kan flytta gener mellan olika arter.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>en gen flyttas</b> <i>→</i> <b>ny egenskap</b> <i>→</i> <b>GMO</b> <i>→</i> <b>gensaxen</b></p>
     </div>
     <div class="card story swarm" id="sw-gmo">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -812,12 +728,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="f2">Vilka exempel finns det på genmodifiering?</h3>
     <div class="answer">
       <p class="short">Grödor som tål bekämpningsmedel, potatis som tål kyla, lax som växer snabbt och ris med extra näring.</p>
-      <ol>
-        <li class="core"><strong>Skräddarsydda grödor</strong> tål ett visst bekämpningsmedel. Det är den vanligaste genmodifieringen och finns hos soja, majs, bomull och raps. Du har troligen redan burit sådan bomull, eller ätit kött från djur som fått sådan soja.</li>
-        <li class="core"><strong>Potatis</strong> kan få en anti-frysgen som gör att den tål kyla bättre.</li>
-        <li class="core"><strong>Lax</strong> kan fås att växa snabbare och att äta växter i stället för annan fisk.</li>
-        <li class="core"><strong>Det gyllene riset</strong> har fått extra näring och skulle kunna minska undernäringen i fattiga länder.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>tål bekämpningsmedel</b> <i>·</i> <b>tål kyla</b> <i>·</i> <b>snabbväxande lax</b> <i>·</i> <b>gyllene ris</b></p>
     </div>
     <div class="card story swarm" id="sw-ex">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -835,15 +746,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="f3">Vilka fördelar och nackdelar finns det med genmodifiering?</h3>
     <div class="answer">
       <p class="short">Fördelarna är större skördar, mindre bekämpningsmedel och snabbare resultat. Nackdelarna är att generna kan spridas i naturen, att odlaren blir beroende av ett företag och att följderna är svåra att förutse.</p>
-      <ol>
-        <li class="core"><strong>Fördel:</strong> skördarna kan bli större, så att vi får mer mat.</li>
-        <li class="core"><strong>Fördel:</strong> det kan gå åt mindre bekämpningsmedel, vilket är bra för miljön och för dem som arbetar på fälten.</li>
-        <li class="core"><strong>Fördel:</strong> det går snabbare och blir mer exakt än avel och förädling.</li>
-        <li class="core"><strong>Nackdel:</strong> de nya generna kan spridas till vilda växter genom korsning, och en genmodifierad art kan tränga undan andra arter. Ekosystem är svåra att förutse.</li>
-        <li class="core"><strong>Nackdel:</strong> ogräs kan bli motståndskraftiga, så att det krävs ännu starkare medel.</li>
-        <li class="core"><strong>Nackdel:</strong> odlaren måste köpa frö och bekämpningsmedel från samma företag. Tekniken är dyr och kanske bara kommer rika länder till godo.</li>
-        <li class="core"><strong>Etik:</strong> en del menar att vi inte har rätt att ändra på andra organismer. Andra svarar att vi har gjort det genom avel i tusentals år.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>för: skörd, mindre gift, snabbt</b> <i>·</i> <b>mot: sprids, resistens, beroende</b> <i>·</i> <b>etik</b></p>
     </div>
     <div class="card story swarm" id="sw-cmp">
       <div class="scene" style="aspect-ratio:1376/768">
@@ -861,15 +764,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h3 id="f4">Hur resonerar man i flera led?</h3>
     <div class="answer">
       <p class="short">Man börjar med vad som har ändrats och följer sedan konsekvenserna steg för steg, först nyttan och sedan risken.</p>
-      <ol>
-        <li class="core">Börja med själva förändringen: vilken egenskap har organismen fått?</li>
-        <li class="core">Skriv vad det leder till, och vad det i sin tur leder till. Ord som "det leder till att" och "vilket gör att" binder ihop leden.</li>
-        <li class="core">Vänd sedan på det med "å andra sidan" och följ risken på samma sätt, i minst två led.</li>
-        <li class="core">Avsluta med en egen slutsats: vad väger tyngst, och varför?</li>
-        <li>Ett led är ett steg i en kedja av orsak och verkan. Ju fler led som hänger ihop, desto högre nivå visar svaret.</li>
-      </ol>
+      <p class="kom"><span>Kom ihåg</span><b>förändringen</b> <i>→</i> <b>det leder till</b> <i>→</i> <b>å andra sidan</b> <i>→</i> <b>slutsats</b></p>
     </div>
     <div class="card" id="gm-chain">
+      <div class="steps"><strong>Så gör du</strong><ol><li>Börja med själva förändringen: vilken egenskap har organismen fått?</li><li>Skriv vad det leder till, och vad det i sin tur leder till. Ord som "det leder till att" och "vilket gör att" binder ihop leden.</li><li>Vänd sedan på det med "å andra sidan" och följ risken på samma sätt, i minst två led.</li><li>Avsluta med en egen slutsats: vad väger tyngst, och varför?</li></ol></div>
       <p class="how">Bygg ett resonemang led för led. Välj ett exempel och sedan den fortsättning som följer av ledet innan.</p>
       <div class="gc-pick pn-row"></div>
       <ol class="gc-list"></ol>
@@ -1230,10 +1128,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     var panel=[[0.835,0.47,0.12,0.09,INS],[0.085,0.52,0.06,0.15,SKIN],[0.5,0.5,0.13,0.3,MUS]];
     function seg(u){return u>=0.12&&u<0.2?0:(u>=0.35&&u<0.5?1:(u>=0.62&&u<0.9?2:-1));}
     Swarm('sw-recept',{N:380,seed:9,steps:[
-      {bg:0,dur:9,text:'Prickarna visar tre ställen där kroppen bygger något just nu: bukspottkörteln, huden och en muskel.',labels:[['Insulin i bukspottkörteln',0.62,0.16],['Färgämne i huden',0.62,0.36],['Protein i muskeln',0.55,0.72]]},
-      {bg:1,dur:9,text:'Hur vet kroppen hur varje sak ska byggas? Prickarna samlas till en bit av DNA-tråden.',labels:[['DNA',0.2,0.6,'samling']]},
-      {bg:1,dur:10,text:'Tre bitar av tråden får färg. Varje färgad bit är ett recept, och de är olika långa.',labels:[['Recept på insulin',0.3,0.92,'recept'],['Recept på färgämne',0.3,0.36,'recept'],['Recept på muskelprotein',0.62,0.12,'recept']]},
-      {bg:2,dur:10,text:'Recepten går dit de ska användas: det orange till huden, det röda till muskeln och det gula till bukspottkörteln.',labels:[['Huden',0.165,0.92],['Muskeln',0.5,0.95],['Bukspottkörteln',0.835,0.92]]}
+      {bg:0,dur:9,text:'Kroppen bygger nya saker hela tiden. Prickarna visar tre ställen: insulin i bukspottkörteln när du har ätit, färgämne i huden när du solar och protein i en muskel när du tränar.',labels:[['Insulin i bukspottkörteln',0.62,0.16],['Färgämne i huden',0.62,0.36],['Protein i muskeln',0.55,0.72]]},
+      {bg:1,dur:9,text:'Hur vet kroppen hur varje sak ska byggas? Instruktionerna finns i ditt DNA. Prickarna samlas till en bit av DNA-tråden.',labels:[['DNA',0.2,0.6,'samling']]},
+      {bg:1,dur:10,text:'Tre bitar av tråden får färg. Varje färgad bit är en DNA-sekvens som fungerar som ett recept på en viss sak. Ett recept kan vara flera tusen bokstäver långt.',labels:[['Recept på insulin',0.3,0.92,'recept'],['Recept på färgämne',0.3,0.36,'recept'],['Recept på muskelprotein',0.62,0.12,'recept']]},
+      {bg:2,dur:10,text:'Olika recept ger olika saker, och varje recept används där det behövs: det orange i huden, det röda i muskeln och det gula i bukspottkörteln.',labels:[['Huden',0.165,0.92],['Muskeln',0.5,0.95],['Bukspottkörteln',0.835,0.92]]}
     ],build:function(h){
       var T=[[],[],[],[]],k,s,p,u;
       for(k=0;k<380;k++){
@@ -1253,12 +1151,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   (function(){
     var E=[[0.235,0.5,0.1,0.47],[0.753,0.5,0.21,0.375],[0.13,0.52,0.05,0.09],[0.38,0.5,0.125,0.235],[0.63,0.52,0.105,0.4],[0.875,0.5,0.095,0.44]], X=[0,0.255,0.505,0.765,1];
     Swarm('sw-arv',{N:220,seed:4,rad:300,steps:[
-      {bg:0,dur:8,text:'Vi börjar med en hel människa och zoomar inåt, steg för steg.',labels:[['En människa',0.5,0.5]]},
-      {bg:1,dur:9,text:'Först huden på armen. I förstoringen syns att den är byggd av celler.',labels:[['Hudceller i förstoring',0.75,0.06]]},
-      {bg:2,dur:8,text:'Så här ser en enda cell ut i genomskärning. Prickarna ringar in cellkärnan.',labels:[['Cell',0.13,0.93,'fabrik']]},
-      {bg:2,dur:10,text:'Närmare: cellkärnan är fylld av en lång tråd som ligger som ett nystan.',labels:[['Cellkärna med arvsmassan',0.38,0.93,'kontor']]},
-      {bg:2,dur:10,text:'Ännu närmare: tråden är virad runt små blå kulor, så att den tar mindre plats. Kulorna är proteiner.',labels:[['DNA lindat runt proteiner',0.63,0.05]]},
-      {bg:2,dur:9,text:'Längst in ser man själva tråden. Det är den vridna stegen med sina baspar.',labels:[['Dubbelspiral',0.875,0.05,'samling']]}
+      {bg:0,dur:8,text:'Vi börjar med en hel människa och zoomar inåt. Du består av tiotusentals miljarder celler.',labels:[['En människa',0.5,0.5]]},
+      {bg:1,dur:9,text:'Först huden på armen. I förstoringen syns att den är byggd av celler, och i nästan varje cell finns hela receptsamlingen.',labels:[['Hudceller i förstoring',0.75,0.06]]},
+      {bg:2,dur:8,text:'Så här ser en enda cell ut i genomskärning. Prickarna ringar in cellkärnan. Där ligger cellens DNA samlat.',labels:[['Cell',0.13,0.93,'fabrik']]},
+      {bg:2,dur:10,text:'Cellkärnan är fylld av en lång tråd som ligger som ett nystan. Allt det DNA:t tillsammans är din arvsmassa.',labels:[['Cellkärna med arvsmassan',0.38,0.93,'kontor']]},
+      {bg:2,dur:10,text:'Tråden är ungefär tre meter lång, fast kärnan bara är en hundradels millimeter bred. Den får plats eftersom den är virad runt små blå kulor av protein, som sytråd på trådrullar, och sedan packad ännu tätare.',labels:[['DNA lindat runt proteiner',0.63,0.05]]},
+      {bg:2,dur:9,text:'Längst in ser man själva tråden: den vridna stegen med sina baspar. Hela arvsmassan består av drygt tre miljarder baspar.',labels:[['Dubbelspiral',0.875,0.05,'samling']]}
     ],build:function(h){
       var T=[],s,i,e,an;
       for(s=0;s<6;s++){T[s]=[]; e=E[s]; for(i=0;i<220;i++){an=i/220*6.2832; T[s].push(h.at(e[0]+Math.cos(an)*e[2],e[1]+Math.sin(an)*e[3],TEAL,1,0.006,0.01));}}
@@ -1274,11 +1172,11 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   (function(){
     var PIG=[[0.165,0.8],[0.48,0.78],[0.77,0.81]];
     Swarm('sw-gen',{N:300,seed:7,steps:[
-      {bg:0,dur:8,text:'Prickarna visar var hennes fräknar sitter. Varför har hon dem?',labels:[['Fräknar',0.6,0.2]]},
-      {bg:1,dur:9,text:'Vi går närmare huden. Varje fräkne är en liten brun fläck.',labels:[['Huden på nära håll',0.5,0.07]]},
-      {bg:2,dur:10,text:'Ännu närmare syns hudens celler. De bruna cellerna längst ner är de som gör färgämnet. Men hur vet de att de ska göra det?',labels:[['Celler som bildar färgämne',0.48,0.95]]},
-      {bg:3,dur:10,text:'Varje cell har en cellkärna, och där inne ligger DNA. Prickarna visar den bit av tråden som är genen för fräknar.',labels:[['DNA',0.1,0.25,'samling'],['Gen: receptet för fräknar',0.5,0.8,'recept']]},
-      {bg:0,dur:10,text:'Tillbaka till ansiktet. Hudcellerna har följt receptet, och resultatet syns.',labels:[['Fräknar',0.6,0.2,'produkt']]}
+      {bg:0,dur:8,text:'En del har fräknar, andra har det inte. Prickarna visar var hennes sitter. Skillnaden syns i huden, men den börjar någon annanstans.',labels:[['Fräknar',0.6,0.2]]},
+      {bg:1,dur:9,text:'Vi går närmare huden. Varje fräkne är en liten fläck där huden har extra mycket färgämne.',labels:[['Huden på nära håll',0.5,0.07]]},
+      {bg:2,dur:10,text:'Ännu närmare syns hudens celler. De bruna cellerna längst ner är de som gör färgämnet. De gör det eftersom det står i deras DNA.',labels:[['Celler som bildar färgämne',0.48,0.95]]},
+      {bg:3,dur:10,text:'DNA är indelat i delar som kallas gener, eller arvsanlag. En gen är ett recept på något som kroppen ska bygga. Prickarna visar den bit av tråden som är genen för fräknar.',labels:[['DNA',0.1,0.25,'samling'],['Gen: receptet för fräknar',0.5,0.8,'recept']]},
+      {bg:0,dur:10,text:'Tillbaka till ansiktet. Hudcellerna har följt receptet, och resultatet syns. Generna avgör därför mycket av hur du ser ut och fungerar. Med en annan variant av genen hade hon inte haft fräknar.',labels:[['Fräknar',0.6,0.2,'produkt']]}
     ],build:function(h){
       var T=[[],[],[],[],[]],i,sp=[],p;
       for(i=0;i<30;i++) sp.push([0.06+h.R()*0.88,0.1+h.R()*0.8]);
@@ -1298,12 +1196,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   /* ---------- Kromosomer: från familjen till befruktningen och tillbaka ---------- */
   (function(){
     Swarm('sw-krom',{N:276,seed:11,rad:380,steps:[
-      {bg:0,dur:9,text:'Han i mitten har pappans lockiga hår och mammans gröna ögon. Hur kan man få drag från två personer?',labels:[['Mamma',0.165,0.06],['Pappa',0.83,0.06]]},
-      {bg:1,dur:10,text:'Svaret finns i hur han blev till. De blå strecken är kromosomerna i pappans spermie, de rosa är kromosomerna i mammans äggcell.',labels:[['23 från pappan',0.3,0.14,'parm'],['23 från mamman',0.755,0.05,'parm']]},
-      {bg:2,dur:9,text:'Spermien har nått äggcellen. Nu ligger de blå och de rosa i samma cell.',labels:[['Den befruktade äggcellen',0.5,0.05]]},
-      {bg:4,dur:11,text:'Kromosomerna ordnar sig två och två, en blå och en rosa. Räkna paren: 8, 8 och 7, alltså 23.',labels:[['46 kromosomer = 23 par',0.5,0.04,'parm']]},
-      {bg:3,dur:10,text:'Ur den första cellen växte ett barn. Prickarna visar att samma kromosomer nu finns i hela kroppen.',labels:[['Samma 46 kromosomer i varje cell',0.68,0.5,'parm']]},
-      {bg:0,dur:10,text:'Blått och rosa följer med hela livet, i varje cell.',labels:[['23 från mamma + 23 från pappa',0.5,0.06,'parm']]}
+      {bg:0,dur:9,text:'Han i mitten har pappans lockiga hår och mammans gröna ögon. Man liknar båda sina föräldrar utan att vara en kopia av någon av dem. Förklaringen finns i hur DNA är uppdelat.',labels:[['Mamma',0.165,0.06],['Pappa',0.83,0.06]]},
+      {bg:1,dur:10,text:'DNA är packat i buntar som kallas kromosomer. De blå strecken är de 23 kromosomerna i pappans spermie, och de rosa är de 23 i mammans äggcell.',labels:[['23 från pappan',0.3,0.14,'parm'],['23 från mamman',0.755,0.05,'parm']]},
+      {bg:2,dur:9,text:'Vid befruktningen når spermien äggcellen. Nu ligger de blå och de rosa kromosomerna i samma cell: 23 + 23 = 46.',labels:[['Den befruktade äggcellen',0.5,0.05]]},
+      {bg:4,dur:11,text:'Kromosomerna ordnar sig två och två i kromosompar, med en från pappa och en från mamma i varje par. Räkna paren: 8, 8 och 7, alltså 23.',labels:[['46 kromosomer = 23 par',0.5,0.04,'parm']]},
+      {bg:3,dur:10,text:'Ur den första cellen växte ett barn. Varje gång en cell delade sig kopierades kromosomerna, så att varje ny kroppscell fick alla 46.',labels:[['Samma 46 kromosomer i varje cell',0.68,0.5,'parm']]},
+      {bg:0,dur:10,text:'Blått och rosa följer med hela livet, i varje cell. Därför har man drag från båda sina föräldrar.',labels:[['23 från mamma + 23 från pappa',0.5,0.06,'parm']]}
     ],build:function(h){
       var T=[[],[],[],[],[],[]],c,j,k,col,row,off;
       for(c=0;c<46;c++){
@@ -1326,14 +1224,14 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   /* ---------- DNA kopieras: från fallet till ny hud ---------- */
   (function(){
     Swarm('sw-kopia',{N:320,seed:5,steps:[
-      {bg:0,dur:8,text:'Aj. Knät fick ta smällen.',labels:[['Aj!',0.3,0.42]]},
-      {bg:1,dur:8,text:'Huden har gått sönder där prickarna sitter.',labels:[['Här behövs ny hud',0.285,0.6]]},
+      {bg:0,dur:8,text:'Aj. Knät fick ta smällen. Men såret kommer att läka av sig självt, för kroppen bygger ny hud.',labels:[['Aj!',0.3,0.42]]},
+      {bg:1,dur:8,text:'Huden har gått sönder där prickarna sitter. Ny hud blir till genom att hudceller delar sig.',labels:[['Här behövs ny hud',0.285,0.6]]},
       {bg:2,dur:10,text:'Så här ser huden ut i genomskärning. Gropen till höger är såret. Prickarna visar en hudcell vid sårkanten som vi ska följa.',labels:[['Såret',0.72,0.24],['En hudcell',0.5,0.2]]},
-      {bg:3,dur:10,text:'Vi går in i den cellen. Prickarna visar var dess DNA ligger, packat i kromosomer.',labels:[['Cellens DNA',0.5,0.08,'samling']]},
-      {bg:3,dur:10,text:'Prickarna blir dubbelt så många. Nu finns det två uppsättningar DNA i cellen.',labels:[['DNA kopieras',0.5,0.08,'kopia']]},
-      {bg:4,dur:10,text:'Cellen snörs av på mitten, och uppsättningarna hamnar i var sin halva.',labels:[['Två celler med samma DNA',0.5,0.1]]},
-      {bg:5,dur:10,text:'Nu finns det fler celler, men de måste också göra sitt jobb: bygga ny hud. Recepten läses i cellkärnan, och proteinerna byggs vid de orange ribosomerna.',labels:[['Cellkärnan: här finns recepten',0.27,0.1,'kontor'],['Ribosomerna: här byggs proteinerna',0.76,0.86,'maskin']]},
-      {bg:6,dur:10,text:'Efter någon vecka är huden hel igen. Bara en ljusare fläck visar var såret satt.',labels:[['Ny hud',0.305,0.72]]}
+      {bg:3,dur:10,text:'Vi går in i den cellen. Prickarna visar var dess DNA ligger, packat i kromosomer. En ny cell klarar sig inte utan DNA, för där står alla recept.',labels:[['Cellens DNA',0.5,0.08,'samling']]},
+      {bg:3,dur:10,text:'Uppgift 1: lagra och kopiera informationen. Innan cellen delar sig kopieras allt DNA. Prickarna blir dubbelt så många, och nu finns det två uppsättningar i cellen.',labels:[['DNA kopieras',0.5,0.08,'kopia']]},
+      {bg:4,dur:10,text:'Cellen snörs av på mitten, och uppsättningarna hamnar i var sin halva. Båda cellerna får samma gener.',labels:[['Två celler med samma DNA',0.5,0.1]]},
+      {bg:5,dur:10,text:'Uppgift 2: tillverka protein. De nya cellerna ska bygga ny hud. Då används generna som recept: de läses i cellkärnan, och proteinerna byggs vid de orange ribosomerna.',labels:[['Cellkärnan: här finns recepten',0.27,0.1,'kontor'],['Ribosomerna: här byggs proteinerna',0.76,0.86,'maskin']]},
+      {bg:6,dur:10,text:'Efter någon vecka har såret fyllts med nya hudceller och huden är hel igen. Bara en ljusare fläck visar var det satt.',labels:[['Ny hud',0.305,0.72]]}
     ],build:function(h){
       var T=[[],[],[],[],[],[],[],[]],i,g,y,jx;
       for(g=0;g<2;g++) for(i=0;i<160;i++){
@@ -1360,15 +1258,15 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   (function(){
     var beads=[];
     Swarm('sw-synt',{N:480,seed:21,steps:[
-      {bg:0,dur:8,text:'En armhävning. Prickarna visar muskeln som gör det tyngsta jobbet.',labels:[['Musklerna får jobba',0.33,0.5]]},
-      {bg:1,dur:9,text:'Samma muskel i närbild. Efter träningen behöver den lagas och byggas på.',labels:[['Här behövs nytt protein',0.5,0.93]]},
-      {bg:2,dur:9,text:'Prickarna visar var proteinet finns på tallriken: i ägget, kycklingen och bönorna.',labels:[['Protein i maten',0.5,0.06]]},
-      {bg:3,dur:10,text:'Maten hamnar i magsäcken och tunntarmen. Där faller proteinet isär i små färgade bitar.',labels:[['Magsäcken',0.74,0.4],['Tunntarmen',0.76,0.7],['Aminosyror',0.24,0.7,'bit']]},
-      {bg:4,dur:9,text:'Bitarna följer med blodet i blodkärlet överst och når muskelns celler.',labels:[['Blodkärl',0.5,0.07],['Muskelceller',0.4,0.94]]},
-      {bg:5,dur:11,text:'Vi går in i en av muskelcellerna. Den lila bollen är cellkärnan. De gula prickarna är en kopia av receptet på muskelprotein.',labels:[['Cellkärna: här finns DNA',0.29,0.05,'kontor'],['Kopia av genen för muskelprotein',0.29,0.95,'kopia'],['Aminosyror',0.74,0.1,'bit']]},
+      {bg:0,dur:8,text:'En armhävning. Prickarna visar muskeln som gör det tyngsta jobbet. Dina muskler är byggda av protein.',labels:[['Musklerna får jobba',0.33,0.5]]},
+      {bg:1,dur:9,text:'Samma muskel i närbild. När du tränar slits den lite och behöver nytt protein för att lagas och bli starkare.',labels:[['Här behövs nytt protein',0.5,0.93]]},
+      {bg:2,dur:9,text:'Byggmaterialet kommer från maten. Prickarna visar var proteinet finns på tallriken: i ägget, kycklingen och bönorna.',labels:[['Protein i maten',0.5,0.06]]},
+      {bg:3,dur:10,text:'I magsäcken och tunntarmen bryts matens protein ner till små bitar som kallas aminosyror. Här syns de som färgade bitar.',labels:[['Magsäcken',0.74,0.4],['Tunntarmen',0.76,0.7],['Aminosyror',0.24,0.7,'bit']]},
+      {bg:4,dur:9,text:'Blodet för aminosyrorna ut till muskelns celler. Där ska de sättas ihop på nytt, i den ordning som ditt DNA bestämmer. Det arbetet kallas proteinsyntes.',labels:[['Blodkärl',0.5,0.07],['Muskelceller',0.4,0.94]]},
+      {bg:5,dur:11,text:'Vi går in i en muskelcell. Den lila bollen är cellkärnan, där DNA finns. DNA lämnar aldrig kärnan, så det börjar med att genen för muskelprotein kopieras. De gula prickarna är kopian.',labels:[['Cellkärna: här finns DNA',0.29,0.05,'kontor'],['Kopia av genen för muskelprotein',0.29,0.95,'kopia'],['Aminosyror',0.74,0.1,'bit']]},
       {bg:5,dur:8,text:'Kopian tar sig ut genom en av öppningarna i cellkärnans vägg.',labels:[['Kopian lämnar kärnan',0.66,0.38,'kopia']]},
-      {bg:6,dur:11,text:'Den orange klumpen är en ribosom. Kopian löper genom den som en remsa, och ovanför växer en kedja av färgade bitar fram.',labels:[['Ribosom: här bildas protein',0.48,0.94,'maskin'],['Muskelprotein',0.78,0.08,'produkt'],['Kopia av genen',0.14,0.62,'kopia']]},
-      {bg:1,dur:9,text:'Tillbaka till armen. Det nya proteinet har hamnat i muskeln.',labels:[['Starkare muskel',0.5,0.93]]}
+      {bg:6,dur:11,text:'Den orange klumpen är en ribosom. Den läser kopian tre bokstäver i taget. Varje sådan grupp, en triplett, står för en aminosyra, och ribosomen kopplar ihop aminosyrorna i den ordningen. Kedjan som växer fram är proteinet.',labels:[['Ribosom: här bildas protein',0.48,0.94,'maskin'],['Muskelprotein',0.78,0.08,'produkt'],['Kopia av genen',0.14,0.62,'kopia']]},
+      {bg:1,dur:9,text:'Tillbaka till armen. Det nya proteinet byggs in i muskeln. Därför blir du starkare av att träna och äta ordentligt.',labels:[['Starkare muskel',0.5,0.93]]}
     ],build:function(h){
       var T=[],i,N=480,food=[[0.367,0.378,0.034,0.085],[0.458,0.32,0.034,0.085],[0.596,0.49,0.052,0.19],[0.596,0.49,0.052,0.19],[0.44,0.69,0.068,0.105],[0.44,0.69,0.068,0.105]];
       function cls(o,from,to,fn){for(var i=from;i<to;i+=10){var c=fn(), col=AMC[Math.floor(h.R()*4)]; for(var j=i;j<Math.min(to,i+10);j++) o[j]=h.ell(c[0],c[1],0.009,0.016,col);}}
@@ -1405,11 +1303,11 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   /* ---------- Vanlig celldelning: du växer ---------- */
   (function(){
     Swarm('sw-mitos',{N:240,seed:31,steps:[
-      {bg:0,dur:8,text:'Strecken på väggen är gamla mätningar. Det översta är nytt.',labels:[['Så mycket har du vuxit',0.44,0.12]]},
-      {bg:1,dur:9,text:'Två bitar av samma vävnad, vid olika tidpunkter. Cellerna är lika stora, men till höger är de många fler.',labels:[['Få celler',0.195,0.85],['Många celler, lika stora',0.68,0.97]]},
-      {bg:2,dur:10,text:'Hur blir en cell till två? Vi tittar på en enda cell. De små kryssen i cellkärnan är kromosomer som just har kopierats.',labels:[['Kromosomerna har kopierats',0.5,0.06,'kopia']]},
-      {bg:3,dur:10,text:'Kryssen har delats till stavar, och varje ny cell har fått en uppsättning. Jämför de två cellkärnorna: de är likadana.',labels:[['46 kromosomer',0.27,0.88,'parm'],['46 kromosomer',0.72,0.88,'parm']]},
-      {bg:4,dur:10,text:'Samma person vid tre, nio och femton år. Ju fler prickar, desto fler celler.',labels:[['Samma DNA i varje cell',0.5,0.06,'samling']]}
+      {bg:0,dur:8,text:'Strecken på väggen är gamla mätningar, och det översta är nytt. Du har vuxit flera centimeter, och allt det nya måste komma någonstans ifrån.',labels:[['Så mycket har du vuxit',0.44,0.12]]},
+      {bg:1,dur:9,text:'Två bitar av samma vävnad, vid olika tidpunkter. Cellerna har inte blivit större. De har blivit fler, genom att celler delar sig.',labels:[['Få celler',0.195,0.85],['Många celler, lika stora',0.68,0.97]]},
+      {bg:2,dur:10,text:'Hur blir en cell till två? Först kopieras alla 46 kromosomerna: DNA-stegen öppnas på mitten, och varje halva byggs på med nya kvävebaser. De små kryssen i cellkärnan är kromosomer som just har kopierats, med två likadana halvor som sitter ihop.',labels:[['Kromosomerna har kopierats',0.5,0.06,'kopia']]},
+      {bg:3,dur:10,text:'Tunna trådar fäster i varje kromosom och drar de två halvorna åt var sitt håll. Sedan snörs cellen av på mitten. Jämför de två cellkärnorna: de är likadana, med 46 kromosomer var. Det kallas vanlig celldelning, eller mitos.',labels:[['46 kromosomer',0.27,0.88,'parm'],['46 kromosomer',0.72,0.88,'parm']]},
+      {bg:4,dur:10,text:'Samma person vid tre, nio och femton år. Så har en enda befruktad äggcell blivit till en hel människa, där alla kroppsceller har samma DNA.',labels:[['Samma DNA i varje cell',0.5,0.06,'samling']]}
     ],build:function(h){
       var T=[[],[],[],[],[]],i,marks=[0.075,0.12,0.165,0.21,0.257];
       for(i=0;i<240;i++){
@@ -1428,12 +1326,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   (function(){
     var SIB=[[0.2,AMC[0]],[0.515,AMC[2]],[0.83,AMC[3]]];
     Swarm('sw-meios',{N:240,seed:33,steps:[
-      {bg:0,dur:9,text:'Tre syskon med samma mamma och pappa. Olika hår, olika ögon, och bara en har fräknar.',labels:[['Samma föräldrar, tre olika barn',0.5,0.05]]},
-      {bg:4,dur:10,text:'För att förstå det måste vi börja med hur ett barn blir till: en spermie och en äggcell slås ihop. De blå prickarna visar spermiernas kromosomer och de rosa äggcellens.',labels:[['Äggcell: 23',0.22,0.16,'parm'],['Spermier: 23 var',0.75,0.16,'parm'],['23 + 23 = 46',0.5,0.85]]},
-      {bg:1,dur:10,text:'Hur får en könscell bara hälften? Den bildas ur en vanlig cell, där kromosomerna ligger i par. Här visas tre par i stället för 23.',labels:[['Tre par här, 23 par i verkligheten',0.5,0.05,'parm']]},
-      {bg:2,dur:10,text:'Till vänster ligger två kromosomer i ett par över varandra. Till höger har de bytt en bit med varandra.',labels:[['Före: armarna korsar varandra',0.24,0.04],['Efter: bitarna har bytt plats',0.72,0.04]]},
-      {bg:3,dur:11,text:'Cellen har delats i fyra. Jämför dem: var och en har tre kromosomer, men ingen har samma färger som en annan.',labels:[['Fyra könsceller, alla olika',0.5,0.12],['En kromosom ur varje par: 23 i verkligheten',0.5,0.9,'parm']]},
-      {bg:0,dur:10,text:'Varje syskon blev till av en egen spermie och en egen äggcell. Tre barn, tre olika blandningar.',labels:[['Tre olika blandningar',0.5,0.05]]}
+      {bg:0,dur:9,text:'Tre syskon med samma mamma och pappa. Olika hår, olika ögon, och bara en har fräknar. Förklaringen finns i hur könscellerna bildas.',labels:[['Samma föräldrar, tre olika barn',0.5,0.05]]},
+      {bg:4,dur:10,text:'Ett barn blir till när en spermie och en äggcell slås ihop, och barnet får kromosomer från båda. Därför får en könscell bara ha 23. Annars skulle barnet få 92.',labels:[['Äggcell: 23',0.22,0.16,'parm'],['Spermier: 23 var',0.75,0.16,'parm'],['23 + 23 = 46',0.5,0.85]]},
+      {bg:1,dur:10,text:'Hur får en könscell bara hälften? Den bildas ur en cell som har alla 46 kromosomerna, ordnade i par, med en från mamma och en från pappa i varje. Här visas tre par i stället för 23.',labels:[['Tre par här, 23 par i verkligheten',0.5,0.05,'parm']]},
+      {bg:2,dur:10,text:'Först blandas arvsmassan. Till vänster lägger sig två kromosomer i ett par tätt intill varandra. Till höger har de bytt motsvarande bitar.',labels:[['Före: armarna korsar varandra',0.24,0.04],['Efter: bitarna har bytt plats',0.72,0.04]]},
+      {bg:3,dur:11,text:'Sedan delas cellen så att varje könscell bara får en kromosom ur varje par, och slumpen avgör vilken. Jämför de fyra cellerna: ingen har samma färger som en annan. Det kallas reduktionsdelning, eller meios.',labels:[['Fyra könsceller, alla olika',0.5,0.12],['En kromosom ur varje par: 23 i verkligheten',0.5,0.9,'parm']]},
+      {bg:0,dur:10,text:'Varje syskon blev till av en egen spermie och en egen äggcell, och ingen könscell är den andra lik. Därför blir syskon olika.',labels:[['Tre olika blandningar',0.5,0.05]]}
     ],build:function(h){
       var T=[[],[],[],[],[],[]],i,s;
       for(i=0;i<240;i++){
@@ -1450,10 +1348,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   /* ---------- Skillnaden: de två delningarna sida vid sida ---------- */
   (function(){
     Swarm('sw-jmf',{N:240,seed:35,steps:[
-      {bg:0,dur:9,text:'Två rader, en för varje sorts delning. Startcellerna till vänster är likadana. Här visas fyra kromosomer i stället för 46.',labels:[['Vanlig celldelning',0.153,0.03],['Reduktionsdelning',0.153,0.5]]},
-      {bg:0,dur:10,text:'Övre raden: två celler, och båda ser ut precis som startcellen.',labels:[['Två likadana celler, 46 kromosomer var',0.62,0.03,'parm']]},
-      {bg:0,dur:10,text:'Nedre raden: fyra mindre celler med två kromosomer var. Titta på färgerna, ingen är den andra lik.',labels:[['Könsceller, 23 kromosomer var, alla olika',0.64,0.5,'parm']]},
-      {bg:0,dur:11,text:'Jämför raderna: uppe kopior med allt kvar, nere hälften så mycket och ny blandning.',labels:[['Vanlig celldelning: kopior',0.62,0.03],['Reduktionsdelning: hälften och olika',0.64,0.5]]}
+      {bg:0,dur:9,text:'Två rader, en för varje sorts delning. Båda börjar med en cell som har 46 kromosomer. Här visas fyra i stället.',labels:[['Vanlig celldelning',0.153,0.03],['Reduktionsdelning',0.153,0.5]]},
+      {bg:0,dur:10,text:'Övre raden är vanlig celldelning. Den sker i hela kroppen, när du växer och när skador ska lagas. Det blir två celler som är kopior av den gamla.',labels:[['Två likadana celler, 46 kromosomer var',0.62,0.03,'parm']]},
+      {bg:0,dur:10,text:'Nedre raden är reduktionsdelning. Den sker bara i äggstockarna och testiklarna, när äggceller och spermier bildas. Cellerna får hälften så många kromosomer, och alla är olika.',labels:[['Könsceller, 23 kromosomer var, alla olika',0.64,0.5,'parm']]},
+      {bg:0,dur:11,text:'Skillnaden har ett syfte. Kroppsceller ska vara kopior. Könsceller ska ha hälften, så att det blir 46 igen vid befruktningen, och vara olika, så att varje barn blir unikt.',labels:[['Vanlig celldelning: kopior',0.62,0.03],['Reduktionsdelning: hälften och olika',0.64,0.5]]}
     ],build:function(h){
       var T=[[],[],[],[]],X=[0.39,0.553,0.718,0.883];
       ringPts(h,T[0],120,0.153,0.275,0.115,0.205,TEAL); ringPts(h,T[0],120,0.153,0.73,0.115,0.205,TEAL);
@@ -1491,12 +1389,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     var FAM=[[0.196,0.17,0.085,'Ff',0.196,0.36],[0.503,0.17,0.085,'Ff',0.503,0.37],[0.803,0.16,0.085,'ff',0.803,0.33]];
     var SIB=[[0.5,0.2,0.09,'Ff',0.3,0.55],[0.5,0.62,0.085,'ff',0.69,0.56]];
     Swarm('sw-dom',{N:240,seed:41,steps:[
-      {bg:0,dur:8,text:'En familj. Prickarna visar fräknarna hos mamman och dottern. Pappan har inga.',labels:[['Mamma: fräknar',0.196,0.93],['Dottern: fräknar',0.503,0.93],['Pappa: inga fräknar',0.803,0.93]]},
+      {bg:0,dur:8,text:'En familj. Prickarna visar fräknarna hos mamman och dottern. Pappan har inga. Varför var det mammans anlag som vann?',labels:[['Mamma: fräknar',0.196,0.93],['Dottern: fräknar',0.503,0.93],['Pappa: inga fräknar',0.803,0.93]]},
       {bg:0,dim:1,dur:8,text:'Vi zoomar in på dotterns kind, ända in i en enda hudcell. Den lila bollen till vänster är cellkärnan, och där ligger kromosomerna.',labels:[['En hudcell',0.2,0.09],['Cellkärnan',0.13,0.6]]},
-      {bg:0,dim:1,dur:10,text:'Ännu närmare: ett av kromosomparen i cellkärnan. Den rosa kromosomen kom från mamma och den blå från pappa. Banden sitter på samma ställe. De är samma gen, i två varianter.',labels:[['Ett genpar',0.8,0.07],['Från mamma',0.72,0.79],['Från pappa',0.885,0.79]]},
-      {bg:0,dim:1,dur:9,text:'Det bruna bandet är anlaget för fräknar. Det räcker med ett enda sådant för att fräknarna ska synas.',labels:[['F: fräknar, dominant',0.8,0.07]]},
-      {bg:0,dim:1,dur:9,text:'Det ljusa bandet är anlaget för inga fräknar. Det märks inte så länge det bruna finns bredvid.',labels:[['f: inga fräknar, vikande',0.8,0.07]]},
-      {bg:0,dur:10,text:'Så ser genparet ut hos var och en. Mamman och dottern har ett brunt band och får fräknar. Pappan har två ljusa.',labels:[['Mamma: Ff',0.196,0.93],['Dottern: Ff',0.503,0.93],['Pappa: ff',0.803,0.93]]},
+      {bg:0,dim:1,dur:10,text:'Ännu närmare: ett av kromosomparen. Den rosa kromosomen kom från mamma och den blå från pappa. Alla gener finns därför i dubbel uppsättning. Banden är samma gen i två varianter, som kallas alleler eller anlag.',labels:[['Ett genpar',0.8,0.07],['Från mamma',0.72,0.79],['Från pappa',0.885,0.79]]},
+      {bg:0,dim:1,dur:9,text:'Det bruna bandet är anlaget för fräknar. Det är dominant: det slår alltid igenom, så att egenskapen syns. Det skrivs med stor bokstav, F.',labels:[['F: fräknar, dominant',0.8,0.07]]},
+      {bg:0,dim:1,dur:9,text:'Det ljusa bandet är anlaget för inga fräknar. Det är vikande, eller recessivt: det märks bara om det inte finns något dominant anlag bredvid. Det skrivs med liten bokstav, f.',labels:[['f: inga fräknar, vikande',0.8,0.07]]},
+      {bg:0,dur:10,text:'Så ser genparet ut hos var och en. Den som har FF eller Ff får fräknar, som mamman och dottern. Bara den som har ff blir utan, som pappan.',labels:[['Mamma: Ff',0.196,0.93],['Dottern: Ff',0.503,0.93],['Pappa: ff',0.803,0.93]]},
       {bg:1,dur:10,text:'Dotterns bror fick det ljusa anlaget från båda föräldrarna. Därför har han inga fräknar, trots samma mamma och pappa.',labels:[['Systern: Ff, fräknar',0.25,0.93],['Brodern: ff, inga fräknar',0.74,0.93]]}
     ],build:function(h){
       var T=[[],[],[],[],[],[],[]],i,b;
@@ -1521,11 +1419,11 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   (function(){
     var G=[0.1,0.42,0.09], B=[0.91,0.42,0.085], C=[0.5,0.45,0.13];
     Swarm('sw-kon',{N:240,seed:43,steps:[
-      {bg:0,dur:9,text:'Två bilder av samma test. Till vänster syns triangeln direkt. Till höger ser man ungefär det som en person med röd-grön färgblindhet ser.',labels:[['Normalt färgseende',0.262,0.05],['Röd-grön färgblindhet',0.729,0.05]]},
-      {bg:1,dur:9,text:'Förklaringen finns i det 23:e kromosomparet. Flickan har två stora X-kromosomer. Pojken har en X-kromosom och en liten Y-kromosom.',labels:[['Flicka: X och X',0.11,0.72],['Pojke: X och Y',0.89,0.72]]},
-      {bg:1,dur:9,text:'På X-kromosomen sitter en gen för färgseende, här markerad med ett band. Y-kromosomen är så liten att den saknar den genen.',labels:[['Gen för färgseende',0.5,0.1],['Två band',0.11,0.72],['Ett band',0.89,0.72]]},
-      {bg:1,dim:1,dur:10,text:'Den här pojken har fått ett mörkt band på sin X-kromosom. Det är anlaget för färgblindhet. Y-kromosomen har inget band som kan väga upp.',labels:[['Pojke: ett anlag, och det är för färgblindhet',0.5,0.1],['Färgblind',0.5,0.9]]},
-      {bg:1,dim:1,dur:10,text:'Den här flickan har samma mörka band på sin ena X-kromosom. Men den andra har ett ljust band, ett friskt anlag, och det räcker.',labels:[['Flicka: ett friskt anlag väger upp',0.5,0.1],['Anlagsbärare, ser färger normalt',0.5,0.9]]},
+      {bg:0,dur:9,text:'Två bilder av samma test. Till vänster syns triangeln direkt. Till höger ser man ungefär det som en person med röd-grön färgblindhet ser. Det är mycket vanligare hos pojkar än hos flickor.',labels:[['Normalt färgseende',0.262,0.05],['Röd-grön färgblindhet',0.729,0.05]]},
+      {bg:1,dur:9,text:'Förklaringen finns i det 23:e kromosomparet, könskromosomerna. Flickan har två stora X-kromosomer. Pojken har en X-kromosom och en liten Y-kromosom.',labels:[['Flicka: X och X',0.11,0.72],['Pojke: X och Y',0.89,0.72]]},
+      {bg:1,dur:9,text:'På X-kromosomen sitter en gen för färgseende, här markerad med ett band. Y-kromosomen är så liten att den saknar den genen. Arv av anlag som sitter på X-kromosomen kallas könsbundet arv.',labels:[['Gen för färgseende',0.5,0.1],['Två band',0.11,0.72],['Ett band',0.89,0.72]]},
+      {bg:1,dim:1,dur:10,text:'Den här pojken har fått ett mörkt band på sin enda X-kromosom. Det är det vikande anlaget för färgblindhet. Y-kromosomen har inget friskt anlag som kan väga upp, så anlaget slår igenom.',labels:[['Pojke: ett anlag, och det är för färgblindhet',0.5,0.1],['Färgblind',0.5,0.9]]},
+      {bg:1,dim:1,dur:10,text:'Den här flickan har samma mörka band på sin ena X-kromosom. Men den andra har ett ljust band, ett friskt anlag, och det räcker. Hon blir inte färgblind men kan föra anlaget vidare. Hon är anlagsbärare.',labels:[['Flicka: ett friskt anlag väger upp',0.5,0.1],['Anlagsbärare, ser färger normalt',0.5,0.9]]},
       {bg:0,dur:9,text:'Därför är det mest pojkar som inte ser triangeln. Blödarsjuka ärvs på samma sätt.',labels:[['Vanligast hos pojkar',0.729,0.05]]}
     ],build:function(h){
       var T=[[],[],[],[],[],[]],b;
@@ -1555,7 +1453,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       {bg:1,dur:9,text:'Genen klipps ut ur bakteriens DNA. De streckade linjerna visar var gensaxen klipper, och prickarna är genen som lyfts ut.',labels:[['Genen har klippts ut',0.5,0.07]]},
       {bg:2,dur:10,text:'En cell från en bomullsplanta. Den är kantig och har gröna kloroplaster, som alla växtceller. Genen sätts in i DNA i den lila cellkärnan.',labels:[['En växtcell',0.5,0.1],['Genen på sin nya plats',0.3,0.9]]},
       {bg:3,dur:10,text:'Cellen odlas i en skål och delar sig om och om igen. Ur den växer en planta, och eftersom alla celler är kopior av den första har alla den nya genen.',labels:[['Den nya genen finns i varje cell',0.5,0.12]]},
-      {bg:0,dur:10,text:'Tillbaka på fältet. Bomullen innanför ringen har den nya genen och tål att man sprutar, så att bara ogräset dör.',labels:[['GMO: genmodifierad bomull',0.62,0.08]]},
+      {bg:0,dur:10,text:'Tillbaka på fältet. Bomullen innanför ringen har den nya genen och tål att man sprutar, så att bara ogräset dör. En sådan planta är en genmodifierad organism, förkortat GMO.',labels:[['GMO: genmodifierad bomull',0.62,0.08]]},
       {bg:0,dur:10,text:'Med vanlig förädling hade man fått korsa plantor i många generationer och hoppas på rätt egenskap. Här flyttades en enda gen, från en helt annan art.',labels:[['Snabbare och mer exakt än förädling',0.5,0.08]]}
     ],build:function(h){
       var T=[[],[],[],[],[],[],[]],i;
@@ -1576,10 +1474,10 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   (function(){
     var GOLD=[236,190,0], ICE=[120,170,220];
     Swarm('sw-ex',{N:200,seed:53,steps:[
-      {bg:0,dur:8,text:'Sojabönor, i baljan och torkade. Soja är den gröda där genmodifiering är vanligast, och det mesta blir djurfoder.',labels:[['Soja som tål bekämpningsmedel',0.5,0.08]]},
+      {bg:0,dur:8,text:'Sojabönor, i baljan och torkade. Soja är den vanligaste av de skräddarsydda grödorna, som har genmodifierats för att tåla ett visst bekämpningsmedel. Det mesta blir djurfoder.',labels:[['Soja som tål bekämpningsmedel',0.5,0.08]]},
       {bg:1,dur:8,text:'Rimfrost på bladen. En vanlig potatisplanta skadas av kylan. Med anti-frysgenen klarar den sig bättre.',labels:[['Potatis som tål kyla',0.5,0.92]]},
-      {bg:2,dur:8,text:'Två laxar som är lika gamla. Den övre har fått en gen som gör att den växer snabbare.',labels:[['Genmodifierad lax',0.5,0.06],['Vanlig lax, lika gammal',0.5,0.93]]},
-      {bg:3,dur:8,text:'Samma sorts ris i båda skålarna. Det gula har fått gener som ger det extra näring, och färgen har gett det namnet.',labels:[['Vanligt ris',0.28,0.1],['Det gyllene riset',0.72,0.1]]}
+      {bg:2,dur:8,text:'Två laxar som är lika gamla. Den övre har fått en gen som gör att den växer snabbare. Sådan lax kan också fås att äta växter i stället för annan fisk.',labels:[['Genmodifierad lax',0.5,0.06],['Vanlig lax, lika gammal',0.5,0.93]]},
+      {bg:3,dur:8,text:'Samma sorts ris i båda skålarna. Det gula har fått gener som ger det extra näring, och färgen har gett det namnet. Det skulle kunna minska undernäringen i fattiga länder.',labels:[['Vanligt ris',0.28,0.1],['Det gyllene riset',0.72,0.1]]}
     ],build:function(h){
       var T=[[],[],[],[]],i;
       ringPts(h,T[0],200,0.68,0.75,0.13,0.14,TEAL);
@@ -2014,6 +1912,17 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     var b=document.createElement('button'); b.type='button'; b.className='xbtn'; b.setAttribute('aria-expanded','false'); b.textContent='Förklaring';
     b.addEventListener('click',function(){var o=a.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); b.textContent=o?'Dölj förklaringen':'Förklaring';});
     a.appendChild(b);
+  });
+})();
+</script>
+<script>
+/* Testa dig: dölj svaret och försök själv */
+(function(){
+  [].forEach.call(document.querySelectorAll('.answer'),function(a){
+    var p=document.createElement('p'); p.className='tprompt'; p.textContent='Säg eller skriv svaret själv. Tryck sedan på knappen och jämför.';
+    var b=document.createElement('button'); b.type='button'; b.className='tbtn'; b.textContent='Testa dig';
+    b.addEventListener('click',function(){var t=a.classList.toggle('test'); b.textContent=t?'Visa svaret':'Testa dig';});
+    a.appendChild(p); a.appendChild(b);
   });
 })();
 </script>
