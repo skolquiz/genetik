@@ -333,7 +333,7 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 /* Svar, minnesord och självtest */
 .kom{margin:0;font-size:16px;line-height:1.9}
 .kom span{display:block;font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);line-height:1.4}
-.kom b{font-weight:700;background:var(--accent-soft);border-radius:7px;padding:2px 8px;white-space:nowrap}
+.kom b{font-weight:700;background:var(--accent-soft);border-radius:7px;padding:2px 8px;display:inline-block;line-height:1.35;margin:2px 0}
 .kom i{font-style:normal;color:var(--muted)}
 .answer .short{font-size:19px}
 .tbtn{align-self:flex-start;font:inherit;font-size:15px;font-weight:700;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--accent);cursor:pointer}
@@ -409,8 +409,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 1</p>
     <h3 id="q1">Hur ser DNA-molekylen ut?</h3>
     <div class="answer">
-      <p class="short">DNA är en mycket lång molekyl som ser ut som en repstege vriden till en spiral. Formen kallas dubbelspiral.</p>
-      <p class="kom"><span>Kom ihåg</span><b>repstege</b> <i>·</i> <b>två strängar</b> <i>·</i> <b>baspar som pinnar</b> <i>·</i> <b>dubbelspiral</b></p>
+      <p class="short">DNA är en mycket lång molekyl som ser ut som en vriden repstege. Stegens två sidor kallas strängar, och pinnarna är baspar. Formen kallas dubbelspiral.</p>
+      <p class="kom"><span>Kom ihåg</span><b>repstege</b> <i>·</i> <b>två strängar</b> <i>·</i> <b>baspar</b> <i>·</i> <b>dubbelspiral</b></p>
     </div>
     <div class="card stage">
       <p class="vhead">Förklaring och övning</p>
@@ -458,7 +458,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 3</p>
     <h3 id="q4">Hur kan fyra bokstäver räcka till så mycket information?</h3>
     <div class="answer">
-      <p class="short">Det är ordningen på kvävebaserna som bär informationen, och ordningen kan varieras nästan hur mycket som helst.</p>
+      <p class="short">Det är ordningen på kvävebaserna som bär informationen. Med fyra bokstäver kan ordningen varieras nästan hur mycket som helst, precis som R, O och T kan bli både ROT, ORT och TRO.</p>
       <p class="kom"><span>Kom ihåg</span><b>fyra bokstäver</b> <i>·</i> <b>ordningen bär informationen</b> <i>·</i> <b>ROT, ORT, TRO</b></p>
     </div>
     <div class="card">
@@ -478,7 +478,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 4</p>
     <h3 id="q5">Vad står det i DNA-sekvenserna?</h3>
     <div class="answer">
-      <p class="short">I DNA-sekvenserna står recept på allt som kroppen ska bygga, till exempel proteiner.</p>
+      <p class="short">I DNA-sekvenserna står recept på det som kroppen ska bygga, till exempel proteiner.</p>
       <p class="kom"><span>Kom ihåg</span><b>DNA-sekvens</b> <i>→</i> <b>recept</b> <i>→</i> <b>protein</b></p>
     </div>
     <div class="card story swarm" id="sw-recept">
@@ -497,8 +497,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 5</p>
     <h3 id="q6">Vad är arvsmassa, och hur får den plats i cellen?</h3>
     <div class="answer">
-      <p class="short">Arvsmassa är allt DNA som finns hos en organism. Den får plats i cellkärnan eftersom DNA är hårt lindat och packat runt proteiner.</p>
-      <p class="kom"><span>Kom ihåg</span><b>allt DNA</b> <i>·</i> <b>cellkärnan</b> <i>·</i> <b>virat runt proteiner</b> <i>·</i> <b>tre miljarder baspar</b></p>
+      <p class="short">Arvsmassan är allt DNA hos en organism, drygt tre miljarder baspar. Den ligger i cellkärnan och får plats eftersom DNA-tråden är virad runt proteiner och tätt packad.</p>
+      <p class="kom"><span>Kom ihåg</span><b>allt DNA</b> <i>·</i> <b>tre miljarder baspar</b> <i>·</i> <b>i cellkärnan</b> <i>·</i> <b>virad runt proteiner</b></p>
     </div>
     <div class="card story swarm" id="sw-arv">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -518,7 +518,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 1</p>
     <h3 id="b1">Vad är en gen?</h3>
     <div class="answer">
-      <p class="short">En gen är en bit av DNA som är ett recept på något som kroppen ska bygga.</p>
+      <p class="short">En gen är en bit av DNA som är ett recept på något som kroppen ska bygga. Gener kallas också arvsanlag och styr mycket av våra egenskaper.</p>
       <p class="kom"><span>Kom ihåg</span><b>bit av DNA</b> <i>·</i> <b>recept</b> <i>·</i> <b>arvsanlag</b> <i>·</i> <b>styr egenskaper</b></p>
     </div>
     <div class="card story swarm" id="sw-gen">
@@ -537,7 +537,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 2</p>
     <h3 id="b2">Hur många kromosomer har en människa?</h3>
     <div class="answer">
-      <p class="short">En människa har 46 kromosomer i varje kroppscell. De hör ihop två och två i 23 kromosompar.</p>
+      <p class="short">En människa har 46 kromosomer i varje kroppscell. De bildar 23 par, med en kromosom från mamma och en från pappa i varje par.</p>
       <p class="kom"><span>Kom ihåg</span><b>46 kromosomer</b> <i>·</i> <b>23 par</b> <i>·</i> <b>en från mamma, en från pappa</b></p>
     </div>
     <div class="card story swarm" id="sw-krom">
@@ -577,7 +577,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 2</p>
     <h3 id="c3">Var bildas proteinerna, och hur går proteinsyntesen till?</h3>
     <div class="answer">
-      <p class="short">Proteinerna bildas i ribosomerna, utanför cellkärnan. Vid proteinsyntesen görs en kopia av en gen i cellkärnan, och ribosomen bygger proteinet efter kopian.</p>
+      <p class="short">Proteinerna bildas i ribosomerna, utanför cellkärnan. Vid proteinsyntesen görs en kopia av en gen i cellkärnan. Ribosomen läser kopian och sätter ihop aminosyror till ett protein.</p>
       <p class="kom"><span>Kom ihåg</span><b>gen</b> <i>→</i> <b>kopia</b> <i>→</i> <b>ribosom</b> <i>→</i> <b>aminosyror</b> <i>→</i> <b>protein</b></p>
     </div>
     <div class="card story swarm" id="sw-synt">
@@ -598,8 +598,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 1</p>
     <h3 id="d1">Vad händer vid vanlig celldelning?</h3>
     <div class="answer">
-      <p class="short">En cell blir två likadana celler. Först kopieras allt DNA, så att båda cellerna får 46 kromosomer.</p>
-      <p class="kom"><span>Kom ihåg</span><b>DNA kopieras</b> <i>→</i> <b>halvorna dras isär</b> <i>→</i> <b>två likadana celler</b> <i>→</i> <b>46 kromosomer</b> <i>→</i> <b>mitos</b></p>
+      <p class="short">Vid vanlig celldelning, mitos, blir en cell två likadana celler. Först kopieras allt DNA. Sedan dras de två halvorna av varje kromosom isär, så att båda cellerna får 46 kromosomer.</p>
+      <p class="kom"><span>Kom ihåg</span><b>mitos</b> <i>·</i> <b>DNA kopieras</b> <i>·</i> <b>halvorna dras isär</b> <i>·</i> <b>två likadana celler</b> <i>·</i> <b>46 kromosomer</b></p>
     </div>
     <div class="card story swarm" id="sw-mitos">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -617,8 +617,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 2</p>
     <h3 id="d2">Vad händer vid reduktionsdelning?</h3>
     <div class="answer">
-      <p class="short">Vid reduktionsdelning bildas könsceller. Antalet kromosomer halveras från 46 till 23, och arvsmassan blandas så att varje könscell blir unik.</p>
-      <p class="kom"><span>Kom ihåg</span><b>könsceller</b> <i>·</i> <b>46 blir 23</b> <i>·</i> <b>arvsmassan blandas</b> <i>·</i> <b>alla unika</b> <i>·</i> <b>meios</b></p>
+      <p class="short">Vid reduktionsdelning, meios, bildas könsceller. Antalet kromosomer halveras från 46 till 23, och arvsmassan blandas så att varje könscell blir unik.</p>
+      <p class="kom"><span>Kom ihåg</span><b>meios</b> <i>·</i> <b>könsceller</b> <i>·</i> <b>46 blir 23</b> <i>·</i> <b>arvsmassan blandas</b> <i>·</i> <b>alla unika</b></p>
     </div>
     <div class="card story swarm" id="sw-meios">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -657,8 +657,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 1</p>
     <h3 id="e1">Vad är dominanta och vikande anlag?</h3>
     <div class="answer">
-      <p class="short">Ett dominant anlag slår alltid igenom. Ett vikande anlag, som också kallas recessivt, syns bara om man har fått det från båda föräldrarna.</p>
-      <p class="kom"><span>Kom ihåg</span><b>dominant slår alltid igenom (F)</b> <i>·</i> <b>vikande syns bara dubbelt (f)</b> <i>·</i> <b>FF och Ff ger fräknar</b> <i>·</i> <b>ff ger inga</b></p>
+      <p class="short">Ett dominant anlag slår alltid igenom och skrivs med stor bokstav, F. Ett vikande anlag, som också kallas recessivt, syns bara om man har fått det från båda föräldrarna och skrivs med liten bokstav, f. FF och Ff ger fräknar, ff ger inga.</p>
+      <p class="kom"><span>Kom ihåg</span><b>dominant slår alltid igenom (F)</b> <i>·</i> <b>vikande syns bara från båda (f)</b> <i>·</i> <b>FF och Ff ger fräknar</b> <i>·</i> <b>ff ger inga</b></p>
     </div>
     <div class="card story swarm" id="sw-dom">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -676,8 +676,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 2</p>
     <h3 id="e2">Hur ritar man ett korsningsschema?</h3>
     <div class="answer">
-      <p class="short">Man skriver den ena förälderns två anlag överst och den andras till vänster, och fyller i de fyra fälten. Fälten visar vilka kombinationer barnen kan få.</p>
-      <p class="kom"><span>Kom ihåg</span><b>föräldrarnas anlag</b> <i>→</i> <b>fyra fält</b> <i>→</i> <b>kombinera</b> <i>→</i> <b>läs av: 25 % per fält</b></p>
+      <p class="short">Man skriver föräldrarnas anlag ovanför och till vänster om en ruta med fyra fält, och kombinerar dem i varje fält. Fälten visar vilka anlag barnen kan få, och varje fält motsvarar 25 %.</p>
+      <p class="kom"><span>Kom ihåg</span><b>föräldrarnas anlag</b> <i>→</i> <b>fyra fält</b> <i>→</i> <b>kombinera</b> <i>→</i> <b>25 % per fält</b></p>
     </div>
     <div class="card punnett" id="pn-auto">
       <p class="vhead">Förklaring och övning</p>
@@ -694,7 +694,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 3</p>
     <h3 id="e3">Vad är könsbundet arv?</h3>
     <div class="answer">
-      <p class="short">Könsbundet arv är arv av anlag som sitter på X-kromosomen. De slår oftast igenom hos pojkar, eftersom pojkar bara har en X-kromosom.</p>
+      <p class="short">Könsbundet arv är arv av anlag som sitter på X-kromosomen. De slår oftast igenom hos pojkar, som har XY och bara en X-kromosom. Flickor har XX och blir oftast anlagsbärare utan att själva bli sjuka.</p>
       <p class="kom"><span>Kom ihåg</span><b>anlag på X-kromosomen</b> <i>·</i> <b>pojkar har XY</b> <i>·</i> <b>flickor har XX</b> <i>·</i> <b>anlagsbärare</b></p>
     </div>
     <div class="card story swarm" id="sw-kon">
@@ -713,7 +713,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 4</p>
     <h3 id="e4">Hur visar man könsbundet arv i ett korsningsschema?</h3>
     <div class="answer">
-      <p class="short">Man skriver X och Y, med anlaget som en liten bokstav uppe till höger om X. Schemat visar då varför söner kan drabbas när döttrar inte gör det.</p>
+      <p class="short">Man skriver X med anlaget som en liten bokstav uppe till höger, och Y utan bokstav. Schemat visar då att söner kan drabbas medan döttrar i stället bär anlaget.</p>
       <p class="kom"><span>Kom ihåg</span><b>X med liten bokstav</b> <i>·</i> <b>Y utan bokstav</b> <i>·</i> <b>söner drabbas</b> <i>·</i> <b>döttrar bär anlaget</b></p>
     </div>
     <div class="card punnett" id="pn-x">
@@ -733,8 +733,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 1</p>
     <h3 id="f1">Vad är genmodifiering?</h3>
     <div class="answer">
-      <p class="short">Vid genmodifiering flyttar man en gen från en organism till en annan, så att den får en ny egenskap. Resultatet kallas en genmodifierad organism, GMO.</p>
-      <p class="kom"><span>Kom ihåg</span><b>en gen flyttas</b> <i>→</i> <b>ny egenskap</b> <i>→</i> <b>GMO</b> <i>→</i> <b>gensaxen</b></p>
+      <p class="short">Vid genmodifiering flyttar man en gen från en organism till en annan med hjälp av gensaxen, så att den får en ny egenskap. Resultatet kallas en genmodifierad organism, GMO.</p>
+      <p class="kom"><span>Kom ihåg</span><b>en gen flyttas</b> <i>→</i> <b>gensaxen</b> <i>→</i> <b>ny egenskap</b> <i>→</i> <b>GMO</b></p>
     </div>
     <div class="card story swarm" id="sw-gmo">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -752,8 +752,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 2</p>
     <h3 id="f2">Vilka exempel finns det på genmodifiering?</h3>
     <div class="answer">
-      <p class="short">Grödor som tål bekämpningsmedel, potatis som tål kyla, lax som växer snabbt och ris med extra näring.</p>
-      <p class="kom"><span>Kom ihåg</span><b>tål bekämpningsmedel</b> <i>·</i> <b>tål kyla</b> <i>·</i> <b>snabbväxande lax</b> <i>·</i> <b>gyllene ris</b></p>
+      <p class="short">Grödor som tål bekämpningsmedel, potatis som tål kyla, lax som växer snabbt och det gyllene riset med extra näring.</p>
+      <p class="kom"><span>Kom ihåg</span><b>tål bekämpningsmedel</b> <i>·</i> <b>tål kyla</b> <i>·</i> <b>lax som växer snabbt</b> <i>·</i> <b>gyllene ris</b></p>
     </div>
     <div class="card story swarm" id="sw-ex">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -771,8 +771,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 3</p>
     <h3 id="f3">Vilka fördelar och nackdelar finns det med genmodifiering?</h3>
     <div class="answer">
-      <p class="short">Fördelarna är större skördar, mindre bekämpningsmedel och snabbare resultat. Nackdelarna är att generna kan spridas i naturen, att odlaren blir beroende av ett företag och att följderna är svåra att förutse.</p>
-      <p class="kom"><span>Kom ihåg</span><b>för: skörd, mindre gift, snabbt</b> <i>·</i> <b>mot: sprids, resistens, beroende</b> <i>·</i> <b>etik</b></p>
+      <p class="short">Fördelarna är större skördar, mindre bekämpningsmedel och snabbare resultat. Nackdelarna är att generna kan spridas i naturen, att ogräs kan bli motståndskraftiga och att odlaren blir beroende av ett företag. Det är också en etisk fråga om vi har rätt att ändra på andra arter.</p>
+      <p class="kom"><span>Kom ihåg</span><b>för: större skördar, mindre bekämpningsmedel, snabbare</b> <i>·</i> <b>mot: sprids, motståndskraftiga ogräs, beroende</b> <i>·</i> <b>etisk fråga</b></p>
     </div>
     <div class="card story swarm" id="sw-cmp">
       <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
@@ -790,8 +790,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <p class="num">Fråga 4</p>
     <h3 id="f4">Hur resonerar man i flera led?</h3>
     <div class="answer">
-      <p class="short">Man börjar med vad som har ändrats och följer sedan konsekvenserna steg för steg, först nyttan och sedan risken.</p>
-      <p class="kom"><span>Kom ihåg</span><b>förändringen</b> <i>→</i> <b>det leder till</b> <i>→</i> <b>å andra sidan</b> <i>→</i> <b>slutsats</b></p>
+      <p class="short">Man börjar med förändringen och skriver vad den leder till, steg för steg. Sedan vänder man med "å andra sidan" och följer risken på samma sätt, och avslutar med en egen slutsats.</p>
+      <p class="kom"><span>Kom ihåg</span><b>förändringen</b> <i>→</i> <b>den leder till</b> <i>→</i> <b>å andra sidan</b> <i>→</i> <b>slutsats</b></p>
     </div>
     <div class="card" id="gm-chain">
       <p class="vhead">Förklaring och övning</p>
