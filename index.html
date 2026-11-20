@@ -379,6 +379,48 @@ main.paged h2.area{font-size:26px;padding-top:0;border-top:0;margin:0}
 .slot{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted);font-size:16px}
 .slot strong{color:var(--ink);font-family:var(--display);font-size:20px}
 footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+
+.paged .qa:has(>.card.ig){display:block}
+.paged .qa:has(>.card.ig)>*{max-width:780px}
+.paged .qa:has(>.card.ig)>.card{margin-top:16px}
+.pnav button{min-width:0;overflow-wrap:anywhere}
+.card.ig{gap:0;padding:14px 18px 16px}
+.card.ig>.vhead{padding:0 0 8px}
+.igrow{display:grid;grid-template-columns:minmax(92px,32%) 1fr;gap:16px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.ig.w .igrow{grid-template-columns:minmax(120px,42%) 1fr}
+.igrow img,.igfig img,.cmprow img{width:100%;height:auto;display:block;border-radius:6px}
+.igt{display:flex;gap:10px;align-items:flex-start}
+.ign{flex:none;width:30px;height:30px;border-radius:50%;background:#1d2330;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.igt b{display:block;font-size:17px;line-height:1.25;margin-bottom:2px}
+.igt .t{display:block;font-size:15.5px;line-height:1.45}
+.igt em{display:block;font-size:14px;color:var(--muted);margin-top:3px}
+.igres{background:var(--bg);border-radius:10px;padding:10px 14px;margin:8px 0 0;font-size:16px}
+.ignote{color:var(--muted);font-size:13.5px;margin:8px 0 0}
+.igfig{margin:0;padding:10px 0;border-top:1px solid var(--line)}
+.igfig figcaption{font-size:15.5px;line-height:1.45;margin-top:8px}
+.igfig.ctx{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.igfig.ctx figcaption{margin:0;color:var(--muted)}
+.iggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.iggrid.two{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.iggrid .igfig{border:0;padding:0}
+.cmphead,.cmprow{display:grid;grid-template-columns:334fr 567fr;gap:14px;align-items:center}
+.cmphead b{font-size:15px}
+.cmprow{padding:10px 0;border-top:1px solid var(--line);margin-top:8px}
+.cmprow p{grid-column:1/-1;margin:0;font-size:15.5px;line-height:1.45}
+.qa.testing>.card.ig{visibility:visible}
+.qa.testing .ig .igt>div,.qa.testing .ig .igres,.qa.testing .ig .ignote,.qa.testing .ig figcaption,.qa.testing .ig .cmprow p{visibility:hidden}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.jump a{font-size:14px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--accent);background:var(--surface)}
+.qa{scroll-margin-top:64px}
+.paged .qa+.qa{margin-top:44px}
+.card.cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.cellfig{margin:0;min-width:0}.cellfig h3{font-size:17px;margin:0 0 6px}
+.cellpic{position:relative}.cellpic img{width:100%;display:block}
+.cn{position:absolute;transform:translate(-50%,-50%);font:inherit;font-size:13px;font-weight:700;line-height:1.2;padding:3px 9px;border-radius:999px;border:1.5px solid #1d2330;background:rgba(255,255,255,.93);color:#1d2330;cursor:pointer;white-space:nowrap}
+.cn.on{background:#1d2330;color:#fff}
+.cinfo{min-height:4.6em;margin:10px 0 0;font-size:15.5px;line-height:1.45}
+.cinfo b{display:block}.cinfo em{display:block;color:var(--muted)}
+@media(max-width:520px){.igrow{grid-template-columns:38% 1fr;gap:10px}.ig.w .igrow{grid-template-columns:1fr;gap:6px}.ig.w .igrow img{max-width:300px}.igt b{font-size:16px}.igt .t{font-size:15px}.cn{font-size:11.5px;padding:2px 6px}.igfig.ctx{grid-template-columns:84px 1fr}}
 </style>
 </head>
 <body>
@@ -413,16 +455,8 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
 
   <section class="factory" aria-labelledby="fab">
     <h2 class="area" id="fabriken"><span>Minnesbild</span>Tänk på cellen som en fabrik</h2>
-    <p class="lead" id="fab">En cell fungerar som en fabrik som bygger produkter efter recept. Klicka dig igenom cellens delar och se vad var och en motsvarar. På provet skriver du cellens ord, inte fabrikens.</p>
-    <div class="card story swarm" id="sw-fab">
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/cell.jpg" alt=""></div>
-        <canvas role="img" aria-label="En cell i genomskärning. Varje steg ringar in en del av cellen och säger vad den motsvarar i en fabrik."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj del av cellen"></div>
-      <ol class="sr"></ol>
-    </div>
+    <p class="lead" id="fab">En cell fungerar som en fabrik som bygger produkter efter recept. Tryck på ett namn för att se vad delen gör och vad den motsvarar i fabriken. På provet skriver du cellens ord, inte fabrikens.</p>
+    <div class="card cells"><figure class="cellfig"><h3>Djurcell</h3><div class="cellpic"><img src="img/cell_djur.jpg" alt=""><button type="button" class="cn" style="left:38%;top:50%" data-t="Här finns DNA, uppdelat på 46 kromosomer." data-f="kontoret där alla ritningar förvaras.">Cellkärna</button><button type="button" class="cn" style="left:66%;top:47%" data-t="Här byggs proteinerna." data-f="maskinerna som tillverkar produkterna.">Ribosomer</button><button type="button" class="cn" style="left:62%;top:24%" data-t="Frigör energi som cellen kan använda." data-f="kraftverket.">Mitokondrie</button><button type="button" class="cn" style="left:61%;top:72%" data-t="Packar proteinerna och skickar dem vidare." data-f="packningen och utlastningen.">Golgiapparat</button><button type="button" class="cn" style="left:40%;top:17%" data-t="Bryter ner sådant som cellen inte behöver." data-f="återvinningen.">Lysosom</button><button type="button" class="cn" style="left:17%;top:40%" data-t="Avgränsar cellen och styr vad som går in och ut." data-f="väggarna och portarna.">Cellmembran</button><button type="button" class="cn" style="left:48%;top:90%" data-t="Vätskan som cellens delar ligger i." data-f="golvet där allt står.">Cellplasma</button></div><p class="cinfo">Tryck på ett namn.</p></figure><figure class="cellfig"><h3>Växtcell</h3><div class="cellpic"><img src="img/cell_vaxt.jpg" alt=""><button type="button" class="cn" style="left:50%;top:13.5%" data-t="Ett stadigt hölje utanför cellmembranet. Finns hos växter men inte hos djur." data-f="ytterväggen som håller byggnaden uppe.">Cellvägg</button><button type="button" class="cn" style="left:50%;top:84%" data-t="Avgränsar cellen och styr vad som går in och ut." data-f="portarna innanför ytterväggen.">Cellmembran</button><button type="button" class="cn" style="left:20%;top:31%" data-t="Här finns DNA." data-f="kontoret där alla ritningar förvaras.">Cellkärna</button><button type="button" class="cn" style="left:32%;top:20.5%" data-t="Här byggs proteinerna." data-f="maskinerna som tillverkar produkterna.">Ribosomer</button><button type="button" class="cn" style="left:84%;top:44%" data-t="Fångar solljus och gör socker av koldioxid och vatten. Finns bara hos växter." data-f="solpanelerna.">Kloroplast</button><button type="button" class="cn" style="left:52%;top:55%" data-t="En stor blåsa fylld med vätska som håller cellen spänd." data-f="vattentanken.">Vakuol</button><button type="button" class="cn" style="left:15%;top:65%" data-t="Frigör energi som cellen kan använda." data-f="kraftverket.">Mitokondrie</button><button type="button" class="cn" style="left:61%;top:21%" data-t="Vätskan som cellens delar ligger i." data-f="golvet där allt står.">Cellplasma</button></div><p class="cinfo">Tryck på ett namn.</p></figure></div>
   </section>
 
   <h2 class="area" id="omrade-1"><span>Område 1</span>DNA-molekylen</h2>
@@ -433,6 +467,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     <div class="answer">
       <p class="short">DNA är en mycket lång molekyl som ser ut som en vriden repstege. Stegens två sidor kallas strängar, och pinnarna är baspar. Formen kallas dubbelspiral.</p>
       <p class="kom"><span>Kom ihåg</span><b>repstege</b> <i>·</i> <b>två strängar</b> <i>·</i> <b>baspar</b> <i>·</i> <b>dubbelspiral</b></p>
+    </div>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_dna_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Dubbelspiral</b><span class="t">Så här ser en bit DNA ut: en repstege som är vriden runt sig själv.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_dna_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Stegen uträtad</b><span class="t">Rätar man ut den syns delarna tydligare: två långa sidor och pinnar emellan.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_dna_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Ett baspar</b><span class="t">Varje pinne är två kvävebaser som passar ihop som pusselbitar.</span></div></div></div>
     </div>
     <div class="card stage">
       <p class="vhead">Förklaring och övning</p>
@@ -503,15 +543,9 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">I DNA-sekvenserna står recept på det som kroppen ska bygga, till exempel proteiner.</p>
       <p class="kom"><span>Kom ihåg</span><b>DNA-sekvens</b> <i>→</i> <b>recept</b> <i>→</i> <b>protein</b></p>
     </div>
-    <div class="card story swarm" id="sw-recept">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/kropp.jpg" alt=""><img src="img/r2.jpg" alt=""><img src="img/r4.jpg" alt=""></div>
-        <canvas role="img" aria-label="En svärm av prickar går mellan tre ställen i kroppen och tre recept på en DNA-tråd."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <figure class="igfig"><img src="img/r4.jpg" alt="" loading="lazy"><figcaption>Kroppen bygger nya saker hela tiden: färgämne i huden när du solar, protein i en muskel när du tränar och insulin i bukspottkörteln när du har ätit. Instruktionen för var och en är en DNA-sekvens, en bit av DNA-tråden där bokstävernas ordning fungerar som ett recept. Ett recept kan vara flera tusen bokstäver långt.</figcaption></figure>
     </div>
   </section>
 
@@ -522,15 +556,13 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Arvsmassan är allt DNA hos en organism, drygt tre miljarder baspar. Den ligger i cellkärnan och får plats eftersom DNA-tråden är virad runt proteiner och tätt packad.</p>
       <p class="kom"><span>Kom ihåg</span><b>allt DNA</b> <i>·</i> <b>tre miljarder baspar</b> <i>·</i> <b>i cellkärnan</b> <i>·</i> <b>virad runt proteiner</b></p>
     </div>
-    <div class="card story swarm" id="sw-arv">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/z1.jpg" alt=""><img src="img/z2.jpg" alt=""><img src="img/zoom.jpg" alt=""></div>
-        <canvas role="img" aria-label="Prickar ringar in ett steg i taget i en inzoomning från cell till cellkärna, packat DNA och dubbelspiral."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_zoom_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Cellen</b><span class="t">Nästan varje cell i kroppen har en cellkärna.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_zoom_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Cellkärnan</b><span class="t">Här ligger arvsmassan, uppdelad på 46 kromosomer. Bilden visar sex av dem.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_zoom_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>En kromosom</b><span class="t">En kromosom är en enda mycket lång DNA-tråd som är virad runt proteiner och tätt packad.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_zoom_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Tråden rullas upp</b><span class="t">Rullar man upp kromosomen ser man att tråden är DNA-spiralen.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_zoom_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">5</span><div><b>En gen</b><span class="t">En gen är en bit av DNA-tråden, här gul.</span></div></div></div>
     </div>
   </section>
 
@@ -543,15 +575,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">En gen är en bit av DNA som är ett recept på något som kroppen ska bygga. Gener kallas också arvsanlag och styr mycket av våra egenskaper.</p>
       <p class="kom"><span>Kom ihåg</span><b>bit av DNA</b> <i>·</i> <b>recept</b> <i>·</i> <b>arvsanlag</b> <i>·</i> <b>styr egenskaper</b></p>
     </div>
-    <div class="card story swarm" id="sw-gen">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/fraknar.jpg" alt=""><img src="img/g2.jpg" alt=""><img src="img/g3.jpg" alt=""><img src="img/g4.jpg" alt=""></div>
-        <canvas role="img" aria-label="En svärm av prickar går från fräknarna i ett ansikte till en bit DNA, där en gen färgas, och tillbaka till huden."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_frakface.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Fräknar</b><span class="t">En del har fräknar, andra har det inte. Skillnaden syns i huden, men den börjar någon annanstans.</span></div></div></div>
+      <div class="igrow"><img src="img/g2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Närbild på huden</b><span class="t">Varje fräkne är en liten fläck där huden har extra mycket färgämne.</span></div></div></div>
+      <div class="igrow"><img src="img/g3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Hudens celler</b><span class="t">De bruna cellerna längst ner gör färgämnet. De gör det eftersom det står i deras DNA.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_zoom_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Genen</b><span class="t">DNA är indelat i gener, som också kallas arvsanlag. Den gula biten är en gen. Med en annan variant av genen för fräknar hade hon inte haft några.</span></div></div></div>
     </div>
   </section>
 
@@ -562,15 +591,16 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">En människa har 46 kromosomer i varje kroppscell. De bildar 23 par, med en kromosom från mamma och en från pappa i varje par.</p>
       <p class="kom"><span>Kom ihåg</span><b>46 kromosomer</b> <i>·</i> <b>23 par</b> <i>·</i> <b>en från mamma, en från pappa</b></p>
     </div>
-    <div class="card story swarm" id="sw-krom">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/k1.jpg" alt=""><img src="img/befruktning.jpg" alt=""><img src="img/k3.jpg" alt=""><img src="img/k5.jpg" alt=""><img src="img/k4.jpg" alt=""></div>
-        <canvas role="img" aria-label="Blå streck vid en spermie och rosa streck i en äggcell möts och ordnar sig i 23 par."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <figure class="igfig"><img src="img/karyo.jpg" alt="" loading="lazy"><figcaption>Alla 46 kromosomerna ordnade i 23 par. Det sista paret, för sig självt, är könskromosomerna: två X hos flickor, ett X och ett litet Y hos pojkar. Här är det en pojke.</figcaption></figure>
+    </div>
+    <div class="card ig">
+      <p class="vhead">Var kommer paren ifrån?</p>
+      <div class="igrow"><img src="img/ig_befr_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Äggcell och spermie</b><span class="t">Könscellerna har bara hälften så många kromosomer som andra celler: 23 i äggcellen och 23 i spermien. Bilden visar två av dem.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_befr_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Spermien tar sig in</b><span class="t">En spermie tränger in i äggcellen och lämnar sina kromosomer där.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_befr_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Det befruktade ägget</b><span class="t">23 + 23 = 46 kromosomer. Varje kromosom från mamma har hittat sin motsvarighet från pappa.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_befr_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Cellen börjar dela sig</b><span class="t">Det befruktade ägget delar sig med vanlig celldelning, om och om igen. Därför har alla kroppens celler samma 46 kromosomer.</span></div></div></div>
     </div>
   </section>
 
@@ -583,15 +613,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">DNA har två uppgifter: att lagra och kopiera informationen, och att tillverka protein.</p>
       <p class="kom"><span>Kom ihåg</span><b>1. lagra och kopiera</b> <i>·</i> <b>2. tillverka protein</b></p>
     </div>
-    <div class="card story swarm" id="sw-kopia">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/d0.jpg" alt=""><img src="img/kna.jpg" alt=""><img src="img/d2.jpg" alt=""><img src="img/d3.jpg" alt=""><img src="img/d4.jpg" alt=""><img src="img/cell.jpg" alt=""><img src="img/d5.jpg" alt=""></div>
-        <canvas role="img" aria-label="Prickar går från ett sår på ett knä till en hudcell i förstoring, där de fördubblas och delas upp på två celler."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_kopia_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>DNA före kopieringen</b><span class="t">En bit av stegen. Varje pinne är ett baspar: A sitter alltid ihop med T (rött och grönt) och C alltid med G (blått och gult).</span></div></div></div>
+      <div class="igrow"><img src="img/ig_kopia_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Stegen öppnas</b><span class="t">Basparen släpper taget om varandra, och stegen delar sig på mitten som ett blixtlås.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_kopia_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Nya baser fäster</b><span class="t">Lösa baser (ljusare) fäster på båda halvorna. Eftersom A bara passar med T och C bara med G kan varje plats bara fyllas på ett sätt.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_kopia_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Två likadana DNA-molekyler</b><span class="t">Varje ny molekyl har en gammal och en ny halva, och bokstäverna står i exakt samma ordning som från början.</span></div></div></div>
     </div>
   </section>
 
@@ -602,15 +629,13 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Proteinerna bildas i ribosomerna, utanför cellkärnan. Vid proteinsyntesen görs en kopia av en gen i cellkärnan. Ribosomen läser kopian och sätter ihop aminosyror till ett protein.</p>
       <p class="kom"><span>Kom ihåg</span><b>gen</b> <i>→</i> <b>kopia</b> <i>→</i> <b>ribosom</b> <i>→</i> <b>aminosyror</b> <i>→</i> <b>protein</b></p>
     </div>
-    <div class="card story swarm" id="sw-synt">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/p0.jpg" alt=""><img src="img/arm.jpg" alt=""><img src="img/mat.jpg" alt=""><img src="img/p3.jpg" alt=""><img src="img/p4.jpg" alt=""><img src="img/p5.jpg" alt=""><img src="img/p6.jpg" alt=""></div>
-        <canvas role="img" aria-label="En svärm av prickar på bilder av en arm, en tallrik mat och en cell visar hur protein från maten bryts ner till aminosyror och byggs ihop till muskelprotein."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig w">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_synt_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Genen är receptet</b><span class="t">I cellkärnan ligger DNA. Den gula biten är en gen, receptet på ett visst protein.</span><em>I fabriken: ritningen som förvaras på kontoret.</em></div></div></div>
+      <div class="igrow"><img src="img/ig_synt_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Genen kopieras</b><span class="t">DNA öppnar sig vid genen och en kopia av den byggs (orange). DNA självt stannar kvar i cellkärnan.</span><em>I fabriken: ritningen kopieras, originalet lämnar aldrig kontoret.</em></div></div></div>
+      <div class="igrow"><img src="img/ig_synt_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Kopian lämnar cellkärnan</b><span class="t">Kopian tar sig ut genom ett av hålen i cellkärnans vägg.</span><em>I fabriken: kopian skickas ut till verkstaden.</em></div></div></div>
+      <div class="igrow"><img src="img/ig_synt_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Ribosomen läser kopian</b><span class="t">Ribosomen läser kopian tre bokstäver i taget. Varje sådan grupp, en triplett, står för en aminosyra, och ribosomen kopplar ihop aminosyrorna i den ordningen.</span><em>I fabriken: maskinen bygger efter ritningen, del för del.</em></div></div></div>
+      <div class="igrow"><img src="img/ig_synt_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">5</span><div><b>Proteinet är klart</b><span class="t">Kedjan av aminosyror viker ihop sig till ett färdigt protein.</span><em>I fabriken: den färdiga produkten.</em></div></div></div>
     </div>
   </section>
 
@@ -623,15 +648,16 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Vid vanlig celldelning, mitos, blir en cell två likadana celler. Först kopieras allt DNA. Sedan dras de två halvorna av varje kromosom isär, så att båda cellerna får 46 kromosomer.</p>
       <p class="kom"><span>Kom ihåg</span><b>mitos</b> <i>·</i> <b>DNA kopieras</b> <i>·</i> <b>halvorna dras isär</b> <i>·</i> <b>två likadana celler</b> <i>·</i> <b>46 kromosomer</b></p>
     </div>
-    <div class="card story swarm" id="sw-mitos">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/v1.jpg" alt=""><img src="img/v2.jpg" alt=""><img src="img/v3.jpg" alt=""><img src="img/v4.jpg" alt=""><img src="img/v5.jpg" alt=""></div>
-        <canvas role="img" aria-label="Prickar visar hur en person växer genom att celler kopierar sina kromosomer och delar sig i två likadana celler."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <figure class="igfig ctx"><img src="img/ctx_vaxer.jpg" alt="" loading="lazy"><figcaption>Det är så här du växer och läker sår: celler delar sig och blir fler.</figcaption></figure>
+      <div class="igrow"><img src="img/ig_mitos_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Före delningen</b><span class="t">Cellen har 46 kromosomer i cellkärnan.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_mitos_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>DNA kopieras</b><span class="t">Varje kromosom får en likadan kopia. De två halvorna sitter ihop på mitten, så kromosomen ser ut som ett X.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_mitos_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Kromosomerna radas upp</b><span class="t">Cellkärnans vägg löses upp. Kromosomerna lägger sig en och en på rad mitt i cellen, och tunna trådar fäster i dem.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_mitos_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Halvorna dras isär</b><span class="t">Trådarna drar halvorna åt var sitt håll, så att varje sida får en av varje.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_mitos_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">5</span><div><b>Cellen delar sig</b><span class="t">Cellen snörs av på mitten och en ny cellkärna bildas i varje del.</span></div></div></div>
+      <p class="igres"><b>Resultat:</b> två likadana celler med 46 kromosomer var.</p>
+      <p class="ignote">Bilden visar bara 4 av de 46 kromosomerna.</p>
     </div>
   </section>
 
@@ -642,15 +668,15 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Vid reduktionsdelning, meios, bildas könsceller. Antalet kromosomer halveras från 46 till 23, och arvsmassan blandas så att varje könscell blir unik.</p>
       <p class="kom"><span>Kom ihåg</span><b>meios</b> <i>·</i> <b>könsceller</b> <i>·</i> <b>46 blir 23</b> <i>·</i> <b>arvsmassan blandas</b> <i>·</i> <b>alla unika</b></p>
     </div>
-    <div class="card story swarm" id="sw-meios">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/m1.jpg" alt=""><img src="img/m3.jpg" alt=""><img src="img/m4.jpg" alt=""><img src="img/m5.jpg" alt=""><img src="img/m2.jpg" alt=""></div>
-        <canvas role="img" aria-label="Prickar visar hur könsceller bildas: kromosomparen blandas och delas upp så att varje könscell får hälften och blir unik."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig w">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_meios_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Före delningen</b><span class="t">Cellen har 46 kromosomer: 23 från mamma (rosa) och 23 från pappa (blå).</span></div></div></div>
+      <div class="igrow"><img src="img/ig_meios_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>DNA kopieras</b><span class="t">Varje kromosom får en likadan kopia, precis som vid vanlig celldelning.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_meios_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Paren lägger sig bredvid varandra</b><span class="t">Kromosomerna som hör ihop, en från mamma och en från pappa, lägger sig parvis mitt i cellen. Trådar fäster i dem.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_meios_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Första delningen: paren dras isär</b><span class="t">Hela kromosomer dras åt var sitt håll, en från varje par. Slumpen avgör vilken som hamnar i vilken cell. Cellerna har nu 23 kromosomer var, fortfarande med två halvor.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_meios_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">5</span><div><b>Andra delningen: halvorna dras isär</b><span class="t">Båda cellerna delar sig en gång till, och nu är det halvorna som dras isär.</span></div></div></div>
+      <p class="igres"><b>Resultat:</b> fyra könsceller med 23 kromosomer var, med olika blandningar av mammans och pappans kromosomer.</p>
+      <p class="ignote">Bilden visar bara 4 av de 46 kromosomerna.</p>
     </div>
   </section>
 
@@ -661,15 +687,14 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Vanlig celldelning ger två likadana kroppsceller med 46 kromosomer. Reduktionsdelning ger könsceller med 23 kromosomer, och alla är olika.</p>
       <p class="kom"><span>Kom ihåg</span><b>kroppsceller eller könsceller</b> <i>·</i> <b>46 eller 23</b> <i>·</i> <b>likadana eller olika</b></p>
     </div>
-    <div class="card story swarm" id="sw-jmf">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/j1.jpg" alt=""></div>
-        <canvas role="img" aria-label="Två rader: överst en cell som blir två likadana celler, nederst en cell som blir fyra olika celler med hälften så många kromosomer."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="cmphead"><b>Vanlig celldelning</b><b>Reduktionsdelning</b></div>
+      <div class="cmprow"><img src="img/ig_mitos_1.jpg" alt="" loading="lazy"><img src="img/ig_meios_1.jpg" alt="" loading="lazy"><p><b>Start.</b> Båda börjar likadant: en cell med 46 kromosomer.</p></div>
+      <div class="cmprow"><img src="img/ig_mitos_2.jpg" alt="" loading="lazy"><img src="img/ig_meios_2.jpg" alt="" loading="lazy"><p><b>Kopiering.</b> I båda kopieras allt DNA först.</p></div>
+      <div class="cmprow"><img src="img/ig_mitos_3.jpg" alt="" loading="lazy"><img src="img/ig_meios_3.jpg" alt="" loading="lazy"><p><b>Uppställning.</b> Vid vanlig celldelning ställer kromosomerna upp sig en och en. Vid reduktionsdelning lägger de sig parvis, mammans bredvid pappans.</p></div>
+      <div class="cmprow"><img src="img/ig_mitos_4.jpg" alt="" loading="lazy"><img src="img/ig_meios_4.jpg" alt="" loading="lazy"><p><b>Delning.</b> Vid vanlig celldelning dras halvorna isär. Vid reduktionsdelning dras först hela kromosomer isär, en från varje par, och sedan delar sig cellerna en gång till.</p></div>
+      <div class="cmprow"><img src="img/ig_mitos_5.jpg" alt="" loading="lazy"><img src="img/ig_meios_5.jpg" alt="" loading="lazy"><p><b>Resultat.</b> Vanlig celldelning ger två likadana celler med 46 kromosomer. Reduktionsdelning ger fyra olika könsceller med 23 kromosomer.</p></div>
     </div>
   </section>
 
@@ -682,15 +707,13 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Ett dominant anlag slår alltid igenom och skrivs med stor bokstav, F. Ett vikande anlag, som också kallas recessivt, syns bara om man har fått det från båda föräldrarna och skrivs med liten bokstav, f. FF och Ff ger fräknar, ff ger inga.</p>
       <p class="kom"><span>Kom ihåg</span><b>dominant slår alltid igenom (F)</b> <i>·</i> <b>vikande syns bara från båda (f)</b> <i>·</i> <b>FF och Ff ger fräknar</b> <i>·</i> <b>ff ger inga</b></p>
     </div>
-    <div class="card story swarm" id="sw-dom">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/a1.jpg" alt=""><img src="img/a3.jpg" alt=""></div>
-        <canvas role="img" aria-label="En familj där förstoringar i lager visar dotterns hudcell och genparet för fräknar."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_frak_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>Föräldrarna</b><span class="t">Mamma har fräknar, pappa har inga.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_frak_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Deras anlag</b><span class="t">Alla har två anlag för varje egenskap, ett på varje kromosom i paret. Mamma har ett anlag för fräknar (brunt band) och ett för inga fräknar. Pappa har två anlag för inga fräknar.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_frak_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Könscellerna</b><span class="t">Varje könscell får bara det ena av de två anlagen. Här har äggcellen fått anlaget för fräknar.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_frak_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Barnets anlag</b><span class="t">Barnet får ett anlag från varje förälder: ett för fräknar och ett för inga fräknar.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_frak_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">5</span><div><b>Barnet får fräknar</b><span class="t">Anlaget för fräknar är dominant: det räcker med ett för att det ska synas. Anlaget för inga fräknar är vikande och syns bara hos den som har två. Dominant skrivs med stor bokstav (F), vikande med liten (f). Barnet är Ff.</span></div></div></div>
     </div>
   </section>
 
@@ -719,15 +742,12 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Könsbundet arv är arv av anlag som sitter på X-kromosomen. De slår oftast igenom hos pojkar, som har XY och bara en X-kromosom. Flickor har XX och blir oftast anlagsbärare utan att själva bli sjuka.</p>
       <p class="kom"><span>Kom ihåg</span><b>anlag på X-kromosomen</b> <i>·</i> <b>pojkar har XY</b> <i>·</i> <b>flickor har XX</b> <i>·</i> <b>anlagsbärare</b></p>
     </div>
-    <div class="card story swarm" id="sw-kon">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/a4.jpg" alt=""><img src="img/a5.jpg" alt=""></div>
-        <canvas role="img" aria-label="Ett färgseendetest och en flicka och en pojke, med förstoringar som visar deras könskromosomer."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_kon_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>X och Y</b><span class="t">Könskromosomerna. X är stor och har många gener. Y är liten och saknar de flesta av dem.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_kon_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Föräldrarna</b><span class="t">Mamma (XX) har ett sjukdomsanlag, det grå bandet, på sin ena X-kromosom. Hon är frisk, eftersom den andra X-kromosomen har ett friskt anlag. Pappa (XY) har inget sjukdomsanlag.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_kon_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Sonen</b><span class="t">Han fick mammas X med anlaget och pappas Y. Y-kromosomen har inget friskt anlag som kan väga upp, så anlaget slår igenom.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_kon_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Dottern</b><span class="t">Hon fick samma X från mamma, men också ett friskt X från pappa. Det friska anlaget väger upp, så hon blir anlagsbärare utan att bli sjuk.</span></div></div></div>
     </div>
   </section>
 
@@ -758,15 +778,13 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Vid genmodifiering flyttar man en gen från en organism till en annan med hjälp av gensaxen, så att den får en ny egenskap. Resultatet kallas en genmodifierad organism, GMO.</p>
       <p class="kom"><span>Kom ihåg</span><b>en gen flyttas</b> <i>→</i> <b>gensaxen</b> <i>→</i> <b>ny egenskap</b> <i>→</i> <b>GMO</b></p>
     </div>
-    <div class="card story swarm" id="sw-gmo">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/gm1.jpg" alt=""><img src="img/gm2.jpg" alt=""><img src="img/gm3.jpg" alt=""><img src="img/gm4.jpg" alt=""></div>
-        <canvas role="img" aria-label="Ett bomullsfält med förstoringar som visar hur en gen flyttas från en bakterie till en växtcell."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="igrow"><img src="img/ig_gmo_1.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">1</span><div><b>En gen med en bra egenskap</b><span class="t">Bakterien har en gen (gul) som gör ett ämne som dödar skadeinsekter.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_gmo_2.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">2</span><div><b>Genen klipps ut</b><span class="t">Gensaxen klipper av DNA precis vid genen, så att den kan lyftas ut.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_gmo_3.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">3</span><div><b>Genen sätts in</b><span class="t">Genen fogas in i bomullsplantans DNA.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_gmo_4.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">4</span><div><b>Växtcellen har fått en ny gen</b><span class="t">Cellen läser den nya genen som vilken gen som helst och börjar göra samma ämne som bakterien.</span></div></div></div>
+      <div class="igrow"><img src="img/ig_gmo_5.jpg" alt="" loading="lazy"><div class="igt"><span class="ign">5</span><div><b>En planta med ny egenskap</b><span class="t">Plantan som växer upp ur cellen skyddar sig själv mot insekterna, och egenskapen går i arv till dess frön.</span></div></div></div>
     </div>
   </section>
 
@@ -777,15 +795,9 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Grödor som tål bekämpningsmedel, potatis som tål kyla, lax som växer snabbt och det gyllene riset med extra näring.</p>
       <p class="kom"><span>Kom ihåg</span><b>tål bekämpningsmedel</b> <i>·</i> <b>tål kyla</b> <i>·</i> <b>lax som växer snabbt</b> <i>·</i> <b>gyllene ris</b></p>
     </div>
-    <div class="card story swarm" id="sw-ex">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/gm5.jpg" alt=""><img src="img/gm6.jpg" alt=""><img src="img/gm7.jpg" alt=""><img src="img/gm8.jpg" alt=""></div>
-        <canvas role="img" aria-label="Fyra exempel på genmodifiering: soja, potatis, lax och ris."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i berättelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="iggrid"><figure class="igfig"><img src="img/gm5.jpg" alt="" loading="lazy"><figcaption><b>Soja.</b> Den vanligaste av de skräddarsydda grödorna, som har genmodifierats för att tåla ett visst bekämpningsmedel. Det mesta blir djurfoder.</figcaption></figure><figure class="igfig"><img src="img/gm6.jpg" alt="" loading="lazy"><figcaption><b>Potatis.</b> En vanlig potatisplanta skadas av frost. Med en anti-frysgen klarar den kylan bättre.</figcaption></figure><figure class="igfig"><img src="img/gm7.jpg" alt="" loading="lazy"><figcaption><b>Lax.</b> Två laxar som är lika gamla. Den övre har fått en gen som gör att den växer snabbare.</figcaption></figure><figure class="igfig"><img src="img/gm8.jpg" alt="" loading="lazy"><figcaption><b>Ris.</b> Samma sorts ris i båda skålarna. Det gula har fått gener som ger det extra näring, vilket skulle kunna minska undernäringen i fattiga länder.</figcaption></figure></div>
     </div>
   </section>
 
@@ -796,15 +808,9 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
       <p class="short">Fördelarna är större skördar, mindre bekämpningsmedel och snabbare resultat. Nackdelarna är att generna kan spridas i naturen, att ogräs kan bli motståndskraftiga och att odlaren blir beroende av ett företag. Det är också en etisk fråga om vi har rätt att ändra på andra arter.</p>
       <p class="kom"><span>Kom ihåg</span><b>för: större skördar, mindre bekämpningsmedel, snabbare</b> <i>·</i> <b>mot: sprids, motståndskraftiga ogräs, beroende</b> <i>·</i> <b>etisk fråga</b></p>
     </div>
-    <div class="card story swarm" id="sw-cmp">
-      <p class="vhead">Förklaring <span>klicka dig igenom bilderna</span></p>
-      <div class="scene" style="aspect-ratio:1376/768">
-        <div class="layers" aria-hidden="true"><img src="img/cmp1.jpg" alt=""><img src="img/cmp2.jpg" alt=""><img src="img/cmp3.jpg" alt=""><img src="img/cmp4.jpg" alt=""></div>
-        <canvas role="img" aria-label="Fyra bildpar som ställer en fördel med genmodifiering mot en nackdel."></canvas>
-      </div>
-      <p class="cap"></p>
-      <div class="pips" role="group" aria-label="Välj steg i jämförelsen"></div>
-      <ol class="sr"></ol>
+    <div class="card ig">
+      <p class="vhead">Förklaring</p>
+      <div class="iggrid two"><figure class="igfig"><img src="img/cmp1.jpg" alt="" loading="lazy"><figcaption><b>Skörden.</b> Till vänster det man vinner: mer bomull från samma åker. Till höger det som det kostar: utsädet och bekämpningsmedlet måste köpas, och från samma företag.</figcaption></figure><figure class="igfig"><img src="img/cmp2.jpg" alt="" loading="lazy"><figcaption><b>Giftet.</b> Till vänster går odlaren på fältet utan skyddsutrustning, eftersom det sprutas mindre. Till höger har några ogräsplantor överlevt sprutningen och står kvar gröna bland de döda.</figcaption></figure><figure class="igfig"><img src="img/cmp3.jpg" alt="" loading="lazy"><figcaption><b>Naturen.</b> Till vänster får forskaren fram egenskapen på några år, i ett laboratorium. Till höger en växt som har spridit sig utom kontroll och täcker en hel sjö.</figcaption></figure><figure class="igfig"><img src="img/cmp4.jpg" alt="" loading="lazy"><figcaption><b>Etiken.</b> Till vänster en varg och en tax: människan har ändrat djur genom avel i tusentals år. Till höger orörd natur: en del menar att vi inte har rätt att ändra på andra arters arvsmassa.</figcaption></figure></div>
     </div>
   </section>
 
@@ -1880,6 +1886,18 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
 })();
 </script>
 <script>
+/* Cellens delar: tryck på ett namn */
+(function(){
+  [].forEach.call(document.querySelectorAll('.cellfig'),function(f){
+    var info=f.querySelector('.cinfo'), bs=f.querySelectorAll('.cn');
+    [].forEach.call(bs,function(b){b.addEventListener('click',function(){
+      [].forEach.call(bs,function(x){x.classList.remove('on');}); b.classList.add('on');
+      info.innerHTML='<b>'+b.textContent+'</b>'+b.dataset.t+'<em>I fabriken: '+b.dataset.f+'</em>';
+    });});
+  });
+})();
+</script>
+<script>
 /* En fråga per sida */
 (function(){
   var main=document.querySelector('main'); if(!main) return;
@@ -1890,7 +1908,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     if(k.tagName==='H2'){var sp=k.querySelector('span'); area={h:k,label:sp?sp.textContent:'',name:k.textContent.replace(sp?sp.textContent:'','').trim(),pages:[]}; groups.push(area); return;}
     if(k.tagName!=='SECTION') return;
     var g=area, h3=k.querySelector('h3'), id, title;
-    if(k.classList.contains('factory')){g={h:null,label:'Minnesbild',name:'Cellen som en fabrik',pages:[]}; groups.push(g); id='fabriken'; title='Klicka dig igenom cellens delar';}
+    if(k.classList.contains('factory')){g={h:null,label:'Minnesbild',name:'Cellen som en fabrik',pages:[]}; groups.push(g); id='fabriken'; title='Cellens delar';}
     else if(h3){id=h3.id; title=h3.textContent;}
     else {id=k.id; title='Öva och slå upp begreppen';}
     var p={el:k,g:g,id:id,title:title,n:g.pages.length+1}; g.pages.push(p); pages.push(p);
@@ -1916,6 +1934,7 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
   var nav=document.createElement('div'); nav.className='pnav'; nav.innerHTML='<button type="button" class="pprev">Föregående</button><button type="button" class="pnext">Nästa</button>'; main.insertBefore(nav,footer);
   var prev=nav.querySelector('.pprev'), next=nav.querySelector('.pnext');
   main.classList.add('paged');
+  groups.forEach(function(g){if(!g.h||g.pages.length<2) return; var j=document.createElement('nav'); j.className='jump'; j.setAttribute('aria-label','Frågor i området'); j.innerHTML=g.pages.map(function(p){return '<a href="#'+p.id+'">'+p.title+'</a>';}).join(''); g.h.parentNode.insertBefore(j,g.h.nextSibling); kids.push(j); g.jump=j;});
 
   function meter(l){return '<span class="lvl l'+l+'" title="'+['Inte påbörjad','Läst','Testat','Kan'][l]+'"><i></i><i></i><i></i></span>';}
   function pbar(n,t){return '<span class="pbarx"><i style="width:'+(t?Math.round(n/t*100):0)+'%"></i></span>';}
@@ -1945,15 +1964,15 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     kids.forEach(function(k){if(k!==header&&k!==footer) k.hidden=true;});
     header.hidden=!!p; footer.hidden=!!p; bar.hidden=!p; nav.hidden=!p;
     if(p){
-      p.el.hidden=false; if(p.g.h) p.g.h.hidden=false;
-      bar.querySelector('.ppos').textContent=p.g.label+(p.g.h?' · '+p.g.name:'')+(p.g.pages.length>1?' · Fråga '+p.n+' av '+p.g.pages.length:'');
-      prev.disabled=i===0; prev.textContent=i===0?'Föregående':'Föregående';
-      next.textContent=i===pages.length-1?'Till innehållet':'Nästa: '+pages[i+1].title;
+      p.g.pages.forEach(function(x){x.el.hidden=false; if(hasAns(x)) window.GProg.raise(x.id,1);}); if(p.g.h) p.g.h.hidden=false; if(p.g.jump) p.g.jump.hidden=false; var gi=groups.indexOf(p.g);
+      bar.querySelector('.ppos').textContent=p.g.label+(p.g.h?' · '+p.g.name:'');
+      prev.disabled=gi===0;
+      next.textContent=gi===groups.length-1?'Till innehållet':'Nästa: '+groups[gi+1].name;
       save('genetik-last',p.id); if(hasAns(p)&&!p.el.querySelector('.swarm')) window.GProg.raise(p.id,1); setTimeout(track,400);
     } else drawToc();
     if(push){try{history.pushState(null,'',p?'#'+p.id:location.pathname+location.search);}catch(e){}}
     window.scrollTo(0,0);
-    setTimeout(function(){window.dispatchEvent(new Event('resize'));},30);
+    setTimeout(function(){window.dispatchEvent(new Event('resize')); if(p&&p.n>1) p.el.scrollIntoView();},60);
   }
   function route(){
     var hsh=decodeURIComponent(location.hash.slice(1)), i, el;
@@ -1963,8 +1982,9 @@ footer{font-size:15px;color:var(--muted);border-top:1px solid var(--line);paddin
     if(el) for(i=0;i<pages.length;i++) if(pages[i].el.contains(el)||pages[i].g.h===el){show(i,false); return;}
     show(-1,false);
   }
-  prev.addEventListener('click',function(){if(cur>0) show(cur-1,true);});
-  next.addEventListener('click',function(){if(cur<pages.length-1) show(cur+1,true); else show(-1,true);});
+  function gstep(d){var gi=groups.indexOf(pages[cur].g)+d; if(gi<0) return; if(gi>=groups.length){show(-1,true); return;} show(pages.indexOf(groups[gi].pages[0]),true);}
+  prev.addEventListener('click',function(){gstep(-1);});
+  next.addEventListener('click',function(){gstep(1);});
   bar.querySelector('.phome').addEventListener('click',function(e){e.preventDefault(); show(-1,true);});
   window.addEventListener('hashchange',route); window.addEventListener('popstate',route);
   document.addEventListener('keydown',function(e){
