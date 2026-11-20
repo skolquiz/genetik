@@ -2,7 +2,7 @@
 
 Inläsningsmaterial till Spektrum Biologi, kapitel 10 (genetik och bioteknik), årskurs 9.
 
-Öppna `index.html` i en webbläsare. Materialet är en enda sida med en fråga i taget, och bilderna ligger i mappen `img`.
+Öppna `index.html` i en webbläsare. Studiehäftet är en enda sida med cellen, 19 provfrågor i sex områden och en begreppsdel. Varje fråga har svaret i steg, bilder och övningar. Bilderna ligger i mappen `img`.
 
 ## Visa som webbsida med GitHub Pages
 
